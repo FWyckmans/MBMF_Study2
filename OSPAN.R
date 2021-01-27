@@ -7,8 +7,8 @@ library(stringr)
 
 ############################################ Parameter ############################################
 Test = 0
-Datapath = "D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/FinalResults/MBMF_Study2/Raw_Data/OSPAN/"
-Output_path = "D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/FinalResults/MBMF_Study2/Output/"
+Datapath = "Raw_Data/OSPAN/"
+Output_path = "Output/"
 NSInverseOspan = c()
 
 ############################################ Frame ################################################
