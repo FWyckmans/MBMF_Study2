@@ -125,4 +125,4 @@ dOspan <- d%>%
   summarise(nWord = sum(nWordAcc, na.rm = T), RT = mean(RT, na.rm = T))
 
 ############################################# Export ##############################################
-write.table(dOspan, paste0(Output_path, "/dOSPAN.txt"), row.names = F, col.names = T, dec = ".", sep = "\t")
+write.table(dOspan, paste0(Output_path, "dOSPAN.txt"), row.names = F, col.names = T, dec = ".", sep = "\t")
