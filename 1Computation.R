@@ -21,19 +21,18 @@ library(readr)
 library(stringr)
 
 ############################################ Parameter ############################################
-Test = 0
+Test = 110
 Way = 'Wyck'
 Datapath = "Raw_Data/RLTaskData/"
 Output_path = "Output/"
 
 ############################################ Frame ################################################
 if (Test != 0){
-  PS <- paste0(path , Test, ".dat")
+  PS <- paste0(Datapath , Test, ".dat")
   d <- read.delim(PS, header=FALSE, stringsAsFactors=FALSE)
 }
 
 if (Test == 0){
-  setwd(path)
   listeFichiers <- dir(pattern = ".dat")
   d <- data.frame()
   for (f in listeFichiers){
