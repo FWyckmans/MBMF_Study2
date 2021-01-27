@@ -147,5 +147,10 @@ dMisc <- d%>%
 
 d <- cbind(dMisc[c(1, 2)], dS1[3], dS2[3], dMisc[c(3: length(dMisc))], dS1[4], dS2[4])
 
+##### Change Step 2 choice codes
+d <- filter(d, level2_choice > 0)
+
+d$level2_choice <- d$level2_choice - 2 
+
 ############################################# Export #########################################
 write.table(d, paste0(Output_path, "ComputationsReady.txt"), row.names = F, col.names = T)
