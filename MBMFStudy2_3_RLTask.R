@@ -25,10 +25,12 @@ d <- d%>%
   filter(!is.na(Trial))%>%
   arrange(Trial) #%>%filter(Trial >= 10)  # Here I keep the 10th trial to compute the PrReward and PrTransition of the 11th but I remove it afterwards
 
-d$RT1[d$RT1 < 1] <- NA  # The RT < than 0 corresponds to transition probabilities
-
 ## Change Step columns
 d$Step <- str_sub(d$Step, start = 6, end = -9)
+
+## Remove transition probabilities
+d$RT1[d$Step == 2] <- NA  # The RT < than 0 corresponds to transition probabilities
+d$Resp1[d$Step == 2] <- NA # The Resp1 < than 0 corresponds to transition probabilities
 
 ###################################### Features engineering #######################################
 ##### New columns
