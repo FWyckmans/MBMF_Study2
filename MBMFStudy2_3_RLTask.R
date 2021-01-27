@@ -61,20 +61,12 @@ for (i in (1:length(d$NS))){
     d$OK2[i] = -1
     d$OK2[i-1] = -1}}
 
-##### Separate both steps
-# dS1 <- d%>%
-#   filter(Step == 1)%>%
-#   select()
-# 
-# dS2 <- d%>%
-#   filter(Step == 2)
-
-# Remove trials after unanswered trial (Daw's way)
+##### Remove trials after unanswered trial (Daw's way)
 if (Way == "Daw"){
   d <- filter(d, OK2 != -1)
 }
 
-# Compute transitions
+##### Compute transitions
 for (i in (1:length(d$NS))){
   if (d$Step[i] == "1"){
     if (d$Resp1[i] == 1 & d$Choice1[i+1] == 3){
@@ -94,7 +86,7 @@ for (i in (1:length(d$NS))){
       d$Transition[i+1] <- 1}}
 }
 
-# Compute Stay
+##### Compute Stay
 for (i in c(1:length(d$NS))){
   if (d$Trial[i] != min(d$Trial)){
       if (d$Step[i] == "1" & d$Step[i-1] == "2"){  # Compute stay only for trials where participants answer to the second step
@@ -108,7 +100,7 @@ for (i in c(1:length(d$NS))){
         d$Stay[i] <- -1  
     }}}
 
-# Compute PrReward & PrTransition
+##### Compute PrReward & PrTransition
 for (i in c(1:length(d$NS))){
   if (d$Trial[i] != min(d$Trial) & d$Step[i] == "1"){
     d$Reward[i] = d$Reward[i+1]
@@ -119,20 +111,16 @@ for (i in c(1:length(d$NS))){
     d$PrTransition[i] = d$Transition[i-1]
     d$PrTransition[i+1] = d$Transition[i-1]}}
 
-# Remove trials after unanswered trial (My way)
+##### Remove trials after unanswered trial (My way)
 if (Way == "Wyck"){
   d <- filter(d, PrReward != -1)
 }
 
-# Change Unrewarded code from 0 to -1
-d$PrReward[d$PrReward == 0] <- -1
-d$Reward[d$Reward == 0] <- -1
-
-# Remove Trial 10 and above 175
+##### Remove Trial 10 and above 175
 d <- d%>%
   filter(Trial > 10)%>%filter(Trial <= 175)
 
-dComp <- filter(d, Step == 1)
+# dComp <- filter(d, Step == 1)
 
 ############################################# Export #########################################
 dComp <- select(dComp, NS, Trial, Resp, Reward, Transition, PrReward, PrTransition, Stay)
