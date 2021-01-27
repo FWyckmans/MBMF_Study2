@@ -44,9 +44,8 @@ d <- d%>%
   filter(!is.na(Trial))%>%
   arrange(Trial) #%>%filter(Trial >= 10)  # Here I keep the 10th trial to compute the PrReward and PrTransition of the 11th but I remove it afterwards
 
-setwd(output_path)
-dClin <- read_excel("D:/Dropbox/Stage_Labo/Questionnaires.xlsx")
-dClin <- filter(dClin, !is.na(NumDaw))
+# dClin <- read_excel("D:/Dropbox/Stage_Labo/Questionnaires.xlsx")
+# dClin <- filter(dClin, !is.na(NumDaw))
 
 ###################################### Features engineering #######################################
 Resp <- rep(0, length(d$NS))
@@ -132,7 +131,7 @@ for (i in c(1:length(d$NS))){
     d$PrTransition[i+1] = d$Transition[i-1]}}
 
 # Remove trials after unanswered trial (My way)
-if (Way == "Mine"){
+if (Way == "Wyck"){
   d <- filter(d, PrReward != -1)
 }
 
@@ -148,103 +147,4 @@ dComp <- filter(d, Step == 1)
 
 ############################################# Export #########################################
 dComp <- select(dComp, NS, Trial, Resp, Reward, Transition, PrReward, PrTransition, Stay)
-write.table(dComp, "Choice_RegressWyck.txt", row.names = F, col.names = T)
-
-########################################## Computation ############################################
-##### My way (individual logistic regression)
-## Add columns to dTot
-MB <- rep(NA, length(dClin$NS))
-MBp <- rep(NA, length(dClin$NS))
-MF <- rep(NA, length(dClin$NS))
-MFp <- rep(NA, length(dClin$NS))
-AIC <- rep(NA, length(dClin$NS))
-MBRew <- rep(NA, length(dClin$NS))
-MBRewp <- rep(NA, length(dClin$NS))
-MBRewAIC <- rep(NA, length(dClin$NS))
-MBUnrew <- rep(NA, length(dClin$NS))
-MBUnrewp <- rep(NA, length(dClin$NS))
-MBUnrewAIC <- rep(NA, length(dClin$NS))
-RFw <- rep(NA, length(dClin$NS))
-RRw <- rep(NA, length(dClin$NS))
-UFw <- rep(NA, length(dClin$NS))
-URw <- rep(NA, length(dClin$NS))
-
-dTot <- cbind(dClin, MB, MBp, MF, MFp, AIC, MBRew, MBRewp, MBRewAIC, MBUnrew, MBUnrewp, MBUnrewAIC, RFw, RRw, UFw, URw)
-
-## Compute the logistic regressions
-# Retrait des participants foireux
-NumDawF <- c(193, 304)
-dComp <- filter(dComp, NS %in% dClin$NumDaw)
-dTot <- filter(dTot, !NumDaw %in% NumDawF)
-
-if (Test == 0){
-  for (i in c(dTot$NumDaw)){ #dTot$NumDaw
-    dt <- filter(dComp, NS==i)
-    
-    RegLogInd <- glm(Stay ~ PrReward*PrTransition,
-                       family = binomial(logit), data = dt)
-
-    dc <- as.data.frame(summary(RegLogInd)[12])
-    # dTot$MB[dTot$NumDaw==i] <- exp(dc[3,1])/(exp(dc[3,1])+1)
-    dTot$MB[dTot$NumDaw==i] <- dc[4,1]
-    dTot$MBp[dTot$NumDaw==i] <- dc[4,4]
-    # dTot$MF[dTot$NumDaw==i] <- exp(dc[2,1])/(exp(dc[2,1])+1)
-    dTot$MF[dTot$NumDaw==i] <- dc[2,1]
-    dTot$MFp[dTot$NumDaw==i] <- dc[2,4]
-    dTot$AIC[dTot$NumDaw==i] <- RegLogInd$aic
-
-    # Rewarded trials
-    dtRew <- filter(dt, PrReward == 1)
-    RegLogInd <- glm(Stay ~ PrTransition,
-                     family = binomial(logit), data = dtRew)
-    
-    dc <- as.data.frame(summary(RegLogInd)[12])
-    # dTot$MBRew[dTot$NumDaw==i] <- exp(dc[2,1])/(exp(dc[2,1])+1)
-    dTot$MBRew[dTot$NumDaw==i] <- dc[2,1]
-    dTot$MBRewp[dTot$NumDaw==i] <- dc[2,4]
-    dTot$MBRewAIC[dTot$NumDaw==i] <- RegLogInd$aic
-
-    # Unrewarded trials
-    dtUnrew <- filter(dt, PrReward == -1)
-    RegLogInd <- glm(Stay ~ PrTransition,
-                     family = binomial(logit), data = dtUnrew)
-    dc <- as.data.frame(summary(RegLogInd)[12])
-    # dTot$MBUnrew[dTot$NumDaw==i] <- exp(dc[2,1])/(exp(dc[2,1])+1)
-    dTot$MBUnrew[dTot$NumDaw==i] <- dc[2,1]
-    dTot$MBUnrewp[dTot$NumDaw==i] <- dc[2,4]
-    # dTot$MBUnrewAIC[dTot$NumDaw==i] <- RegLogInd$aic
-    
-    # Test same results as DAW
-    dtPStay <- dt%>%
-      group_by(PrReward, PrTransition)%>%
-      summarise(PStay = mean(Stay))
-    dTot$RFw[dTot$NumDaw==i] <- dtPStay$PStay[(dtPStay$PrReward == 1 & dtPStay$PrTransition == 1)]
-    dTot$RRw[dTot$NumDaw==i] <- dtPStay$PStay[(dtPStay$PrReward == 1 & dtPStay$PrTransition == -1)]
-    dTot$UFw[dTot$NumDaw==i] <- dtPStay$PStay[(dtPStay$PrReward == -1 & dtPStay$PrTransition == 1)]
-    dTot$URw[dTot$NumDaw==i] <- dtPStay$PStay[(dtPStay$PrReward == -1 & dtPStay$PrTransition == -1)]
-}}
-
-if(Test != 0){
-  dt <- filter(dComp, NS==Test)
-  dtPStay <- dt%>%
-    group_by(PrReward, PrTransition)%>%
-    summarise(PStay = mean(Stay))
-  dTot$RFw[dTot$NumDaw==Test] <- dtPStay$PStay[(dtPStay$PrReward == 1 & dtPStay$PrTransition == 1)]
-  dTot$RRw[dTot$NumDaw==Test] <- dtPStay$PStay[(dtPStay$PrReward == 1 & dtPStay$PrTransition == -1)]
-  dTot$UFw[dTot$NumDaw==Test] <- dtPStay$PStay[(dtPStay$PrReward == -1 & dtPStay$PrTransition == 1)]
-  dTot$URw[dTot$NumDaw==Test] <- dtPStay$PStay[(dtPStay$PrReward == -1 & dtPStay$PrTransition == -1)]
-  ##### Comparison with Daw
-  dTest <- read.csv("D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/Data_Daw/choice_regress.dat", sep="")
-  dCompTest <- dComp%>%
-    filter(NS == Test)%>%
-    filter(PrReward == 1)%>%
-    filter(PrTransition == -1)
-  dTest <- dTest%>%
-    filter(subj == Test)#%>%filter(mn == 1)%>%filter(common == -1)
-}
-# summary(RegLogInd)
-
-##### Coefficients : BMB, BMF, p, B2, g, a
-
-############################################# Export #########################################
-write.table(dTot, "dTotal.txt", row.names = F, col.names = T)
+write.table(dComp, paste0(Output_path, "Choice_Regress.txt"), row.names = F, col.names = T)
