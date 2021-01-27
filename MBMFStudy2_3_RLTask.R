@@ -124,6 +124,28 @@ d <- d%>%
 
 # dComp <- filter(d, Step == 1)
 
+##### Separate dataframe into 3: Step1, Step2 and misc
+dS1 <- d%>%
+  filter(Step == "1")%>%
+  select(NS, Trial,
+         level1_choice = Resp1, RT1)%>%
+  arrange(NS, Trial)
+
+dS2 <- d%>%
+  filter(Step == "2")%>%
+  select(NS, Trial,
+         level2_choice = Resp2, RT2)%>%
+  arrange(NS, Trial)
+
+dMisc <- d%>%
+  filter(Step == "1")%>%
+  select(subjID = NS, Trial, # Changed NS to subjID to fit in the ts_par7 function
+         reward = Reward, transition = Transition,  # Removed the uppercase to fit in the ts_par7 function
+         Stay, PrReward, PrTransition)%>%
+  arrange(subjID, Trial)
+
+d <- cbind(dMisc[c(1, 2)], dS1[3], dS2[3], dMisc[c(3: length(dMisc))], dS1[4], dS2[4])
+
 ############################################# Export #########################################
 dComp <- select(dComp, NS, Trial, Resp, Reward, Transition, PrReward, PrTransition, Stay)
 write.table(dComp, paste0(Output_path, "Choice_Regress.txt"), row.names = F, col.names = T)
