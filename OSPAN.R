@@ -7,8 +7,8 @@ library(stringr)
 
 ############################################ Parameter ############################################
 Test = 0
-Datapath = "D:/Dropbox/Stage_Labo/OSPAN/"
-Output_path = "D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/FinalResults"
+Datapath = "D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/FinalResults/MBMF_Study2/Raw_Data/OSPAN"
+Output_path = "D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/FinalResults/MBMF_Study2/Output"
 NSInverseOspan = c()
 
 ############################################ Frame ################################################
@@ -40,7 +40,7 @@ if (Test == 0){
 setwd(Output_path)
 
 ########################################## Modify frame ###########################################
-ComputeAcc <- function(d){     # Fonction pour calculer les réponses correctes
+ComputeAcc <- function(d){     # Fonction pour calculer les r?ponses correctes
   if (d$NS %in% NSInverseOspan){  
     d$Acc[d$Resp == "correct" & d$RespCorr == 1] <- 0
     d$Acc[d$Resp == "incorrect" & d$RespCorr == 0] <- 0
@@ -56,13 +56,13 @@ ComputeAcc <- function(d){     # Fonction pour calculer les réponses correctes
 }
 
 WordClean <- function(d){
-  unwanted_array = list(    'S'='S', 's'='s', 'Z'='Z', 'z'='z', 'À'='A', 'Á'='A', 'Â'='A', 'Ã'='A', 'Ä'='A', 'Å'='A', 'Æ'='A', 'Ç'='C', 'È'='E', 'É'='E',
-                            'Ê'='E', 'Ë'='E', 'Ì'='I', 'Í'='I', 'Î'='I', 'Ï'='I', 'Ñ'='N', 'Ò'='O', 'Ó'='O', 'Ô'='O', 'Õ'='O', 'Ö'='O', 'Ø'='O', 'Ù'='U',
-                            'Ú'='U', 'Û'='U', 'Ü'='U', 'Ý'='Y', 'Þ'='B', 'ß'='Ss', 'à'='a', 'á'='a', 'â'='a', 'ã'='a', 'ä'='a', 'å'='a', 'æ'='a', 'ç'='c',
-                            'è'='e', 'é'='e', 'ê'='e', 'ë'='e', 'ì'='i', 'í'='i', 'î'='i', 'ï'='i', 'ð'='o', 'ñ'='n', 'ò'='o', 'ó'='o', 'ô'='o', 'õ'='o',
-                            'ö'='o', 'ø'='o', 'ù'='u', 'ú'='u', 'û'='u', 'ý'='y', 'ý'='y', 'þ'='b', 'ÿ'='y' )
+  unwanted_array = list(    'S'='S', 's'='s', 'Z'='Z', 'z'='z', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='C', '?'='E', '?'='E',
+                            '?'='E', '?'='E', '?'='I', '?'='I', '?'='I', '?'='I', '?'='N', '?'='O', '?'='O', '?'='O', '?'='O', '?'='O', '?'='O', '?'='U',
+                            '?'='U', '?'='U', '?'='U', '?'='Y', '?'='B', '?'='Ss', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='c',
+                            '?'='e', '?'='e', '?'='e', '?'='e', '?'='i', '?'='i', '?'='i', '?'='i', '?'='o', '?'='n', '?'='o', '?'='o', '?'='o', '?'='o',
+                            '?'='o', '?'='o', '?'='u', '?'='u', '?'='u', '?'='y', '?'='y', '?'='b', '?'='y' )
   d$WordResp[d$WordResp==1|d$WordResp==0] <- NA
-  d$WordResp <- str_remove_all(d$WordResp, "[²-]")
+  d$WordResp <- str_remove_all(d$WordResp, "[?-]")
   for (i in c(1:length(d$NS))){
     d$Word[i] <- chartr(paste(names(unwanted_array), collapse=''),
                         paste(unwanted_array, collapse=''),
