@@ -147,5 +147,4 @@ dMisc <- d%>%
 d <- cbind(dMisc[c(1, 2)], dS1[3], dS2[3], dMisc[c(3: length(dMisc))], dS1[4], dS2[4])
 
 ############################################# Export #########################################
-dComp <- select(dComp, NS, Trial, Resp, Reward, Transition, PrReward, PrTransition, Stay)
-write.table(dComp, paste0(Output_path, "Choice_Regress.txt"), row.names = F, col.names = T)
+write.table(d, paste0(Output_path, "ComputationsReady.txt"), row.names = F, col.names = T)
