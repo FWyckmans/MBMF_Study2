@@ -24,9 +24,6 @@ d <- d%>%
   filter(!is.na(Trial))%>%
   arrange(Trial) #%>%filter(Trial >= 10)  # Here I keep the 10th trial to compute the PrReward and PrTransition of the 11th but I remove it afterwards
 
-# dClin <- read_excel("D:/Dropbox/Stage_Labo/Questionnaires.xlsx")
-# dClin <- filter(dClin, !is.na(NumDaw))
-
 ###################################### Features engineering #######################################
 Resp <- rep(0, length(d$NS))
 Transition <- rep(0, length(d$NS))
