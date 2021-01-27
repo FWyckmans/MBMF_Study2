@@ -1,24 +1,4 @@
-#################################### Initialisation ###############################################
 remove(list = ls())
-
-library(ggplot2)
-library(BayesFactor)
-library(car)
-library(readxl)
-library(stats)
-library(gridExtra)
-library(cowplot)
-library(Hmisc)
-library(rms)
-library(ISLR)
-library(nlme)
-library(lmerTest)
-library(e1071)
-library(dplyr)
-library(tidyr)
-# library(rprime)
-library(readr)
-library(stringr)
 
 ############################################ Parameter ############################################
 Test = 0
