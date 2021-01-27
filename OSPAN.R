@@ -24,10 +24,10 @@ if (Test != 0){
            WordResp = set1, WordAcc, RespCorr = correct_operation, Resp = response, Acc, RT)}
 
 if (Test == 0){
-  listeFichiers <- dir(pattern = ".txt")
+  listeFichiers <- dir(path = Datapath, pattern = ".txt")
   d <- data.frame()
   for (f in listeFichiers){
-    s <- read.delim(f, header=TRUE, stringsAsFactors=FALSE)
+    s <- read.delim(paste0(Datapath, f), header=TRUE, stringsAsFactors=FALSE)
     NS <- rep(str_sub(f, start = 1, end = -5), length(s$block.number))
     Acc <- rep(NA, length(s$block.number))
     WordAcc <- rep(NA, length(s$block.number))
