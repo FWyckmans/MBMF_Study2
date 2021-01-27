@@ -25,6 +25,9 @@ library(ISLR)
 library(e1071)
 library(stringr)
 
+## Specific
+library(hBayesDM)
+
 ##### Best Song
 BestSong = "Bennie and The Jets by Sir Elton John"
 print(BestSong)
