@@ -21,7 +21,7 @@ library(readr)
 library(stringr)
 
 ############################################ Parameter ############################################
-Test = 110
+Test = 0
 Way = 'Wyck'
 Datapath = "Raw_Data/RLTaskData/"
 Output_path = "Output/"
@@ -33,10 +33,10 @@ if (Test != 0){
 }
 
 if (Test == 0){
-  listeFichiers <- dir(pattern = ".dat")
+  listeFichiers <- dir(path = Datapath, pattern = ".dat")
   d <- data.frame()
   for (f in listeFichiers){
-    s <- read.delim(f, header=FALSE, stringsAsFactors=FALSE)
+    s <- read.delim(paste0(Datapath, f), header=FALSE, stringsAsFactors=FALSE)
     d <- rbind(d, s)}}
 
 d <- d%>%
