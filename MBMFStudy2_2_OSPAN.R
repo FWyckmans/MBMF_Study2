@@ -5,7 +5,7 @@ Test = 0
 Datapath = "Raw_Data/OSPAN/"
 Output_path = "Output/"
 NSInverseOspan = c() # Not needed ATM
-Playlist = "This is Elton John by Spotify, Benny and the Jets"
+Playlist = "This is: Elton John by Spotify, Benny and the Jets"
 
 ############################################ Frame ################################################
 if (Test != 0){
