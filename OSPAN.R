@@ -7,8 +7,8 @@ library(stringr)
 
 ############################################ Parameter ############################################
 Test = 0
-Datapath = "D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/FinalResults/MBMF_Study2/Raw_Data/OSPAN"
-Output_path = "D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/FinalResults/MBMF_Study2/Output"
+Datapath = "D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/FinalResults/MBMF_Study2/Raw_Data/OSPAN/"
+Output_path = "D:/Dropbox/Doc_Florent/MB_MF_2/Result_Daw/FinalResults/MBMF_Study2/Output/"
 NSInverseOspan = c()
 
 ############################################ Frame ################################################
@@ -20,10 +20,10 @@ if (Test != 0){
   d <- cbind(NS, d, Acc, WordAcc)
   d <- d%>%
     filter(block.number > 8)%>%
-    select(NS, Block = block.number, Trial = trial.number, Content = trial.contents, WordResp = set1, WordAcc, RespCorr = correct_operation, Resp = response, Acc, RT)}
+    select(NS, Block = block.number, Trial = trial.number, Content = trial.contents,
+           WordResp = set1, WordAcc, RespCorr = correct_operation, Resp = response, Acc, RT)}
 
 if (Test == 0){
-  setwd(Datapath)
   listeFichiers <- dir(pattern = ".txt")
   d <- data.frame()
   for (f in listeFichiers){
@@ -37,10 +37,8 @@ if (Test == 0){
     filter(block.number > 8)%>%
     select(NS, Block = block.number, Trial = trial.number, Content = trial.contents, WordResp = set1, WordAcc, RespCorr = correct_operation, Resp = response, Acc, RT)}
 
-setwd(Output_path)
-
 ########################################## Modify frame ###########################################
-ComputeAcc <- function(d){     # Fonction pour calculer les r?ponses correctes
+ComputeAcc <- function(d){     # Fonction pour calculer les reponses correctes
   if (d$NS %in% NSInverseOspan){  
     d$Acc[d$Resp == "correct" & d$RespCorr == 1] <- 0
     d$Acc[d$Resp == "incorrect" & d$RespCorr == 0] <- 0
