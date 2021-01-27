@@ -20,11 +20,18 @@ if (Test == 0){
     d <- rbind(d, s)}}
 
 d <- d%>%
-  select(NS = V1, Trial = V3, Step = V4, Choice1 = V5, Choice2 = V6, Resp1 = V7, Resp2 = V9, Reward = V11)%>%
+  select(NS = V1, Trial = V3, Step = V4, Choice1 = V5, Choice2 = V6, Resp1 = V7, Resp2 = V9, Reward = V11,
+         RT1 = V8, RT2 = V10)%>%
   filter(!is.na(Trial))%>%
   arrange(Trial) #%>%filter(Trial >= 10)  # Here I keep the 10th trial to compute the PrReward and PrTransition of the 11th but I remove it afterwards
 
+d$RT1[d$RT1 < 1] <- NA  # The RT < than 0 corresponds to transition probabilities
+
+## Change Step columns
+d$Step <- str_sub(d$Step, start = 6, end = -9)
+
 ###################################### Features engineering #######################################
+##### New columns
 Resp <- rep(0, length(d$NS))
 Transition <- rep(0, length(d$NS))
 Stay <- rep(0, length(d$NS))
@@ -36,10 +43,7 @@ d <- cbind(d, Resp, Transition, Stay, PrReward, PrTransition, OK1, OK2)
 d <- d%>%
   arrange(NS, Trial)
 
-d$Step <- str_sub(d$Step, start = 6, end = -9)
-d$Resp1[d$Resp1 < 1] <- NA  # Resp smaller than 1 correspond to RT so we remove them
-
-# One Resp column
+##### One Resp column
 for (i in (1:length(d$NS))){
   if (d$Step[i] == "1"){
     d$Resp[i] = d$Resp1[i]}
@@ -49,13 +53,21 @@ for (i in (1:length(d$NS))){
     d$Resp[i] = -1
     d$OK1[i] = -1}}
 
-# Remove unanswered
+##### Remove unanswered
 d <- filter(d, d$OK1 != -1)   # Totally remove trials where participant did not answer the 1st step
 
 for (i in (1:length(d$NS))){
   if (d$Step[i] == "2" & d$Resp[i] == "-1"){   # Missed second step
     d$OK2[i] = -1
     d$OK2[i-1] = -1}}
+
+##### Separate both steps
+# dS1 <- d%>%
+#   filter(Step == 1)%>%
+#   select()
+# 
+# dS2 <- d%>%
+#   filter(Step == 2)
 
 # Remove trials after unanswered trial (Daw's way)
 if (Way == "Daw"){
