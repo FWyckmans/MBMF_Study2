@@ -2,6 +2,7 @@ remove(list = ls())
 
 ############################################ Parameter ############################################
 Test = 0
+StartOver = 0
 Datapath = "Raw_Data/RLTaskData/"
 Output_path = "Output/"
 Playlist = "This is: Blondie by Spotify, Call me, Random"
@@ -22,4 +23,5 @@ output <- ts_par7(
 
 ########################################## Save Output ###########################################
 dOutput <- output$allIndPars
-write.table(dOutput, paste0(Output_path, "ComputationParameter.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
+if (Test == 0){
+  write.table(dOutput, paste0(Output_path, "ComputationParameter.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")}
