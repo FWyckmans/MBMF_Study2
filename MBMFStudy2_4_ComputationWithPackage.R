@@ -19,3 +19,7 @@ if (Test != 0){
 
 output <- ts_par7(
   data = d, niter = 2000, nwarmup = 1000, nchain = 4, ncore = 4)
+
+########################################## Save Output ###########################################
+dOutput <- output$allIndPars
+write.table(dOutput, paste0(Output_path, "ComputationParameter.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
