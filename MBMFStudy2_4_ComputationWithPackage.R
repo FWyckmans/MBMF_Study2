@@ -24,8 +24,7 @@ if (StartOver == 0){
 # output <- ts_par7(
 #   data = "example", niter = 2000, nwarmup = 1000, nchain = 4, ncore = 4)
 
-output <- ts_par7(
-  data = d, niter = 2000, nwarmup = 1000, nchain = 4, ncore = 4)
+output <- ts_par7(data = d, niter = 2000, nwarmup = 1000, nchain = 4, ncore = 4)
 
 ########################################## Save Output ###########################################
 dOutput <- output$allIndPars
