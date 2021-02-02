@@ -1,4 +1,5 @@
 remove(list = ls())
+source("MBMFStudy2_1_Initialization.R")
 
 ############################################ Parameter ############################################
 Test = 0
