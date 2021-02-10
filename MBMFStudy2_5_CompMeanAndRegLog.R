@@ -19,7 +19,7 @@ d$PrTransition[d$PrTransition==-1] <- "Rare"
 d$PrTransition[d$PrTransition==1] <- "Common"
 
 ###################################### Features engineering #######################################
-##### Mean
+##### Mean - This part computes the same probabilities as those used by Sebold et al. (2014)
 ## Long format
 dProbaLong <- d%>%
   group_by(subjID, PrReward, PrTransition)%>%
