@@ -1,9 +1,8 @@
 remove(list = ls())
 
 ############################################ Parameter ############################################
+source("MBMFStudy2_1_Initialization.R")
 Test = 0
-Datapath = "Raw_Data/OSPAN/"
-Output_path = "Output/"
 NSInverseOspan = c() # Not needed ATM
 Playlist = "This is: Elton John by Spotify, Benny and the Jets"
 

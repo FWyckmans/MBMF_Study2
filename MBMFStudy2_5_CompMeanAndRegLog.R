@@ -1,9 +1,7 @@
 remove(list = ls())
-source("MBMFStudy2_1_Initialization.R")
 
 ############################################ Parameter ############################################
-Datapath = "Raw_Data/RLTaskData/"
-Output_path = "Output/"
+source("MBMFStudy2_1_Initialization.R")
 
 ############################################ Frame ################################################
 d <- read.csv(paste0(Output_path, "/ComputationsReady.txt"), sep = " ")

@@ -1,9 +1,7 @@
 remove(list = ls())
-source("MBMFStudy2_1_Initialization.R")
 
 ############################################ Parameter ############################################
-Datapath = "Raw_Data/"
-Output_path = "Output/"
+source("MBMFStudy2_1_Initialization.R")
 
 ############################################ Frame ################################################
 ########## Clinical frame
