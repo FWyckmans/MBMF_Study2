@@ -118,7 +118,8 @@ d$nWordAcc[d$CalcOK==0] <- 0
 dOspan <- d%>%
   # filter(CalcOK == 1)%>%
   group_by(NS)%>%
-  summarise(nWord = sum(nWordAcc, na.rm = T), RT = mean(RT, na.rm = T))
+  summarise(nWord = sum(nWordAcc, na.rm = T), RT = mean(RT, na.rm = T))%>%
+  rename(subjID = NS)
 
 ############################################# Export ##############################################
 write.table(dOspan, paste0(Output_path, "dOSPAN.txt"), row.names = F, col.names = T, dec = ".", sep = "\t")
