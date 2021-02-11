@@ -2,8 +2,6 @@ remove(list = ls())
 source("MBMFStudy2_1_Initialization.R")
 
 ############################################ Parameter ############################################
-Test = 0
-Way = 'Wyck'
 Datapath = "Raw_Data/RLTaskData/"
 Output_path = "Output/"
 
