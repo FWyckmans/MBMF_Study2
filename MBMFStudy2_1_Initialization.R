@@ -36,3 +36,4 @@ library(hBayesDM)
 
 ##### Functions
 source("Functions/AddDummyCol.R")
+source("Functions/FillCol.R")
