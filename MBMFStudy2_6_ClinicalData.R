@@ -80,3 +80,28 @@ dRegLogInd <- read.delim(paste0(Output_path, "dRegLogIndLarge.txt"))
 dProba <- read.delim(paste0(Output_path, "ProbaLarge.txt"))
 dProbaD <- read.table(paste0(Datapath, "/DataFromORScript/choice_probs.dat"))%>%
   rename(subjID = V1, PRCd = V2, PRRd = V3, PUCd = V4, PURd = V5)
+
+
+# Under Maintenance
+# DestinationDF = dClin
+# SourceDF = dProba
+# c = "a1"
+# 
+# ########## Add all these columns to dClin and creation of the final df: dTot
+# FillCol <- function(DestinationDF, SourceDF, ToFill){
+#   ##### Give the destination DF, the source DF and a vector with all the column names to fill in the destination DF #####
+#   ##### The first column MUST be the subjID (exact name) #####
+#   # dTot$MB[dTot$NumDaw==i] <- dc[4,1]
+#   for (c in ToFill) {
+#     list = list(DestInd = DestinationDF[,1],
+#                 SourcInd = SourceDF[,1])
+#     commonSubj <- Reduce(intersect, list)
+#     
+#     for (i in CommonSubj) {
+#     }
+#   return(DestinationDF)
+#   }
+# }
+# 
+# ToFill = c("PRCw", "PRRw")
+# dTot <- FillCol(dClin, dProba, "PRCw")
