@@ -75,33 +75,24 @@ dClin <- AddDummyCol(dClin, ToAdd)
 
 ########## Other frames
 dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
-dOspan <- read.delim(paste0(Output_path, "dOspan.txt"))
+dOspan <- read.delim(paste0(Output_path, "dOspan.txt"))%>%
+  rename(OSPAN = nWord)
 dRegLogInd <- read.delim(paste0(Output_path, "dRegLogIndLarge.txt"))
 dProba <- read.delim(paste0(Output_path, "ProbaLarge.txt"))
 dProbaD <- read.table(paste0(Datapath, "/DataFromORScript/choice_probs.dat"))%>%
   rename(subjID = V1, PRCd = V2, PRRd = V3, PUCd = V4, PURd = V5)
 
+########## Add all these columns to dClin and creation of the final df: dTot
+AdditionnalDF <- list(dComputationParameter, dOspan, dRegLogInd, dProba, dProbaD)
+ToFillbyDF <- list(dCP = colnames(dComputationParameter)[-1],
+                   dOsp = colnames(dOspan)[-1],
+                   dRegLogInd = colnames(dRegLogInd)[-1],
+                   dProba = colnames(dProba)[-1],
+                   dProbaD = colnames(dProbaD)[-1])
 
-# Under Maintenance
-# DestinationDF = dClin
-# SourceDF = dProba
-# c = "a1"
-# 
-# ########## Add all these columns to dClin and creation of the final df: dTot
-# FillCol <- function(DestinationDF, SourceDF, ToFill){
-#   ##### Give the destination DF, the source DF and a vector with all the column names to fill in the destination DF #####
-#   ##### The first column MUST be the subjID (exact name) #####
-#   # dTot$MB[dTot$NumDaw==i] <- dc[4,1]
-#   for (c in ToFill) {
-#     list = list(DestInd = DestinationDF[,1],
-#                 SourcInd = SourceDF[,1])
-#     commonSubj <- Reduce(intersect, list)
-#     
-#     for (i in CommonSubj) {
-#     }
-#   return(DestinationDF)
-#   }
+# Under maintenance
+# for (i in 1:length(AdditionnalDF)) {
+#   dt <- as.data.frame(AdditionnalDF[i])
+#   ToFill <- ToFillbyDF[[i]]
+#   dClin <- FillCol(dClin, dProba, ToFill)
 # }
-# 
-# ToFill = c("PRCw", "PRRw")
-# dTot <- FillCol(dClin, dProba, "PRCw")
