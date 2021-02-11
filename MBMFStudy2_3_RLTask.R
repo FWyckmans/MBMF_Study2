@@ -2,6 +2,8 @@ remove(list = ls())
 
 ############################################ Parameter ############################################
 source("MBMFStudy2_1_Initialization.R")
+Datapath = "Raw_Data/RLTaskData/"
+Output_path = "Output/"
 Test = 0
 Way = 'Wyck'
 Playlist = "This is: Elton John by Spotify, Benny and the Jets, random"

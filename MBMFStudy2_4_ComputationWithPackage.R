@@ -2,6 +2,8 @@ remove(list = ls())
 
 ############################################ Parameter ############################################
 source("MBMFStudy2_1_Initialization.R")
+Datapath = "Raw_Data/"
+Output_path = "Output/"
 Test = 0
 StartOver = 0 # 1 to start from scratch, 0 to start with only new participants
 Playlist = "This is: Blondie by Spotify, Call me, Random"
