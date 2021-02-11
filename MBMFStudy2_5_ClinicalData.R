@@ -65,6 +65,13 @@ Perso <- c("SCL90R", "Fagerstrom", "Beck",
            "Routine", "Auto",
            "UPPS_Total", "Urgence", "UrgencePos", "Manquedepremeditation", "Manquedeperseverance", "Sensation")
 
+##### Add needed columns to dClin
+ToAdd = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda",
+          "MB", "MF", "RewMB", "UnrewMB", "MBp", "MFp", "RewMBp", "UnrewMBp",
+          "PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd",
+          "OKDaw")
+
+dClin <- AddDummyCol(dClin, ToAdd)
 
 ########## Other frames
 dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
