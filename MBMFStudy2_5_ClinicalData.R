@@ -78,3 +78,5 @@ dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.tx
 dOspan <- read.delim(paste0(Output_path, "dOspan.txt"))
 dRegLogInd <- read.delim(paste0(Output_path, "dRegLogIndLarge.txt"))
 dProba <- read.delim(paste0(Output_path, "ProbaLarge.txt"))
+dProbaD <- read.table(paste0(Datapath, "/DataFromORScript/choice_probs.dat"))%>%
+  rename(subjID = V1, PRCd = V2, PRRd = V3, PUCd = V4, PURd = V5)
