@@ -4,6 +4,7 @@ remove(list = ls())
 source("MBMFStudy2_1_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
+StressThreshold = 0 # Indicate the threshold of deltaCortisol to be considered as stressed
 
 ############################################ Frame ################################################
 ########## Clinical frame
@@ -19,6 +20,9 @@ dClin$Sample[dClin$Condition=="A_CPT"|dClin$Condition=="A_WPT"] <- "Alc"
 dClin$Sample[dClin$Condition=="G_CPT"|dClin$Condition=="G_WPT"] <- "Gambler"
 dClin$Sample[dClin$Condition=="HC_CPT"|dClin$Condition=="HC_WPT"] <- "HC"
 
+##### Add StressGr to specify participants which saw their cortisol level or their self-reported measure Rise
+dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM"), 0)
+
 ##### Select the necessary columns
 dClin <- dClin%>%
   mutate(dCraving = Envie_3-Envie_2, dCravingM = ((Envie_3+Envie_4)/2)-((Envie_2+Envie_1)/2),
@@ -28,7 +32,7 @@ dClin <- dClin%>%
          dCorti = Analyse_3-Analyse_2, dCortiM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
   select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
-         Condition, Sample, Patho,
+         Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
          AUDIT, SOGS, DSM, Craving,
          
          dCraving, dResist, dStress, dPain, dCorti,
@@ -54,7 +58,7 @@ dClin <- dClin%>%
 ##### Vector with column names by type of variable for further references
 ID <- c("subjID", "NS", "Initiales")
 Demo <- c("Age", "StudyLevel")
-Condition <- c("Condition", "Sample", "Patho")
+Condition <- c("Condition", "Sample", "StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "Patho")
 Gamb <- c("SOGS", "DSM", "Craving")
 Alc <- c("AUDIT")
 Cog <- c("OSPAN", "WAIS", "Raven")
@@ -105,6 +109,21 @@ for (i in 1:length(AdditionnalDF)) {
 ########## Indicate if the task is good according to Otto Ross script
 dClin$OKd <- 1
 dClin$OKd[is.na(dClin$PRCd)] <- 0
+
+########## Indicate if the participant was stressed (1) or not (0)
+##### With Cortisol
+dClin$StressGr[dClin$dCorti > 0] <- 1
+dClin$StressGr[is.na(dClin$dCorti)] <- NA
+
+dClin$StressGrM[dClin$dCortiM > 0] <- 1
+dClin$StressGrM[is.na(dClin$dCortiM)] <- NA
+
+##### With self-reported measures
+dClin$StressGrSR[dClin$dStress > 0] <- 1
+dClin$StressGrSR[is.na(dClin$dStress)] <- NA
+
+dClin$StressGrSRM[dClin$dStressM > 0] <- 1
+dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
 
 ############################################# Export ##############################################
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
