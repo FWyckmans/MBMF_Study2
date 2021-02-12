@@ -99,3 +99,6 @@ for (i in 1:length(AdditionnalDF)) {
 ########## Indicate if the task is good according to Otto Ross script
 dClin$OKd <- 1
 dClin$OKd[is.na(dClin$PRCd)] <- 0
+
+############################################# Export ##############################################
+write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
