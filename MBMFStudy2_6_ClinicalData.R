@@ -21,7 +21,7 @@ dClin$Sample[dClin$Condition=="G_CPT"|dClin$Condition=="G_WPT"] <- "Gambler"
 dClin$Sample[dClin$Condition=="HC_CPT"|dClin$Condition=="HC_WPT"] <- "HC"
 
 ##### Add StressGr to specify participants which saw their cortisol level or their self-reported measure Rise
-dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM"), 0)
+dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM"), -1)
 
 ##### Select the necessary columns
 dClin <- dClin%>%
@@ -110,7 +110,7 @@ for (i in 1:length(AdditionnalDF)) {
 dClin$OKd <- 1
 dClin$OKd[is.na(dClin$PRCd)] <- 0
 
-########## Indicate if the participant was stressed (1) or not (0)
+########## Indicate if the participant was stressed (1) or not (-1)
 ##### With Cortisol
 dClin$StressGr[dClin$dCorti > 0] <- 1
 dClin$StressGr[is.na(dClin$dCorti)] <- NA
