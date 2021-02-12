@@ -82,17 +82,16 @@ dProba <- read.delim(paste0(Output_path, "ProbaLarge.txt"))
 dProbaD <- read.table(paste0(Datapath, "/DataFromORScript/choice_probs.dat"))%>%
   rename(subjID = V1, PRCd = V2, PRRd = V3, PUCd = V4, PURd = V5)
 
-########## Add all these columns to dClin and creation of the final df: dTot
+########## Add all these columns to dClin and creation of the complete DF
 AdditionnalDF <- list(dComputationParameter, dOspan, dRegLogInd, dProba, dProbaD)
 ToFillbyDF <- list(dCP = colnames(dComputationParameter)[-1],
-                   dOsp = colnames(dOspan)[-1],
+                   dOsp = colnames(dOspan)[2],
                    dRegLogInd = colnames(dRegLogInd)[-1],
                    dProba = colnames(dProba)[-1],
                    dProbaD = colnames(dProbaD)[-1])
 
-# Under maintenance
-# for (i in 1:length(AdditionnalDF)) {
-#   dt <- as.data.frame(AdditionnalDF[i])
-#   ToFill <- ToFillbyDF[[i]]
-#   dClin <- FillCol(dClin, dProba, ToFill)
-# }
+for (i in 1:length(AdditionnalDF)) {
+  dt <- as.data.frame(AdditionnalDF[i])
+  ToFill <- ToFillbyDF[[i]]
+  dClin <- FillCol(dClin, dt, ToFill)
+}
