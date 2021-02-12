@@ -40,21 +40,22 @@ source("Functions/AddDummyCol.R")
 source("Functions/FillCol.R")
 
 ##### Vector with column names by type of variable for further references
-ID <- c("subjID", "NS", "Initiales")
-Demo <- c("Age", "StudyLevel")
-Condition <- c("Condition", "Sample", "StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "Patho")
-Gamb <- c("SOGS", "DSM", "Craving")
-Alc <- c("AUDIT")
-Cog <- c("OSPAN", "WAIS", "Raven")
-FR <- c("dCraving", "dResist", "dStress", "dPain", "dAnalyse",
-        "dCravingM", "dResistM", "dStressM", "dPainM", "dAnalyseM",
-        "Envie_1", "Envie_2", "Envie_3", "Envie_4",
-        "Resister_1", "Resister_2", "Resister_3", "Resister_4",
-        "Stress_1", "Stress_2", "Stress_3", "Stress_4",
-        "Douleur_1", "Douleur_2", "Douleur_3", "Douleur_4",
-        "Analyse_1", "Analyse_2", "Analyse_3", "Analyse_4")
-Perso <- c("SCL90R", "Fagerstrom", "Beck",
-           "Affect_positif", "Affect_Negatif", "STAIA", "STAIB", "SRRS",
-           "Sensibilite_Punition", "Sensibilite_Recompense",
-           "Routine", "Auto",
-           "UPPS_Total", "Urgence", "UrgencePos", "Manquedepremeditation", "Manquedeperseverance", "Sensation")
+AllCol <- list(
+  ID = c("subjID", "NS", "Initiales"),
+  Demo = c("Age", "StudyLevel"),
+  Condition = c("Condition", "Sample", "StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "Patho"),
+  Gamb = c("SOGS", "DSM", "Craving"),
+  Alc = c("AUDIT"),
+  Cog = c("OSPAN", "WAIS", "Raven"),
+  FR = c("dCraving", "dResist", "dStress", "dPain", "dAnalyse",
+         "dCravingM", "dResistM", "dStressM", "dPainM", "dAnalyseM",
+         "Envie_1", "Envie_2", "Envie_3", "Envie_4",
+         "Resister_1", "Resister_2", "Resister_3", "Resister_4",
+         "Stress_1", "Stress_2", "Stress_3", "Stress_4",
+         "Douleur_1", "Douleur_2", "Douleur_3", "Douleur_4",
+         "Analyse_1", "Analyse_2", "Analyse_3", "Analyse_4"),
+  Perso = c("SCL90R", "Fagerstrom", "Beck",
+            "Affect_positif", "Affect_Negatif", "STAIA", "STAIB", "SRRS",
+            "Sensibilite_Punition", "Sensibilite_Recompense",
+            "Routine", "Auto",
+            "UPPS_Total", "Urgence", "UrgencePos", "Manquedepremeditation", "Manquedeperseverance", "Sensation"))
