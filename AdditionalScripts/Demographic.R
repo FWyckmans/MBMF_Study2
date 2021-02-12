@@ -15,7 +15,7 @@ d$Sample[d$Condition=="A_CPT"|d$Condition=="A_WPT"] <- "Alc"
 d$Sample[d$Condition=="G_CPT"|d$Condition=="G_WPT"] <- "Gambler"
 d$Sample[d$Condition=="HC_CPT"|d$Condition=="HC_WPT"] <- "HC"
 
-d <- select(d, SubjID, Condition, Sample, Age, StudyLevel)
+d <- select(d, subjID, Condition, Sample, Age, StudyLevel)
 
 ########################################### Descriptive ###########################################
 ########## By group and stressor
