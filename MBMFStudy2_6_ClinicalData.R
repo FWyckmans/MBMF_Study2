@@ -69,7 +69,7 @@ Perso <- c("SCL90R", "Fagerstrom", "Beck",
 ToAdd = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda",
           "MB", "MF", "RewMB", "UnrewMB", "MBp", "MFp", "RewMBp", "UnrewMBp",
           "PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd",
-          "OKDaw")
+          "OKd")
 
 dClin <- AddDummyCol(dClin, ToAdd)
 
@@ -95,3 +95,7 @@ for (i in 1:length(AdditionnalDF)) {
   ToFill <- ToFillbyDF[[i]]
   dClin <- FillCol(dClin, dt, ToFill)
 }
+
+########## Indicate if the task is good according to Otto Ross script
+dClin$OKd <- 1
+dClin$OKd[is.na(dClin$PRCd)] <- 0
