@@ -28,6 +28,7 @@ library(rms)
 library(ISLR)
 library(e1071)
 library(stringr)
+library(writexl)
 
 ## Specific
 library(hBayesDM)
