@@ -42,9 +42,9 @@ TotG <- dBC$Total[dBC$Condition=="G_CPT"] + dBC$Total[dBC$Condition=="G_WPT"]
 MissingHC <- dBC$nMissing[dBC$Condition=="HC_CPT"] + dBC$nMissing[dBC$Condition=="HC_WPT"]
 TotHC <- dBC$Total[dBC$Condition=="HC_CPT"] + dBC$Total[dBC$Condition=="HC_WPT"]
 
-TextBC <- paste0("Chez les alcooliques, ", MissingAlc, " analyses sont manquantes (sur ", TotAlc, " participants)\n",
-                 "Chez les gamblers, ", MissingG, " analyses sont manquantes (sur ", TotG, " participants)\n",
-                 "Chez les contrôles, ", MissingHC, " analyses sont manquantes (sur ", TotHC, " participants)\n")
+TextBC <- paste0("Among alcoholics, ", MissingAlc, " analyzes are missing (for a total of ", TotAlc, " participants)\n",
+                 "Among gamblers, ", MissingG, " analyzes are missing (for a total of ", TotG, " participants)\n",
+                 "Among contrôles, ", MissingHC, " analyzes are missing (for a total of ", TotHC, " participants)\n")
 
 ######################################### Display results #########################################
 cat(TextTot)
