@@ -8,9 +8,9 @@ Output_path = "Output/"
 ############################################ Frame ################################################
 dCort <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   filter(OKd == 1)%>%
-  select(NS, Initiales, Condition, Analyse_1, Analyse_2, Analyse_3, Analyse_4)
+  select(NS, Initiales, Condition, Corti1, Corti2, Corti3, Corti4)
 
-dExp <- select(dCort, NS, Initiales, Analyse_1, Analyse_2, Analyse_3, Analyse_4)
+dExp <- select(dCort, NS, Initiales, Corti1, Corti2, Corti3, Corti4)
 
 ############################################# Export ##############################################
 write_xlsx(dExp, paste0(Output_path, "Cortisol.xlsx"))
