@@ -1,7 +1,7 @@
 remove(list = ls())
 
 ############################################ Parameter ############################################
-source("DataPrep/MBMFStudy2_1_Initialization.R")
+source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
 Test = 0
