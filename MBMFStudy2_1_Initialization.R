@@ -58,4 +58,8 @@ AllCol <- list(
             "Affect_positif", "Affect_Negatif", "STAIA", "STAIB", "SRRS",
             "Sensibilite_Punition", "Sensibilite_Recompense",
             "Routine", "Auto",
-            "UPPS_Total", "Urgence", "UrgencePos", "Manquedepremeditation", "Manquedeperseverance", "Sensation"))
+            "UPPS_Total", "Urgence", "UrgencePos", "Manquedepremeditation", "Manquedeperseverance", "Sensation"),
+  Computation = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda"),
+  RegLogInd = c("MB", "MF", "RewMB", "UnrewMB", "MBp", "MFp", "RewMBp", "UnrewMBp"),
+  ProbaM = c("PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd"),
+  ManipCheck = c("OKd"))
