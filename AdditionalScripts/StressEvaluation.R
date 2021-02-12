@@ -15,3 +15,4 @@ d <- dTot%>%
          Craving1, Craving2, Craving3, Craving4, dCraving, dCravingM,
          Resist1, Resist2, Resist3, Resist4, dResist, dResistM,
          Pain1, Pain2, Pain3, Pain4, dPain, dPainM)
+
