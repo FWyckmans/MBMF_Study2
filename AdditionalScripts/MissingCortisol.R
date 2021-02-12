@@ -18,7 +18,7 @@ write_xlsx(dExp, paste0(Output_path, "Cortisol.xlsx"))
 ########################################### Descriptive ###########################################
 dCort <- AddDummyCol(dCort, "CortiOK")
 dCort$CortiOK <- 1
-dCort$CortiOK[is.na(dCort$Analyse_1)] <- 0
+dCort$CortiOK[is.na(dCort$Corti1)] <- 0
 
 ########## Total missing
 nDone <- sum(dCort$CortiOK)
