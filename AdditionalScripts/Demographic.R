@@ -8,14 +8,7 @@ Output_path = "Output/"
 ############################################ Frame ################################################
 d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   filter(OKd == 1)%>%
-  select(subjID, Condition, Age, StudyLevel)
-
-d <- AddDummyCol(d, "Sample")
-d$Sample[d$Condition=="A_CPT"|d$Condition=="A_WPT"] <- "Alc"
-d$Sample[d$Condition=="G_CPT"|d$Condition=="G_WPT"] <- "Gambler"
-d$Sample[d$Condition=="HC_CPT"|d$Condition=="HC_WPT"] <- "HC"
-
-d <- select(d, subjID, Condition, Sample, Age, StudyLevel)
+  select(subjID, Condition, Sample, Age, StudyLevel)
 
 ########################################### Descriptive ###########################################
 ########## By group and stressor

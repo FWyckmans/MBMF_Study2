@@ -13,6 +13,12 @@ dClin <- read_excel(paste0(Datapath, "Questionnaires.xlsx"), range = "A1:BN500")
 bad <- is.na(dClin$NumDaw)
 dClin <- dClin[!bad, ]
 
+##### Add Group columns to specify gamblers, alcoholics and healthy controls
+dClin <- AddDummyCol(dClin, "Sample")
+dClin$Sample[dClin$Condition=="A_CPT"|dClin$Condition=="A_WPT"] <- "Alc"
+dClin$Sample[dClin$Condition=="G_CPT"|dClin$Condition=="G_WPT"] <- "Gambler"
+dClin$Sample[dClin$Condition=="HC_CPT"|dClin$Condition=="HC_WPT"] <- "HC"
+
 ##### Select the necessary columns
 dClin <- dClin%>%
   mutate(dCraving = Envie_3-Envie_2, dCravingM = ((Envie_3+Envie_4)/2)-((Envie_2+Envie_1)/2),
@@ -22,7 +28,7 @@ dClin <- dClin%>%
          dCorti = Analyse_3-Analyse_2, dCortiM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
   select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
-         Condition, Patho,
+         Condition, Sample, Patho,
          AUDIT, SOGS, DSM, Craving,
          
          dCraving, dResist, dStress, dPain, dCorti,
@@ -48,7 +54,7 @@ dClin <- dClin%>%
 ##### Vector with column names by type of variable for further references
 ID <- c("subjID", "NS", "Initiales")
 Demo <- c("Age", "StudyLevel")
-Condition <- c("Condition", "Patho")
+Condition <- c("Condition", "Sample", "Patho")
 Gamb <- c("SOGS", "DSM", "Craving")
 Alc <- c("AUDIT")
 Cog <- c("OSPAN", "WAIS", "Raven")
