@@ -14,6 +14,8 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 ########################################### Graphic ###############################################
 ##### Parameter = w
 boxplot(w ~ Condition, data = d)
+boxplot(w ~ Sample, data = d)
+
 boxplot(w ~ StressGr*Sample, data = d)
 
 boxplot(w ~ StressGrM*Sample, data = d)
