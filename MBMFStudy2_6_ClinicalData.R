@@ -20,7 +20,7 @@ dClin <- dClin%>%
          dStress = Stress_3-Stress_2, dStressM = ((Stress_3+Stress_4)/2)-((Stress_2+Stress_1)/2),
          dPain = Douleur_3-Douleur_2, dPainM = ((Douleur_3+Douleur_4)/2)-((Douleur_2+Douleur_1)/2),
          dAnalyse = Analyse_3-Analyse_2, dAnalyseM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
-  select(subjID = NumDaw, Initiales, Age, StudyLevel = Annee_Reussie,
+  select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
          Condition, Patho,
          AUDIT, SOGS, DSM, Craving,
@@ -46,7 +46,7 @@ dClin <- dClin%>%
          Analyse_1, Analyse_2, Analyse_3, Analyse_4)
 
 ##### Vector with column names by type of variable for further references
-ID <- c("subjID", "Initiales")
+ID <- c("subjID", "NS", "Initiales")
 Demo <- c("Age", "StudyLevel")
 Condition <- c("Condition", "Patho")
 Gamb <- c("SOGS", "DSM", "Craving")
