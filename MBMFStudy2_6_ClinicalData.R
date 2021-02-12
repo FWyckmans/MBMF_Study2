@@ -53,7 +53,7 @@ dClin <- dClin%>%
          Resist1 = Resister_1, Resist2 = Resister_2, Resist3 = Resister_3, Resist4 = Resister_4,
          Stress1 = Stress_1, Stress2 = Stress_2, Stress3 = Stress_3, Stress4 = Stress_4,
          Pain1 = Douleur_1, Pain2 = Douleur_2, Pain3 = Douleur_3, Pain4 = Douleur_4,
-         Analyse_1, Analyse_2, Analyse_3, Analyse_4)
+         Corti1 = Analyse_1, Corti2 = Analyse_2, Corti3 = Analyse_3, Corti4 = Analyse_4)
 
 ##### Add needed columns to dClin
 ToAdd = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda",
