@@ -19,14 +19,14 @@ dClin <- dClin%>%
          dResist = Resister_3-Resister_2, dResistM = ((Resister_3+Resister_4)/2)-((Resister_2+Resister_1)/2),
          dStress = Stress_3-Stress_2, dStressM = ((Stress_3+Stress_4)/2)-((Stress_2+Stress_1)/2),
          dPain = Douleur_3-Douleur_2, dPainM = ((Douleur_3+Douleur_4)/2)-((Douleur_2+Douleur_1)/2),
-         dAnalyse = Analyse_3-Analyse_2, dAnalyseM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
+         dCorti = Analyse_3-Analyse_2, dCortiM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
   select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
          Condition, Patho,
          AUDIT, SOGS, DSM, Craving,
          
-         dCraving, dResist, dStress, dPain, dAnalyse,
-         dCravingM, dResistM, dStressM, dPainM, dAnalyseM,
+         dCraving, dResist, dStress, dPain, dCorti,
+         dCravingM, dResistM, dStressM, dPainM, dCortiM,
          
          OSPAN, WAIS, Raven,
          
