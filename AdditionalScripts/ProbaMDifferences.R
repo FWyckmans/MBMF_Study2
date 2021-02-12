@@ -5,7 +5,7 @@ source("MBMFStudy2_1_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
 
-############################################ Frame ################################################
+############################################# Frame ###############################################
 d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   filter(OKd == 1)%>%
   select(subjID, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
@@ -15,7 +15,7 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
          MBd = PRCd - PRRd - PUCd + PURd, MFd = PRCd + PRRd - PUCd - PURd,
          MBRd = PRCd - PRRd, MBUd = PUCd - PURd)
 
-########################################### Graphic ###############################################
+############################################ Graphics #############################################
 ########## My parameter (MBw:MBUw)
 ##### Parameter = MB
 boxplot(MBw ~ Condition, data = d)
