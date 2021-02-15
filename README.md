@@ -7,6 +7,7 @@ All the R-codes, data and output used for this study. We are still recruiting pa
 - R version 4.0.0 or later (mine: 4.0.3)
 - RStudio version 1.4.x or later (mine: 1.4.1103)
 - Please follow these instructions before launching any code in this folder: https://ccs-lab.github.io/hBayesDM/index.html (needed for the 7 parameter computations).
+- Install all the packages proposed in the *MBMFStudy2_Initialization.R* once. Once they are downloaded, their installation will be handled by the *MBMFStudy2_Initialization.R*.
 
 ## Repository content
 - The *MBMF_Study2.Rproj* which is the project. Open it before anything else to handle the working directory.
