@@ -106,6 +106,7 @@ dClin$StressGrSRM[dClin$dStressM > 0] <- 1
 dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
 
 ##### Final stress group
+# dClin$FinalCondition[((dClin$Sample == i) & (dClin[x] == 1)] <- ""
 dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == 1))] <- "G_Str"
 dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == -1))] <- "G_NoStr"
 
