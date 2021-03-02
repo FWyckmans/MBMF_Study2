@@ -110,14 +110,14 @@ dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
 
 ##### Final stress group
 # dClin$FinalCondition[((dClin$Sample == i) & (dClin[x] == 1)] <- ""
-dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == 1))] <- "G_Str"
-dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == -1))] <- "G_NoStr"
+dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGrM == 1))] <- "G_Str"
+dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGrM == -1))] <- "G_NoStr"
 
-dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGr == 1))] <- "A_Str"
-dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGr == -1))] <- "A_NoStr"
+dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGrM == 1))] <- "A_Str"
+dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGrM == -1))] <- "A_NoStr"
 
-dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == 1))] <- "HC_Str"
-dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == -1))] <- "HC_NoStr"
+dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGrM == 1))] <- "HC_Str"
+dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGrM == -1))] <- "HC_NoStr"
 
 ############################################# Export ##############################################
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
