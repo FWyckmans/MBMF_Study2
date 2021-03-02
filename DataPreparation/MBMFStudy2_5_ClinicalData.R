@@ -63,6 +63,9 @@ ToAdd = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda",
 
 dClin <- AddDummyCol(dClin, ToAdd)
 
+##### Change AUDIT >= 10 to Alcoholic
+dClin$Sample[dClin$AUDIT >= 10] <- "Alc"
+
 ########## Other frames
 dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
 dOspan <- read.delim(paste0(Output_path, "dOspan.txt"))%>%
