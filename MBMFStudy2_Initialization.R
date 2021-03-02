@@ -43,7 +43,7 @@ source("Functions/FillCol.R")
 AllCol <- list(
   ID = c("subjID", "NS", "Initiales"),
   Demo = c("Age", "StudyLevel"),
-  Condition = c("Condition", "Sample", "StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "Patho"),
+  Condition = c("FinalCondition", "Condition", "Sample", "StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "Patho"),
   Gamb = c("SOGS", "DSM", "Craving"),
   Alc = c("AUDIT"),
   Cog = c("OSPAN", "WAIS", "Raven"),

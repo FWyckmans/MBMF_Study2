@@ -21,7 +21,7 @@ dClin$Sample[dClin$Condition=="G_CPT"|dClin$Condition=="G_WPT"] <- "Gambler"
 dClin$Sample[dClin$Condition=="HC_CPT"|dClin$Condition=="HC_WPT"] <- "HC"
 
 ##### Add StressGr to specify participants which saw their cortisol level or their self-reported measure Rise
-dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM"), -1)
+dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "FinalCondition"), -1)
 
 ##### Select the necessary columns
 dClin <- dClin%>%
@@ -32,7 +32,7 @@ dClin <- dClin%>%
          dCorti = Analyse_3-Analyse_2, dCortiM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
   select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
-         Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
+         FinalCondition, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
          AUDIT, SOGS, DSM, Craving,
          
          dCraving, dResist, dStress, dPain, dCorti,
@@ -104,6 +104,16 @@ dClin$StressGrSR[is.na(dClin$dStress)] <- NA
 
 dClin$StressGrSRM[dClin$dStressM > 0] <- 1
 dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
+
+##### Final stress group
+dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == 1))] <- "G_Str"
+dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == -1))] <- "G_NoStr"
+
+dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGr == 1))] <- "A_Str"
+dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGr == -1))] <- "A_NoStr"
+
+dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == 1))] <- "HC_Str"
+dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == -1))] <- "HC_NoStr"
 
 ############################################# Export ##############################################
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
