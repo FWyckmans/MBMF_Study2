@@ -8,7 +8,7 @@ StressThreshold = 0 # Indicate the threshold of deltaCortisol to be considered a
 
 ############################################ Frame ################################################
 ########## Clinical frame
-dClin <- read_excel(paste0(Datapath, "Questionnaires.xlsx"), range = "A1:BN500")
+dClin <- read_excel(paste0(Datapath, "Questionnaires.xlsx"), range = "A1:BN500", na = "N/A")
 
 ##### Remove useless rows
 bad <- is.na(dClin$NumDaw)
