@@ -119,5 +119,12 @@ dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGrM == -1))] <- "A_
 dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGrM == 1))] <- "HC_Str"
 dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGrM == -1))] <- "HC_NoStr"
 
+##### Simplified analyses DV
+dClin <- dClin%>%
+  mutate(MBsw = PRCw - PRRw - PUCw + PURw, MFsw = PRCw + PRRw - PUCw - PURw,
+         MBURsw = PURw - PUCw, MBRsw = PRCw - PRRw,
+         MBsd = PRCd - PRRd - PUCd + PURd, MFsd = PRCd + PRRd - PUCd - PURd,
+         MBURsd = PURd - PUCd, MBRsd = PRCd - PRRd)
+
 ############################################# Export ##############################################
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
