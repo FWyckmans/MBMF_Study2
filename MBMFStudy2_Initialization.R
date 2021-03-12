@@ -64,5 +64,5 @@ AllCol <- list(
   ProbaM = c("PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd",
              "MBsw", "MFsw", "MBURsw", "MBRsw",
              "MBsd", "MFsd", "MBURsd", "MBRsd"),
-  interaction = c("OSPANxdCraving"),
+  Interaction = c("OSPANxdCraving"),
   ManipCheck = c("OKd"))
