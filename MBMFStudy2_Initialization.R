@@ -61,5 +61,7 @@ AllCol <- list(
             "UPPS_Total", "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation"),
   Computation = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda"),
   RegLogInd = c("MB", "MF", "RewMB", "UnrewMB", "MBp", "MFp", "RewMBp", "UnrewMBp"),
-  ProbaM = c("PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd"),
+  ProbaM = c("PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd",
+             "MBsw", "MFsw", "MBURsw", "MBRsw",
+             "MBsd", "MFsd", "MBURsd", "MBRsd"),
   ManipCheck = c("OKd"))
