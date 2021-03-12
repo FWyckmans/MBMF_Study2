@@ -51,7 +51,6 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   
   # Creation of a correlation dataframe
   BigCorr <- function(){
-    # X = c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso)
     Z = c()
     p = c()
     Compt = 1
