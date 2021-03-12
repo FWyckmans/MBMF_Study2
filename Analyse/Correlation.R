@@ -26,6 +26,14 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
     CoI = AllCol$RegLogInd[1:4]
   }
   
+  if (VD == "Seboldw"){
+    CoI = AllCol$ProbaM[9:12]
+  }
+  
+  if (VD == "Seboldd"){
+    CoI = AllCol$ProbaM[13:16]
+  }
+  
   Y = rep(CoI, each = length(X))
   
   # Select appropriate sample
@@ -108,3 +116,8 @@ HeatMap("RegLogInd", "All")
 HeatMap("RegLogInd", "Alc")
 HeatMap("RegLogInd", "PG")
 HeatMap("RegLogInd", "HC")
+
+HeatMap("Seboldw", "All")
+HeatMap("Seboldw", "Alc")
+HeatMap("Seboldw", "PG")
+HeatMap("Seboldw", "HC")
