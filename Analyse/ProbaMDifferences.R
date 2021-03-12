@@ -48,7 +48,20 @@ ClassicGraph <- function(d, Method = "Mine"){
   
   dI <- dI%>%
     group_by(Sample, StressGrM, Score)%>%
-    summarise(M = mean(Value, na.rm = T), SD = sd(Value, na.rm = T), n = length(Value))
+    summarise(M = mean(Value, na.rm = T), SD = sd(Value, na.rm = T), n = length(Value))%>%
+    mutate(ErBar = 2*(SD/sqrt(n)))
+  
+  dI$Score[dI$Score == "PRCw"] <- "Rewarded Common"
+  dI$Score[dI$Score == "PRRw"] <- "Rewarded Rare"
+  dI$Score[dI$Score == "PUCw"] <- "Unrewarded Common"
+  dI$Score[dI$Score == "PURw"] <- "Unrewarded Rare"
+  
+  dI$Score[dI$Score == "PRCd"] <- "Rewarded Common"
+  dI$Score[dI$Score == "PRRd"] <- "Rewarded Rare"
+  dI$Score[dI$Score == "PUCd"] <- "Unrewarded Common"
+  dI$Score[dI$Score == "PURd"] <- "Unrewarded Rare"
+  
+  dI <<- dI
   
   for (j in c("Stressed", "Not Stressed")){  
     di <- filter(dI, StressGrM == j)
@@ -57,7 +70,12 @@ ClassicGraph <- function(d, Method = "Mine"){
     
       Plot <- ggplot(data = di2, aes(x = Score, y = M)) +
         geom_bar(stat = "identity") +
-        ggtitle(paste0(i, " ", j))
+        geom_errorbar(aes(ymin = M - ErBar, ymax = M + ErBar), width = .2) +
+        # scale_y_continuous("Proba") +
+        # ylim(0.5, 1) +
+        coord_cartesian(ylim=c(0.5,1)) +
+        labs(title=paste0(i, " ", j),
+             x ="Score", y = "Proba")
       print(Plot)
     }
   }
