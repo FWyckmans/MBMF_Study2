@@ -37,7 +37,7 @@ dG$StressGrM[dG$StressGrM == 1] <- "Stressed"
 dG$StressGrM[dG$StressGrM == -1] <- "Not Stressed"
 
 
-ClassicGraph <- function(d, Method = "Mine"){
+ClassicGraph <- function(d, Method = "Mine", byStress = 0){
   if (Method == "Mine"){
     dI <- filter(d, Score %in% c("PRCw", "PRRw", "PUCw", "PURw"))
   }
@@ -63,20 +63,22 @@ ClassicGraph <- function(d, Method = "Mine"){
   
   dI <<- dI
   
-  for (j in c("Stressed", "Not Stressed")){  
-    di <- filter(dI, StressGrM == j)
-    for (i in c("HC", "Gambler", "Alc")) {
-      di2 <- filter(di, Sample == i)
-    
-      Plot <- ggplot(data = di2, aes(x = Score, y = M)) +
-        geom_bar(stat = "identity") +
-        geom_errorbar(aes(ymin = M - ErBar, ymax = M + ErBar), width = .2) +
-        # scale_y_continuous("Proba") +
-        # ylim(0.5, 1) +
-        coord_cartesian(ylim=c(0.5,1)) +
-        labs(title=paste0(i, " ", j),
-             x ="Score", y = "Proba")
-      print(Plot)
+  if(byStress == 0){
+    for (j in c("Stressed", "Not Stressed")){  
+      di <- filter(dI, StressGrM == j)
+      for (i in c("HC", "Gambler", "Alc")) {
+        di2 <- filter(di, Sample == i)
+      
+        Plot <- ggplot(data = di2, aes(x = Score, y = M)) +
+          geom_bar(stat = "identity") +
+          geom_errorbar(aes(ymin = M - ErBar, ymax = M + ErBar), width = .2) +
+          # scale_y_continuous("Proba") +
+          # ylim(0.5, 1) +
+          coord_cartesian(ylim=c(0.5,1)) +
+          labs(title=paste0(i, " ", j),
+               x ="Score", y = "Proba")
+        print(Plot)
+      }
     }
   }
 }
