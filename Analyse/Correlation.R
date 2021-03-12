@@ -53,6 +53,7 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   BigCorr <- function(){
     # X = c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso)
     Z = c()
+    p = c()
     Compt = 1
     
     for (i in unique(Y)) {
@@ -63,21 +64,34 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
         correlation <- cor.test(d[,grep(paste0("\\b", i, "\\b"), colnames(d))],
                                 d[,grep(paste0("\\b", x, "\\b"), colnames(d))])
         Z[Compt] = correlation$estimate
+        p[Compt] = correlation$p.value
         Compt = Compt+1
       }
     }
-    dCorr <- data.frame(X, Y, Z)
+    dCorr <- data.frame(X, Y, Z, p)
     dCorr$Z[is.na(dCorr$Z)] <- 0
     dCorr
   }
   
   dCorr <- BigCorr()
   
+  # Add * for significant correlation
+  dCorr <- AddDummyCol(dCorr, c("Sig", "Label"))
+  dCorr$Sig[dCorr$p < .1] <- "."
+  dCorr$Sig[dCorr$p < .05] <- "*"
+  dCorr$Sig[dCorr$p < .01] <- "**"
+  dCorr$Sig[dCorr$p < .001] <- "***"
+  dCorr$Sig[dCorr$p >= .1] <- ""
+  
+  dCorr$Label <- paste0(round(dCorr$Z, 3), dCorr$Sig)
+  dCorr$Label[dCorr$Label=="NANA"] <- "0"
+  dCorr$Label[dCorr$Label=="0NA"] <- "0"
+  
   # Creation of the Heatmap
   TilePlot <- function(d, Title = ""){
     Tile <- ggplot(data = d, aes(x = X, y = Y, fill = Z)) +
       geom_tile() +
-      geom_text(aes(label = round(Z, 2))) +
+      geom_text(aes(label = Label)) +
       theme(axis.text.x = element_text(face="bold", color="#993333", 
                                        size=8, angle=45),
             axis.text.y = element_text(face="bold", color="#993333", 
@@ -90,7 +104,7 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
       ggtitle(Title)
   }
   
-  Tile1 <- TilePlot(dCorr, "Tout")
+  Tile1 <- TilePlot(dCorr, paste0("Tout - ", Pop))
   Tile2 <- TilePlot(dCorr[dCorr$X %in% AllCol$Demo,], paste0("Correlation demographique - ", Pop))
   Tile3 <- TilePlot(dCorr[dCorr$X %in% AllCol$Gamb,], paste0("Correlation gambling - ", Pop))
   Tile4 <- TilePlot(dCorr[dCorr$X %in% AllCol$Alc,], paste0("Correlation alcool - ", Pop))
@@ -105,6 +119,8 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   print(Tile5)
   print(Tile6)
   print(Tile7)
+  
+  dCorr <<- dCorr
 }
 
 HeatMap("Computation", "All")
