@@ -36,8 +36,9 @@ library(hBayesDM)
 # Sys.setenv(MAKEFLAGS='-j 4')  # Use 4 cores for compilation (or the number you want)
 
 ##### Functions
-source("Functions/AddDummyCol.R")
-source("Functions/FillCol.R")
+for (i in dir("Functions/")) {
+  source(paste0("Functions/",i))
+}
 
 ##### Vector with column names by type of variable for further references
 AllCol <- list(
