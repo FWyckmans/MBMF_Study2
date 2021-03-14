@@ -37,7 +37,21 @@ dG$StressGrM[dG$StressGrM == 1] <- "Stressed"
 dG$StressGrM[dG$StressGrM == -1] <- "Not Stressed"
 
 
-ClassicGraph <- function(d, Method = "Mine", byStress = 0, MultErBar = 2){
+ClassicGraph <- function(d, Method = "Mine", byStress = 1, MultErBar = 2){
+  
+  # Plotting function
+  Plotting <- function(){
+    Plot <- ggplot(data = di2, aes(x = Score, y = M)) +
+      geom_bar(stat = "identity") +
+      geom_errorbar(aes(ymin = M - ErBar, ymax = M + ErBar), width = .2) +
+      # scale_y_continuous("Proba") +
+      # ylim(0.5, 1) +
+      coord_cartesian(ylim=c(0.5,0.9)) +
+      labs(title = Title,
+           x ="Score", y = "Proba")
+    print(Plot)}
+  
+  # Data preparation
   if (Method == "Mine"){
     dI <- filter(d, Score %in% c("PRCw", "PRRw", "PUCw", "PURw"))
   }
@@ -45,11 +59,6 @@ ClassicGraph <- function(d, Method = "Mine", byStress = 0, MultErBar = 2){
   if (Method == "Daw"){
     dI <- filter(d, Score %in% c("PRCd", "PRRd", "PUCd", "PURd"))
   }
-  
-  dI <- dI%>%
-    group_by(Sample, StressGrM, Score)%>%
-    summarise(M = mean(Value, na.rm = T), SD = sd(Value, na.rm = T), n = length(Value))%>%
-    mutate(ErBar = MultErBar*(SD/sqrt(n)))
   
   dI$Score[dI$Score == "PRCw"] <- "Rewarded Common"
   dI$Score[dI$Score == "PRRw"] <- "Rewarded Rare"
@@ -61,26 +70,42 @@ ClassicGraph <- function(d, Method = "Mine", byStress = 0, MultErBar = 2){
   dI$Score[dI$Score == "PUCd"] <- "Unrewarded Common"
   dI$Score[dI$Score == "PURd"] <- "Unrewarded Rare"
   
-  dI <<- dI
   
-  if(byStress == 0){
+  # While taking stress into account
+  if(byStress == 1){
+    dI <- dI%>%
+      group_by(Sample, StressGrM, Score)%>%
+      summarise(M = mean(Value, na.rm = T), SD = sd(Value, na.rm = T), n = length(Value))%>%
+      mutate(ErBar = MultErBar*(SD/sqrt(n)))
+    
+    dI <<- dI
+    
     for (j in c("Stressed", "Not Stressed")){  
       di <- filter(dI, StressGrM == j)
       for (i in c("HC", "Gambler", "Alc")) {
         di2 <- filter(di, Sample == i)
-      
-        Plot <- ggplot(data = di2, aes(x = Score, y = M)) +
-          geom_bar(stat = "identity") +
-          geom_errorbar(aes(ymin = M - ErBar, ymax = M + ErBar), width = .2) +
-          # scale_y_continuous("Proba") +
-          # ylim(0.5, 1) +
-          coord_cartesian(ylim=c(0.5,1)) +
-          labs(title=paste0(i, " ", j, " (n = ", di2$n, ")"),
-               x ="Score", y = "Proba")
-        print(Plot)
+        Title <- paste0(i, " ", j, " (n = ", di2$n, ")")
+        Plotting()
       }
+    }
+  }
+  
+  # Without taking stress into account
+  if(byStress == 0){
+    
+    dI <- dI%>%
+      group_by(Sample, Score)%>%
+      summarise(M = mean(Value, na.rm = T), SD = sd(Value, na.rm = T), n = length(Value))%>%
+      mutate(ErBar = MultErBar*(SD/sqrt(n)))
+    
+    dI <<- dI
+    
+    for (i in c("HC", "Gambler", "Alc")) {
+      di2 <- filter(dI, Sample == i)
+      Title <- paste0(i, " (n = ", di2$n, ")")
+      Plotting()
     }
   }
 }
 
-ClassicGraph(dG)
+ClassicGraph(dG, byStress = 0)
