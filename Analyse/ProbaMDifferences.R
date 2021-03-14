@@ -37,7 +37,7 @@ dG$StressGrM[dG$StressGrM == 1] <- "Stressed"
 dG$StressGrM[dG$StressGrM == -1] <- "Not Stressed"
 
 
-ClassicGraph <- function(d, Method = "Mine", byStress = 0){
+ClassicGraph <- function(d, Method = "Mine", byStress = 0, MultErBar = 2){
   if (Method == "Mine"){
     dI <- filter(d, Score %in% c("PRCw", "PRRw", "PUCw", "PURw"))
   }
@@ -49,7 +49,7 @@ ClassicGraph <- function(d, Method = "Mine", byStress = 0){
   dI <- dI%>%
     group_by(Sample, StressGrM, Score)%>%
     summarise(M = mean(Value, na.rm = T), SD = sd(Value, na.rm = T), n = length(Value))%>%
-    mutate(ErBar = 2*(SD/sqrt(n)))
+    mutate(ErBar = MultErBar*(SD/sqrt(n)))
   
   dI$Score[dI$Score == "PRCw"] <- "Rewarded Common"
   dI$Score[dI$Score == "PRRw"] <- "Rewarded Rare"
@@ -75,7 +75,7 @@ ClassicGraph <- function(d, Method = "Mine", byStress = 0){
           # scale_y_continuous("Proba") +
           # ylim(0.5, 1) +
           coord_cartesian(ylim=c(0.5,1)) +
-          labs(title=paste0(i, " ", j),
+          labs(title=paste0(i, " ", j, " (n = ", di2$n, ")"),
                x ="Score", y = "Proba")
         print(Plot)
       }
