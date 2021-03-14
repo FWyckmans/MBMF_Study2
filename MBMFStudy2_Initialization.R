@@ -36,8 +36,8 @@ library(hBayesDM)
 # Sys.setenv(MAKEFLAGS='-j 4')  # Use 4 cores for compilation (or the number you want)
 
 ##### Functions
-for (i in dir("Functions/")) {
-  source(paste0("Functions/",i))
+for (Fun in dir("Functions/")) {
+  source(paste0("Functions/", Fun))
 }
 
 ##### Vector with column names by type of variable for further references
