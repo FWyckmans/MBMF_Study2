@@ -15,21 +15,25 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
          MBRw = PRCw - PRRw, MBUw = PUCw - PURw,
          MBd = PRCd - PRRd - PUCd + PURd, MFd = PRCd + PRRd - PUCd - PURd,
          MBRd = PRCd - PRRd, MBUd = PUCd - PURd)
+d$StressGr[d$StressGr == -1] <- "NotStressed"
+d$StressGr[d$StressGr == 1] <- "Stressed"
 
 ############################################ Graphics #############################################
 ########## My parameter (MBw:MBUw)
 ##### Parameter = MB
-boxplot(MBw ~ Condition, data = d)
-boxplot(MBw ~ Sample, data = d)
+dbp <- OutliersModif(d, c("MBw", "MFw", "MBRw", "MBUw"), Groups = c("Sample", "StressGrM"))
+boxplot(MBw ~ Condition, data = dbp)
+boxplot(MBw ~ Sample, data = dbp)
 
-boxplot(MBw ~ StressGr*Sample, data = d)
+boxplot(MBw ~ StressGr*Sample, data = dbp)
 
-boxplot(MBw ~ StressGrM*Sample, data = d)
+boxplot(MBw ~ StressGrM*Sample, data = dbp)
 
-boxplot(MBw ~ StressGrSR*Sample, data = d)
+boxplot(MBw ~ StressGrSR*Sample, data = dbp)
 
 ##### Classic Graphic
-dG <- d%>%
+
+dG <- dbp%>%
   select(subjID, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
          PRCw, PRRw, PUCw, PURw, PRCd, PRRd, PUCd, PURd)%>%
   gather(key = "Score", value = "Value", PRCw:PURd)
@@ -44,9 +48,7 @@ ClassicGraph <- function(d, Method = "Mine", byStress = 1, MultErBar = 2){
     Plot <- ggplot(data = di2, aes(x = Score, y = M)) +
       geom_bar(stat = "identity") +
       geom_errorbar(aes(ymin = M - ErBar, ymax = M + ErBar), width = .2) +
-      # scale_y_continuous("Proba") +
-      # ylim(0.5, 1) +
-      coord_cartesian(ylim=c(0.5,0.9)) +
+      coord_cartesian(ylim=c(0.5,1)) +
       labs(title = Title,
            x ="Score", y = "Proba")
     print(Plot)}
@@ -80,11 +82,17 @@ ClassicGraph <- function(d, Method = "Mine", byStress = 1, MultErBar = 2){
     
     dI <<- dI
     
+    # lplot <- list("HCStressed" = NULL, "PGStressed" = NULL, "AlcStressed" = NULL,
+    #               "HCNotStressed" = NULL, "PGNotStressed" = NULL, "AlcNotStressed" = NULL)
+    # compt = 1
+    
     for (j in c("Stressed", "Not Stressed")){  
       di <- filter(dI, StressGrM == j)
       for (i in c("HC", "Gambler", "Alc")) {
         di2 <- filter(di, Sample == i)
         Title <- paste0(i, " ", j, " (n = ", di2$n, ")")
+        # lplot[compt] <- Plotting()
+        # compt = compt + 1
         Plotting()
       }
     }
@@ -100,12 +108,18 @@ ClassicGraph <- function(d, Method = "Mine", byStress = 1, MultErBar = 2){
     
     dI <<- dI
     
+    # lplot <- list("HC" = NULL, "PG" = NULL, "Alc" = NULL)
+    # compt = 1
+    
     for (i in c("HC", "Gambler", "Alc")) {
       di2 <- filter(dI, Sample == i)
       Title <- paste0(i, " (n = ", di2$n, ")")
+      # lplot[compt] <- Plotting()
+      # compt = compt + 1
       Plotting()
     }
   }
+  # lplot
 }
 
 ClassicGraph(dG, byStress = 0)

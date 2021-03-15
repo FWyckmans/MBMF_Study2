@@ -7,9 +7,13 @@ Output_path = "Output/"
 
 ############################################# Frame ###############################################
 d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
-  filter(OKd == 1)
+  filter(OKd == 1)%>%
+  filter(!is.na(StressGr))
 
 # d$WAIS = 1
+
+# Outlierremoval
+d <- OutliersModif(d, c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso), Groups = "Sample")
 
 ############################################ Graphics ##############################################
 HeatMap <- function(VD = "Computation", Pop = "All"){
