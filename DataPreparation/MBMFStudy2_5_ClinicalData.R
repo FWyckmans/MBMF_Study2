@@ -126,5 +126,9 @@ dClin <- dClin%>%
          MBsd = PRCd - PRRd - PUCd + PURd, MFsd = PRCd + PRRd - PUCd - PURd,
          MBURsd = PURd - PUCd, MBRsd = PRCd - PRRd)
 
+##### Changed 0 in auto and routine to NA
+dClin$Auto[dClin$Auto == 0] <- NA
+dClin$Routine[dClin$Routine == 0] <- NA
+
 ############################################# Export ##############################################
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
