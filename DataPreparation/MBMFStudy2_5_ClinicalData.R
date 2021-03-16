@@ -130,5 +130,22 @@ dClin <- dClin%>%
 dClin$Auto[dClin$Auto == 0] <- NA
 dClin$Routine[dClin$Routine == 0] <- NA
 
+##### Change stress group
+dClin$StressGr[dClin$StressGr == -1] <- "NotStressed"
+dClin$StressGr[dClin$StressGr == 1] <- "Stressed"
+dClin$StressGr <- as.factor(dClin$StressGr)
+
+dClin$StressGrM[dClin$StressGrM == -1] <- "NotStressed"
+dClin$StressGrM[dClin$StressGrM == 1] <- "Stressed"
+dClin$StressGrM <- as.factor(dClin$StressGrM)
+
+dClin$StressGrSR[dClin$StressGrSR == -1] <- "NotStressed"
+dClin$StressGrSR[dClin$StressGrSR == 1] <- "Stressed"
+dClin$StressGrSR <- as.factor(dClin$StressGrSR)
+
+dClin$StressGrSRM[dClin$StressGrSRM == -1] <- "Stressed"
+dClin$StressGrSRM[dClin$StressGrSRM == 1] <- "NotStressed"
+dClin$StressGrSRM <- as.factor(dClin$StressGrSRM)
+
 ############################################# Export ##############################################
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")

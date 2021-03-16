@@ -15,8 +15,6 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
          MBRw = PRCw - PRRw, MBUw = PUCw - PURw,
          MBd = PRCd - PRRd - PUCd + PURd, MFd = PRCd + PRRd - PUCd - PURd,
          MBRd = PRCd - PRRd, MBUd = PUCd - PURd)
-d$StressGr[d$StressGr == -1] <- "NotStressed"
-d$StressGr[d$StressGr == 1] <- "Stressed"
 
 ############################################ Graphics #############################################
 ########## My parameter (MBw:MBUw)
@@ -37,9 +35,6 @@ dG <- dbp%>%
   select(subjID, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
          PRCw, PRRw, PUCw, PURw, PRCd, PRRd, PUCd, PURd)%>%
   gather(key = "Score", value = "Value", PRCw:PURd)
-dG$StressGrM[dG$StressGrM == 1] <- "Stressed"
-dG$StressGrM[dG$StressGrM == -1] <- "Not Stressed"
-
 
 ClassicGraph <- function(d, Method = "Mine", byStress = 1, MultErBar = 2){
   
@@ -86,7 +81,7 @@ ClassicGraph <- function(d, Method = "Mine", byStress = 1, MultErBar = 2){
     #               "HCNotStressed" = NULL, "PGNotStressed" = NULL, "AlcNotStressed" = NULL)
     # compt = 1
     
-    for (j in c("Stressed", "Not Stressed")){  
+    for (j in c("Stressed", "NotStressed")){  
       di <- filter(dI, StressGrM == j)
       for (i in c("HC", "Gambler", "Alc")) {
         di2 <- filter(di, Sample == i)
@@ -122,4 +117,4 @@ ClassicGraph <- function(d, Method = "Mine", byStress = 1, MultErBar = 2){
   # lplot
 }
 
-ClassicGraph(dG, byStress = 0)
+ClassicGraph(dG, byStress = 1)

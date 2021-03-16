@@ -126,7 +126,7 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   dCorr <<- dCorr
 }
 
-HeatMap("Computation", "All")
+HeatMap("Computation", "All")☺
 HeatMap("Computation", "Alc")
 HeatMap("Computation", "PG")
 HeatMap("Computation", "HC")
