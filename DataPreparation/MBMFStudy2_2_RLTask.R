@@ -122,7 +122,7 @@ if (Way == "Wyck"){
 
 ##### Remove Trial 10 and above 175
 d <- d%>%
-  filter(Trial > 10)%>%filter(Trial <= 175)
+  filter(Trial > 10)#%>%filter(Trial <= 175) Keep trial until max!
 
 # dComp <- filter(d, Step == 1)
 
