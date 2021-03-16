@@ -4,6 +4,16 @@ Datapath = "Raw_Data/"
 Output_path = "Output/"
 
 ##### Cran packages
+## Install
+packages <- c("dplyr", "tidyr",
+              "ggplot2", "gridExtra", "cowplot",
+              "nlme", "lmerTest", "BayesFactor", "stats",
+              "car", "readxl", "readr", "Hmisc", "rms", "ISLR", "e1071", "stringr", "writexl",
+              "hBayesDM")
+
+new.packages <- packages[!(packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
 ## Data
 library(dplyr)
 library(tidyr)
