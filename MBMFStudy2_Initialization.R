@@ -9,7 +9,7 @@ packages <- c("dplyr", "tidyr",
               "ggplot2", "gridExtra", "cowplot",
               "nlme", "lmerTest", "BayesFactor", "stats",
               "car", "readxl", "readr", "Hmisc", "rms", "ISLR", "e1071", "stringr", "writexl",
-              "hBayesDM")
+              "hBayesDM", "FactoMineR", "factoextra")
 
 new.packages <- packages[!(packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
@@ -28,6 +28,8 @@ library(nlme)
 library(lmerTest)
 library(BayesFactor)
 library(stats)
+library(FactoMineR)
+library(factoextra)
 
 ## Misc (or don't remember and imported anyway)
 library(car)
@@ -76,4 +78,9 @@ AllCol <- list(
              "MBsw", "MFsw", "MBURsw", "MBRsw",
              "MBsd", "MFsd", "MBURsd", "MBRsd"),
   Interaction = c("OSPANxdCraving"),
-  ManipCheck = c("OKd"))
+  ManipCheck = c("OKd"),
+  PCA = c("SOGS", "AUDIT", "Fagerstrom",
+          "Beck", "PANASPos", "PANASNeg", "SCL90R",
+          "STAIA", "STAIB", "SRRS", "PunitionSens", "RewardSens",
+          "UPPS_Total", "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation",
+          "Routine", "Auto"))
