@@ -6,7 +6,7 @@ Output_path = "Output/"
 ##### Cran packages
 ## Install
 packages <- c("dplyr", "tidyr",
-              "ggplot2", "gridExtra", "cowplot",
+              "ggplot2", "gridExtra", "cowplot", "corrplot",
               "nlme", "lmerTest", "BayesFactor", "stats",
               "car", "readxl", "readr", "Hmisc", "rms", "ISLR", "e1071", "stringr", "writexl",
               "hBayesDM", "FactoMineR", "factoextra")
@@ -22,6 +22,7 @@ library(tidyr)
 library(ggplot2)
 library(gridExtra)
 library(cowplot)
+library(corrplot)
 
 ## Stat and ML
 library(nlme)
