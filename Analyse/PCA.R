@@ -4,7 +4,8 @@ remove(list = ls())
 source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
-
+Reference = "http://www.sthda.com/french/articles/38-methodes-des-composantes-principales-
+dans-r-guide-pratique/73-acp-analyse-en-composantes-principales-avec-r-l-essentiel/#calcul"
 ############################################# Frame ###############################################
 d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   select(AllCol$ID, AllCol$Condition, AllCol$PCA)
