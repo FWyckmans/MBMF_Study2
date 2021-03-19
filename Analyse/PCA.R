@@ -8,7 +8,8 @@ Reference = "http://www.sthda.com/french/articles/38-methodes-des-composantes-pr
 dans-r-guide-pratique/73-acp-analyse-en-composantes-principales-avec-r-l-essentiel/#calcul"
 ############################################# Frame ###############################################
 d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
-  select(AllCol$ID, AllCol$Condition, AllCol$PCA)
+  select(AllCol$ID, AllCol$Condition, AllCol$PCA)%>%
+  filter(Sample != "Alc")
 
 PCA = c("SOGS", "AUDIT", "Fagerstrom",
         "Beck", "PANASPos", "PANASNeg", "SCL90R",
@@ -16,14 +17,12 @@ PCA = c("SOGS", "AUDIT", "Fagerstrom",
         "UPPS_Total", "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation",
         "Routine", "Auto")
 
-
-
 AllCol$PCA = c("SOGS", "AUDIT", "Fagerstrom",
         "Beck", "PANASPos", "PANASNeg", "SCL90R",
         "STAIA", "STAIB", "SRRS", "PunitionSens", "RewardSens",
-        "UPPS_Total", "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation")
+        "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation")
 
-pca <- PCA(d[AllCol$PCA], scale.unit = TRUE, ncp = 3, graph = TRUE)
+pca <- PCA(d[AllCol$PCA], scale.unit = TRUE, ncp = 4, graph = TRUE)
 fviz_eig(pca, addlabels = TRUE)
 
 var <- get_pca_var(pca)
