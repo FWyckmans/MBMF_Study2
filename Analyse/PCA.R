@@ -17,12 +17,18 @@ PCA = c("SOGS", "AUDIT", "Fagerstrom",
         "UPPS_Total", "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation",
         "Routine", "Auto")
 
-AllCol$PCA = c("SOGS", "AUDIT", "Fagerstrom",
+AllCol$PCA = c("SOGS", "AUDIT",
         "Beck", "PANASPos", "PANASNeg", "SCL90R",
         "STAIA", "STAIB", "SRRS", "PunitionSens", "RewardSens",
         "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation")
 
-pca <- PCA(d[AllCol$PCA], scale.unit = TRUE, ncp = 4, graph = TRUE)
+AllCol$PCA = c("SOGS", "AUDIT",
+               "Beck", "PANASNeg", "SCL90R",
+               "STAIA",
+               "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation")
+
+
+pca <- PCA(d[AllCol$PCA], scale.unit = TRUE, ncp = 3, graph = TRUE)
 fviz_eig(pca, addlabels = TRUE)
 
 var <- get_pca_var(pca)
