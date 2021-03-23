@@ -1,3 +1,14 @@
+remove(list = ls())
+
+d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
+  filter(OKd == 1)%>%
+  select(subjID, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
+         a1, beta1, a2, beta2, pi, w, lambda)
+
+
+Btwn = "Sample"
+
+
 DescrFrame <- function(d, Btwn = NA){
   ########## Init
   #### Required packages
@@ -41,6 +52,9 @@ DescrFrame <- function(d, Btwn = NA){
   
   # Compute n
   nPresAbs <- function(v, ...){
+    if (!is.factor(v)){
+      v <- as.factor(v)
+    }
     levelname <- levels(v)
     nl <- length(levelname)
     n = length(v[!is.na(v)])
@@ -60,6 +74,7 @@ DescrFrame <- function(d, Btwn = NA){
       if (is.factor(d[[i]])){
         Descriptive[i] <- nPresAbs(d[[i]])
       }
+      
       if (!is.factor(d[[i]])){
         Descriptive[i] <- MeanSD(d[[i]])
       }
@@ -79,12 +94,14 @@ DescrFrame <- function(d, Btwn = NA){
     Btwn <- FromColNameToIndex(d, Btwn)
   }
   
+  d[[Btwn]] <- as.factor(d[[Btwn]])
+  
   ##### Prepare the new descriptive frame
   dDescr <- data.frame(c(colnames(d[1:(length(d)-1)])))
   colnames(dDescr)[1] <- "Variable"
   
   ##### Fill the descriptive frame by group
-  for (i in unique(levels(d[[Btwn]]))){
+  for (i in levels(d[[Btwn]])){
     dt <- filter(d, d[[Btwn]] == i)
     dT <- FinalFrame(dt)
     dDescr <- cbind(dDescr, dT)
