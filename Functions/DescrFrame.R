@@ -57,7 +57,7 @@ DescrFrame <- function(d, Btwn = NA){
   
   ##### Specific function
   # Compute mean or n according to the type of subject
-  FinalFrame <- function(...){
+  FinalFrame <- function(d){
     Descriptive <- rep(NA, each = (length(d)-1))
     for (i in 1:(length(d)-1)) {
       if (is.factor(d[[i]])){
@@ -70,7 +70,6 @@ DescrFrame <- function(d, Btwn = NA){
     }
     return(Descriptive)
   }
-  
   
   ########## Main code
   ##### Factorize character columns
@@ -89,8 +88,6 @@ DescrFrame <- function(d, Btwn = NA){
   if (is.character(Btwn)){
     Btwn <- FromColNameToIndex(d, Btwn)
   }
-  
-  # d[[Btwn]] <- as.factor(d[[Btwn]])
   
   ##### Prepare the new descriptive frame
   dDescr <- data.frame(c(colnames(d[1:(length(d)-1)])))

@@ -29,3 +29,5 @@ bp(d, "lambda", c("Sample", "StressGrSR"))
 # bp(d, "lambda", c("Sample", "StressGrSRM"))
 
 dDescr <- DescrFrame(d, Btwn = "Sample")
+dDescr <- DescrFrame(d, Btwn = "Condition")
+
