@@ -13,11 +13,17 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 
 ############################################ Graphics ##############################################
 ##### Parameter = w
-boxplot(w ~ Condition, data = d)
-boxplot(w ~ Sample, data = d)
+bp(d, "w", "Condition")
+bp(d, "w", "Sample")
+bp(d, "w", c("Sample", "StressGr"))
+bp(d, "w", c("Sample", "StressGrM"))
+bp(d, "w", c("Sample", "StressGrSR"))
+# bp(d, "w", c("Sample", "StressGrSRM"))
 
-boxplot(w ~ StressGr*Sample, data = d)
-
-boxplot(w ~ StressGrM*Sample, data = d)
-
-boxplot(w ~ StressGrSR*Sample, data = d)
+##### Parameter = lambda
+bp(d, "lambda", "Condition")
+bp(d, "lambda", "Sample")
+bp(d, "lambda", c("Sample", "StressGr"))
+bp(d, "lambda", c("Sample", "StressGrM"))
+bp(d, "lambda", c("Sample", "StressGrSR"))
+# bp(d, "lambda", c("Sample", "StressGrSRM"))
