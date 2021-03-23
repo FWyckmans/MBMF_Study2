@@ -1,11 +1,7 @@
-##### Import personal functions
-# Meta-function I copy paste in any other script to import functions in these folders
-# I update it each time I add a new functions folder
-
-# FoldLocation: AllFun folder location.
-# nRow: number of rows in the test df
-
-dTest <- function(nRow = 80){
+TestDF <- function(nRow = 80){
+  # This function is used to create a test tidy df. Which is easier to prepare new function
+  # nRow is the number of rows you want in your test df
+  
   # Create test df
   if (nRow %% 80 != 0){
     print("nRow not divisible by 80, default value taken")

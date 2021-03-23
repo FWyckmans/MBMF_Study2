@@ -53,7 +53,7 @@ for (Fun in dir("Functions/")) {
   source(paste0("Functions/", Fun))
 }
 
-dTest()
+TestDF()
 
 ##### Vector with column names by type of variable for further references
 AllCol <- list(
