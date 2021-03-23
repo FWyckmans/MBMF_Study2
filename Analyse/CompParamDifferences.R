@@ -11,11 +11,6 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   select(subjID, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
          a1, beta1, a2, beta2, pi, w, lambda)
 
-# for (i in 1:length(d)) {
-#   if(is.character(d[[1,i]])){
-#     d[[i]] <- as.factor(d[[i]])
-#   }
-# }
 ############################################ Graphics ##############################################
 ##### Parameter = w
 bp(d, "w", "Condition")
