@@ -1,14 +1,3 @@
-remove(list = ls())
-
-d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
-  filter(OKd == 1)%>%
-  select(subjID, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
-         a1, beta1, a2, beta2, pi, w, lambda)
-
-
-Btwn = "Sample"
-
-
 DescrFrame <- function(d, Btwn = NA){
   ########## Init
   #### Required packages
@@ -84,6 +73,13 @@ DescrFrame <- function(d, Btwn = NA){
   
   
   ########## Main code
+  ##### Factorize character columns
+  for (i in 1:length(d)) {
+    if(is.character(d[[1,i]])){
+      d[[i]] <- as.factor(d[[i]])
+    }
+  }
+  
   ##### Get the index of the between subject column
   d <- AddDummyCol(d, "Dummy", "Every Subject")
   if (is.na(Btwn)){
@@ -94,7 +90,7 @@ DescrFrame <- function(d, Btwn = NA){
     Btwn <- FromColNameToIndex(d, Btwn)
   }
   
-  d[[Btwn]] <- as.factor(d[[Btwn]])
+  # d[[Btwn]] <- as.factor(d[[Btwn]])
   
   ##### Prepare the new descriptive frame
   dDescr <- data.frame(c(colnames(d[1:(length(d)-1)])))
@@ -107,7 +103,7 @@ DescrFrame <- function(d, Btwn = NA){
     dDescr <- cbind(dDescr, dT)
     colnames(dDescr)[length(dDescr)] <- paste0(i,
                                                " (n = ",
-                                               length(d[[Btwn]][d$Hospit == i]),
+                                               length(d[[Btwn]][d[[Btwn]] == i]),
                                                ")")
   }
   return(dDescr)
