@@ -1,4 +1,4 @@
-bp <- function(d, VoI, Groups = NA, OutliersRem = T){
+bp <- function(d, VoI, Groups = NA, OutliersRem = F){
   ## Additionnal requirment
   # This function requires dplyr to work
   if(!require(dplyr)){install.packages('dplyr')}
