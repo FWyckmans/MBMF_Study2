@@ -13,7 +13,7 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 
 ############################################ Graphics ##############################################
 ##### Parameter = w
-bp(d, "w", "Condition")
+bp(d, "w", "Condition", F)
 bp(d, "w", "Sample")
 bp(d, "w", c("Sample", "StressGr"))
 bp(d, "w", c("Sample", "StressGrM"))
@@ -28,6 +28,10 @@ bp(d, "lambda", c("Sample", "StressGrM"))
 bp(d, "lambda", c("Sample", "StressGrSR"))
 # bp(d, "lambda", c("Sample", "StressGrSRM"))
 
+d <- OutliersModif(d, "w", Groups = "Sample")
+
 dDescr <- DescrFrame(d, Btwn = "Sample")
 dDescr <- DescrFrame(d, Btwn = "Condition")
-
+anova <- aov(w ~ Sample, data = d)
+summary(anova)
+t.test(d$w[d$Sample=="Alc"], d$w[d$Sample=="HC"])
