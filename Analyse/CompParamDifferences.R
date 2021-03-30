@@ -14,7 +14,8 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 ############################################ Graphics ##############################################
 ########## Parameter = w
 ##### Main ANOVA
-MainAOV(d, VoI = "lambda", Groups = c("Sample", "StressGrM"), RemoveOutTechnique = "MAD")
+
+MainAOV(d, VoI = "w", Groups = c("Condition"), RemoveOutTechnique = "MAD")
 
 # bp(d, "w", "Condition")
 # bp(d, "w", "Sample")
