@@ -5,7 +5,7 @@ source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
 Test = 0
-StartOver = 1 # 1 to start from scratch, 0 to start with only new participants
+StartOver = 0 # 1 to start from scratch, 0 to start with only new participants
 
 ############################################# Frame ###############################################
 d <- read.csv(paste0(Output_path, "ComputationsReady.txt"), sep="")
