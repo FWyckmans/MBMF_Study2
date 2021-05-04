@@ -1,0 +1,131 @@
+block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8	set9	set10	set11	set12	set13	set14	set15	set_Ex1	set_Ex2	set_Ex3	set_Ex4	set_Ex5	set_Ex6	correct_operation	incorrect_operation	response	RT	
+1	1	IS  (5 x 1) - 1 = 4   ?, balle	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	correct	8516	
+2	1	IS  (2 x 3) + 1 = 4   ?, bouche	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	incorrect	2696	
+3	1	IS  (6 x 3) + 2 = 17   ?, sol	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	incorrect	3989	
+4	1	IS  (2 x 2) + 1 = 4   ?, groupe	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	incorrect	3561	
+5	1	dummy	sol	
+5	1	dummy	groupe	
+6	1	IS  (3 : 1) - 2 = 3   ?, prix	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	incorrect	6295	
+7	1	IS  (10 : 2) + 4 = 3   ?, pain	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	incorrect	2742	
+8	1	dummy	²²prix	
+8	1	dummy	pain	
+9	1	IS  (5 : 1) + 4 = 9   ?, bois	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	12728	
+9	2	IS  (8 : 2) + 4 = 2   ?, lait	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2906	
+9	3	IS  (9 x 2) - 3 = 16   ?, argent	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	4226	
+10	1	dummy	i-bois	
+10	1	dummy	lait	
+10	1	dummy	argent	
+11	1	IS  (10 : 10) - 1 = 2   ?, mot	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	10375	
+11	2	IS  (8 x 1) + 8 = 16   ?, coffre	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5920	
+11	3	IS  (8 : 8) + 1 = 2   ?, air	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3190	
+11	4	IS  (8 x 1) + 5 = 13   ?, rêve	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5282	
+11	5	IS  (9 : 3) - 2 = 1   ?, coeur	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6074	
+12	1	dummy	---mot	
+12	1	dummy	corrfre	
+12	1	dummy	reve	
+12	1	dummy	coeur	
+12	1	dummy	  	
+13	1	IS  (6 x 2) - 3 = 10   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5442	
+13	2	IS  (9 : 1) - 7 = 4   ?, sac	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4219	
+13	3	IS  (4 x 4) + 1 = 17   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2446	
+14	1	dummy	byciclette 	
+14	1	dummy	sac	
+14	1	dummy	fourchette	
+15	1	IS  (3 : 1) + 3 = 6   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5206	
+15	2	IS  (8 x 4) + 2 = 34   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	2448	
+16	1	dummy	tissu	
+16	1	dummy	fete	
+17	1	IS  (10 x 2) + 3 = 23   ?, maison	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2645	
+17	2	IS  (4 : 1) + 1 = 4   ?, cri	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2152	
+17	3	IS  (10 : 1) + 1 = 10   ?, voie	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2550	
+17	4	IS  (4 : 1) - 4 = 2   ?, pierre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3116	
+17	5	IS  (7 x 2) - 3 = 11   ?, verre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4316	
+18	1	dummy	²²maison	
+18	1	dummy	cri	
+18	1	dummy	voix	
+18	1	dummy	pierre	
+18	1	dummy	verre	
+19	1	IS  (5 x 2) + 1 = 6   ?, escalier	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2183	
+19	2	IS  (9 x 1) - 1 = 8   ?, plan	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	4572	
+19	3	IS  (3 x 2) + 1 = 6   ?, tête	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	1806	
+19	4	IS  (9 x 2) + 1 = 18   ?, enfant	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2378	
+19	5	IS  (9 : 1) - 5 = 4   ?, montre	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	5871	
+20	1	dummy	²²escalier	
+20	1	dummy	plan	
+20	1	dummy	fete	
+20	1	dummy	enfant	
+20	1	dummy	 	
+21	1	IS  (4 x 2) + 1 = 9   ?, sang	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2598	
+21	2	IS  (6 x 1) - 4 = 1   ?, serrure	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2802	
+21	3	IS  (4 : 2) + 1 = 6   ?, montagne	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2342	
+21	4	IS  (10 : 2) + 4 = 9   ?, chemise	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3668	
+21	5	IS  (9 : 3) - 1 = 2   ?, bouteille	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4077	
+21	6	IS  (10 : 2) - 3 = 2   ?, homme	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6421	
+22	1	dummy	sang	
+22	1	dummy	serrure	
+22	1	dummy	montagne	
+22	1	dummy	chemise	
+22	1	dummy	bouteille	
+22	1	dummy	   	
+23	1	IS  (9 x 3) - 2 = 25   ?, carte	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5209	
+23	2	IS  (9 : 3) - 2 = 2   ?, chaise	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3948	
+23	3	IS  (6 : 3) + 2 = 4   ?, cheval	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	4994	
+23	4	IS  (8 : 1) - 6 = 4   ?, film	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5613	
+24	1	dummy	²carte	
+24	1	dummy	chaise 	
+24	1	dummy	cheval	
+24	1	dummy	film	
+25	1	IS  (6 : 2) - 2 = 2   ?, village	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6499	
+25	2	IS  (7 x 2) - 1 = 14   ?, bouton	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2209	
+25	3	IS  (8 x 4) - 2 = 32   ?, rouleau	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3197	
+25	4	IS  (5 : 5) + 1 = 2   ?, assiette	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6306	
+25	5	IS  (3 x 1) + 2 = 2   ?, classe	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3880	
+25	6	IS  (3 x 3) - 1 = 8   ?, robinet	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3912	
+26	1	dummy	²²village	
+26	1	dummy	 	
+26	1	dummy	 	
+26	1	dummy	 	
+26	1	dummy	 	
+26	1	dummy	 	
+27	1	IS  (6 : 2) - 2 = 1   ?, point	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5169	
+27	2	IS  (7 x 1) + 6 = 13   ?, travail	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2253	
+28	1	dummy	point	
+28	1	dummy	travail	
+29	1	IS  (10 : 2) - 4 = 3   ?, chien	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3219	
+29	2	IS  (6 : 2) + 1 = 4   ?, banque	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	correct	2470	
+29	3	IS  (9 x 1) + 9 = 1   ?, voeu	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2127	
+29	4	IS  (7 : 1) + 2 = 7   ?, moustache	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2614	
+30	1	dummy	chien	
+30	1	dummy	banque	
+30	1	dummy	vieux	
+30	1	dummy	moustache	
+31	1	IS  (10 : 1) + 3 = 13   ?, mur	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	incorrect	3083	
+31	2	IS  (2 x 1) - 1 = 1   ?, toit	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	2580	
+31	3	IS  (8 : 4) - 1 = 1   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	incorrect	3833	
+32	1	dummy	mur	
+32	1	dummy	toit	
+32	1	dummy	etable	
+33	1	IS  (10 : 2) + 4 = 8   ?, nappe	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	incorrect	2453	
+33	2	IS  (7 x 7) + 1 = 49   ?, herbe	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	incorrect	1879	
+34	1	dummy	nappe	
+34	1	dummy	herbe	
+35	1	IS  (9 x 3) - 3 = 24   ?, femme	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	correct	4764	
+35	2	IS  (9 : 1) + 8 = 18   ?, peinture	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	2769	
+35	3	IS  (5 x 1) - 1 = 5   ?, église	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	3190	
+35	4	IS  (6 x 4) + 1 = 25   ?, poupée	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	correct	2858	
+35	5	IS  (6 x 3) - 2 = 11   ?, lettre	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	3716	
+35	6	IS  (10 x 2) - 6 = 12   ?, feuille	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	4987	
+36	1	dummy	femme	
+36	1	dummy	eglise	
+36	1	dummy	poupée	
+36	1	dummy	lettre	
+36	1	dummy	feuille	
+36	1	dummy	 	
+37	1	IS  (6 x 2) - 2 = 10   ?, nuit	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	correct	3771	
+37	2	IS  (8 : 2) - 1 = 3   ?, guide	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	correct	2856	
+37	3	IS  (7 : 1) + 6 = 12   ?, voix	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	incorrect	2281	
+37	4	IS  (10 : 1) - 1 = 9   ?, bras	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	correct	4475	
+38	1	dummy	--nuit	
+38	1	dummy	guide	
+38	1	dummy	voix	
+38	1	dummy	bras	
