@@ -45,7 +45,7 @@ library(writexl)
 
 ## Specific
 library(hBayesDM)
-# Sys.setenv(BUILD_ALL='true')  # Build all the models on installation
+Sys.setenv(BUILD_ALL='true')  # Build all the models on installation
 # Sys.setenv(MAKEFLAGS='-j 4')  # Use 4 cores for compilation (or the number you want)
 
 ##### Functions
