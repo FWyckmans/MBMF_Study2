@@ -21,8 +21,14 @@ dClin$Sample[dClin$Condition=="G_CPT"|dClin$Condition=="G_WPT"] <- "Gambler"
 dClin$Sample[dClin$Condition=="HC_CPT"|dClin$Condition=="HC_WPT"] <- "HC"
 
 ##### Add StressGr to specify participants which saw their cortisol level or their self-reported measure Rise
-dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "FinalCondition"), -1)
-
+dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "FinalCondition", "OKCort"), -1)
+dClin$OKCort[dClin$Analyse_1==9999] <- 0
+dClin$OKCort[dClin$Analyse_1!=9999] <- 1
+dClin$Analyse_1[dClin$Analyse_1 == 9999] <- NA
+dClin$Analyse_1[dClin$Analyse_2 == 9999] <- NA
+dClin$Analyse_1[dClin$Analyse_3 == 9999] <- NA
+dClin$Analyse_1[dClin$Analyse_4 == 9999] <- NA
+Û
 ##### Select the necessary columns
 dClin <- dClin%>%
   mutate(dCraving = Envie_3-Envie_2, dCravingM = ((Envie_3+Envie_4)/2)-((Envie_2+Envie_1)/2),
@@ -32,7 +38,7 @@ dClin <- dClin%>%
          dCorti = Analyse_3-Analyse_2, dCortiM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
   select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
-         FinalCondition, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
+         FinalCondition, Condition, Sample, OKCort, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
          AUDIT, SOGS, DSM, Craving,
          
          dCraving, dResist, dStress, dPain, dCorti,

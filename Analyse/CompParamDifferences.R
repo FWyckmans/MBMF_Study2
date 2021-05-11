@@ -20,8 +20,8 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 ############################################ Graphics ##############################################
 ########## Parameter = w
 ##### Main ANOVA
-
-MainAOV(d, VoI = "w", Groups = c("Sample", "StressGrM"), RemoveOutTechnique = "SD")
+# d <- filter(d, Sample != "Gambler")
+MainAOV(d, VoI = "w", Groups = c("Sample", "StressGrM"), RemoveOutTechnique = NA)
 
 # bp(d, "w", "Condition")
 # bp(d, "w", "Sample")

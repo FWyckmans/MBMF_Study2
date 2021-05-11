@@ -19,11 +19,11 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 ############################################ Graphics #############################################
 ########## My parameter (MBw:MBUw)
 ##### Parameter = MB
-dbp <- OutliersModif(d, c("MBw", "MFw", "MBRw", "MBUw"), Groups = c("Sample", "StressGrM"))
-boxplot(MBw ~ Condition, data = dbp)
-boxplot(MBw ~ Sample, data = dbp)
+# dbp <- OutliersModif(d, c("MBw", "MFw", "MBRw", "MBUw"), Groups = c("Sample", "StressGrM"))
+boxplot(MBw ~ Condition, data = d)
+boxplot(MBw ~ Sample, data = d)
 
-boxplot(MBw ~ StressGr*Sample, data = dbp)
+boxplot(MBw ~ StressGr*Sample, data = d)
 
 boxplot(MBw ~ StressGrM*Sample, data = dbp)
 
@@ -31,7 +31,7 @@ boxplot(MBw ~ StressGrSR*Sample, data = dbp)
 
 ##### Classic Graphic
 
-dG <- dbp%>%
+dG <- d%>%
   select(subjID, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
          PRCw, PRRw, PUCw, PURw, PRCd, PRRd, PUCd, PURd)%>%
   gather(key = "Score", value = "Value", PRCw:PURd)

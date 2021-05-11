@@ -28,7 +28,7 @@ AllCol$PCA = c("SOGS", "AUDIT",
                "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation")
 
 
-pca <- PCA(d[AllCol$PCA], scale.unit = TRUE, ncp = 3, graph = TRUE)
+pca <- PCA(d[AllCol$PCA], scale.unit = TRUE, ncp = 4, graph = TRUE)
 fviz_eig(pca, addlabels = TRUE)
 
 var <- get_pca_var(pca)

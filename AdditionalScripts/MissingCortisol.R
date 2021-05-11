@@ -7,10 +7,11 @@ Output_path = "Output/"
 
 ############################################ Frame ################################################
 dCort <- read.delim(paste0(Output_path,"dTot.txt"))%>%
-  # filter(OKd == 1)%>%
-  select(NS, Initiales, Condition, Corti1, Corti2, Corti3, Corti4)
+  filter(OKd == 1)%>%
+  filter(OKCort != 0)%>%
+  select(NS, Initiales, Condition, OKCort, Corti1, Corti2, Corti3, Corti4)
 
-dExp <- select(dCort, NS, Initiales, Corti1, Corti2, Corti3, Corti4)
+dExp <- select(dCort, NS, Initiales, OKCort, Corti1, Corti2, Corti3, Corti4)
 
 ############################################# Export ##############################################
 write_xlsx(dExp, paste0(Output_path, "Cortisol.xlsx"))
@@ -44,7 +45,7 @@ TotHC <- dBC$Total[dBC$Condition=="HC_CPT"] + dBC$Total[dBC$Condition=="HC_WPT"]
 
 TextBC <- paste0("Among alcoholics, ", MissingAlc, " analyzes are missing (for a total of ", TotAlc, " participants)\n",
                  "Among gamblers, ", MissingG, " analyzes are missing (for a total of ", TotG, " participants)\n",
-                 "Among contrôles, ", MissingHC, " analyzes are missing (for a total of ", TotHC, " participants)\n")
+                 "Among HC, ", MissingHC, " analyzes are missing (for a total of ", TotHC, " participants)\n")
 
 ######################################### Display results #########################################
 cat(TextTot)
