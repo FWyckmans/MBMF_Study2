@@ -28,7 +28,7 @@ dClin$Analyse_1[dClin$Analyse_1 == 9999] <- NA
 dClin$Analyse_1[dClin$Analyse_2 == 9999] <- NA
 dClin$Analyse_1[dClin$Analyse_3 == 9999] <- NA
 dClin$Analyse_1[dClin$Analyse_4 == 9999] <- NA
-Û
+
 ##### Select the necessary columns
 dClin <- dClin%>%
   mutate(dCraving = Envie_3-Envie_2, dCravingM = ((Envie_3+Envie_4)/2)-((Envie_2+Envie_1)/2),
@@ -153,5 +153,23 @@ dClin$StressGrSRM[dClin$StressGrSRM == -1] <- "Stressed"
 dClin$StressGrSRM[dClin$StressGrSRM == 1] <- "NotStressed"
 dClin$StressGrSRM <- as.factor(dClin$StressGrSRM)
 
+# Create dFinal where we only keep participant who did OK at DAW task AND get their Cortisol analyses
+dOKAlc <- dClin%>%
+  filter(OKCort == 1)%>%
+  filter(OKd == 1)%>%
+  filter(Sample != "Gambler")
+
+dOKGam <- dClin%>%
+  filter(OKCort == 1)%>%
+  filter(OKd == 1)%>%
+  filter(Sample != "Alc")
+
+dOKTot <- dClin%>%
+  filter(OKCort == 1)%>%
+  filter(OKd == 1)
+
 ############################################# Export ##############################################
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
+write.table(dOKAlc, paste0(Output_path, "dOKAlc.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
+write.table(dOKGam, paste0(Output_path, "dOKGam.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
+write.table(dOKTot, paste0(Output_path, "dOKTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
