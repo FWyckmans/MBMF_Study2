@@ -8,7 +8,8 @@ StressThreshold = 0 # Indicate the threshold of deltaCortisol to be considered a
 
 ############################################ Frame ################################################
 ########## Clinical frame
-dTot <- read.delim(paste0(Datapath, "dTot.txt"))
+dTot <- read.delim(paste0(Datapath, "dTot.txt"))%>%
+    filter(OKCort != 0)
 
 a <- length(dTot$FinalCondition[dTot$FinalCondition=="G_NoStr"])
 b <- length(dTot$FinalCondition[dTot$FinalCondition=="G_Str"])
