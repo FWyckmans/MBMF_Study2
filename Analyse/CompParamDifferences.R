@@ -10,8 +10,8 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   filter(OKd == 1)%>%
   filter(OKCort != 0)%>%
   select(subjID, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
-         a1, beta1, a2, beta2, pi, w, lambda)%>%
-  filter(subjID != 302 & subjID != 275 & subjID != 217 & subjID != 211 & subjID != 235 & subjID != 212)#%>%
+         a1, beta1, a2, beta2, pi, w, lambda)#%>%
+  # filter(subjID != 302 & subjID != 275 & subjID != 217 & subjID != 211 & subjID != 235 & subjID != 212)#%>%
   # filter(Sample != "Gambler")
 
 # d1 <- read.delim(paste0(Output_path,"ComputationParameter.txt"))
@@ -22,8 +22,9 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 ########## Parameter = w
 ##### Main ANOVA
 # d <- filter(d, Sample != "Gambler")
-MainAOV(d, VoI = "w", Groups = c("Sample", "StressGrM"), RemoveOutTechnique = NA)
-MainAOV(d, VoI = "w", Groups = c("Sample", "StressGrSR"), RemoveOutTechnique = NA)
+MainAOV(d, VoI = "w", Groups = c("Sample", "StressGrM"), RemoveOutTechnique = "MAD")
+
+MainAOV(d, VoI = "w", Groups = c("Sample", "StressGrSR"), RemoveOutTechnique = "MAD")
 
 # bp(d, "w", "Condition")
 # bp(d, "w", "Sample")
