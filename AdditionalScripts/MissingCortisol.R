@@ -11,7 +11,8 @@ dCort <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   filter(OKCort != 0)%>%
   select(NS, Initiales, Condition, OKCort, Corti1, Corti2, Corti3, Corti4)
 
-dExp <- select(dCort, NS, Initiales, OKCort, Corti1, Corti2, Corti3, Corti4)
+dExp <- dCort%>%
+  select(NS, Initiales, OKCort, Corti1, Corti2, Corti3, Corti4)
 
 ############################################# Export ##############################################
 write_xlsx(dExp, paste0(Output_path, "Cortisol.xlsx"))
