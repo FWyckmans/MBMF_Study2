@@ -69,7 +69,7 @@ cat("L'échantillon final avec les participants qui ont déjà toutes leurs anal
     "Pour un total de", Totok, "Participants recrutés")
 
 cat("Il faut encore recruter\n",
-    60-Aokc, "alcooliques", 60-Gokc, "gamblers et", 60-HCokc, "contrôles" )
+    60-Aokc, "alcooliques", 60-Gokc, "gamblers et", 60-HCokc, "contrôles.")
 
 cat("Il manque les analyses de\n",
     Aokc-Aok, "alcooliques", Gokc-Gok, "Gamblers et", HCokc-HCok, "contrôles.")

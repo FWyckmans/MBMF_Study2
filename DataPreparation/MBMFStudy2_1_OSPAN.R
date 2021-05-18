@@ -5,7 +5,7 @@ source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/OSPAN/"
 Output_path = "Output/"
 Test = 0
-NSInverseOspan = c() # Not needed ATM
+NSInverseOspan = c(114, 121:145, 200, 201, 214, 218, 219, 244) # Not needed ATM
 Playlist = "This is: Elton John by Spotify, Benny and the Jets"
 
 ############################################ Frame ################################################
@@ -36,7 +36,7 @@ if (Test == 0){
 
 ########################################## Modify frame ###########################################
 ComputeAcc <- function(d){     # Fonction pour calculer les reponses correctes
-  if (d$NS %in% NSInverseOspan){  
+  if (d$NS[1] %in% NSInverseOspan){  
     d$Acc[d$Resp == "correct" & d$RespCorr == 1] <- 0
     d$Acc[d$Resp == "incorrect" & d$RespCorr == 0] <- 0
     d$Acc[d$Resp == "correct" & d$RespCorr == 0] <- 1
@@ -50,21 +50,64 @@ ComputeAcc <- function(d){     # Fonction pour calculer les reponses correctes
   return(d)
 }
 
+rm_accent <- function(str,pattern="all") {
+  if(!is.character(str))
+    str <- as.character(str)
+  
+  pattern <- unique(pattern)
+  
+  if(any(pattern=="Ç"))
+    pattern[pattern=="Ç"] <- "ç"
+  
+  symbols <- c(
+    acute = "áéíóúÁÉÍÓÚýÝ",
+    grave = "àèìòùÀÈÌÒÙ",
+    circunflex = "âêîôûÂÊÎÔÛ",
+    tilde = "ãõÃÕñÑ",
+    umlaut = "äëïöüÄËÏÖÜÿ",
+    cedil = "çÇ"
+  )
+  
+  nudeSymbols <- c(
+    acute = "aeiouAEIOUyY",
+    grave = "aeiouAEIOU",
+    circunflex = "aeiouAEIOU",
+    tilde = "aoAOnN",
+    umlaut = "aeiouAEIOUy",
+    cedil = "cC"
+  )
+  
+  accentTypes <- c("´","`","^","~","¨","ç")
+  
+  if(any(c("all","al","a","todos","t","to","tod","todo")%in%pattern)) # opcao retirar todos
+    return(chartr(paste(symbols, collapse=""), paste(nudeSymbols, collapse=""), str))
+  
+  for(i in which(accentTypes%in%pattern))
+    str <- chartr(symbols[i],nudeSymbols[i], str) 
+  
+  return(str)
+}
+
 WordClean <- function(d){
   unwanted_array = list(    'S'='S', 's'='s', 'Z'='Z', 'z'='z', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='C', '?'='E', '?'='E',
                             '?'='E', '?'='E', '?'='I', '?'='I', '?'='I', '?'='I', '?'='N', '?'='O', '?'='O', '?'='O', '?'='O', '?'='O', '?'='O', '?'='U',
                             '?'='U', '?'='U', '?'='U', '?'='Y', '?'='B', '?'='Ss', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='c',
                             '?'='e', '?'='e', '?'='e', '?'='e', '?'='i', '?'='i', '?'='i', '?'='i', '?'='o', '?'='n', '?'='o', '?'='o', '?'='o', '?'='o',
-                            '?'='o', '?'='o', '?'='u', '?'='u', '?'='u', '?'='y', '?'='y', '?'='b', '?'='y' )
+                            '?'='o', '?'='o', '?'='u', '?'='u', '?'='u', '?'='y', '?'='y', '?'='b', '?'='y', '?' = 'ê')
   d$WordResp[d$WordResp==1|d$WordResp==0] <- NA
   d$WordResp <- str_remove_all(d$WordResp, "[?-]")
+  d$WordResp <- str_remove_all(d$WordResp, "[²]")
   for (i in c(1:length(d$NS))){
     d$Word[i] <- chartr(paste(names(unwanted_array), collapse=''),
                         paste(unwanted_array, collapse=''),
                         d$Word[i])
+    d$Word[i] <- rm_accent(d$Word[i])
+    d$Word[i] <- tolower(d$Word[i])
     d$WordResp[i] <- chartr(paste(names(unwanted_array), collapse=''),
                         paste(unwanted_array, collapse=''),
                         d$WordResp[i])
+    d$WordResp[i] <- rm_accent(d$WordResp[i])
+    d$WordResp[i] <- tolower(d$WordResp[i])
   }
   return(d)
 }
@@ -87,6 +130,8 @@ CorrectWord <- function(d){
   return(d)
 }
 
+i = 114
+
 dT <- data.frame()
 for (i in unique(d$NS)){
   print(i)
@@ -105,7 +150,7 @@ d <- dT%>%
   select(NS, Block, Trial, Word, WordResp, WordAcc, Acc, RT)%>%
   group_by(NS, Block)%>%
   summarise(nWordAcc = sum(WordAcc, na.rm = T), WordAcc = mean(WordAcc, na.rm = T), Acc = mean(Acc, na.rm = T), RT = mean(RT, na.rm = T),
-            nTrial = length(Trial))%>%
+            nTrial = length(Trial), .groups = 'drop')%>%
   group_by()%>%
   select(NS, WordAcc, nWordAcc, nTrial, Acc, RT)
 
