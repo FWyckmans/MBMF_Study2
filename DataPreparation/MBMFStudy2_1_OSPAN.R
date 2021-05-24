@@ -130,8 +130,6 @@ CorrectWord <- function(d){
   return(d)
 }
 
-i = 114
-
 dT <- data.frame()
 for (i in unique(d$NS)){
   print(i)
