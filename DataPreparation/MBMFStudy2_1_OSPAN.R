@@ -89,23 +89,23 @@ rm_accent <- function(str,pattern="all") {
 }
 
 WordClean <- function(d){
-  unwanted_array = list(    'S'='S', 's'='s', 'Z'='Z', 'z'='z', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='C', '?'='E', '?'='E',
-                            '?'='E', '?'='E', '?'='I', '?'='I', '?'='I', '?'='I', '?'='N', '?'='O', '?'='O', '?'='O', '?'='O', '?'='O', '?'='O', '?'='U',
-                            '?'='U', '?'='U', '?'='U', '?'='Y', '?'='B', '?'='Ss', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='c',
-                            '?'='e', '?'='e', '?'='e', '?'='e', '?'='i', '?'='i', '?'='i', '?'='i', '?'='o', '?'='n', '?'='o', '?'='o', '?'='o', '?'='o',
-                            '?'='o', '?'='o', '?'='u', '?'='u', '?'='u', '?'='y', '?'='y', '?'='b', '?'='y', '?' = 'ê')
+  # unwanted_array = list(    'S'='S', 's'='s', 'Z'='Z', 'z'='z', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='A', '?'='C', '?'='E', '?'='E',
+                            # '?'='E', '?'='E', '?'='I', '?'='I', '?'='I', '?'='I', '?'='N', '?'='O', '?'='O', '?'='O', '?'='O', '?'='O', '?'='O', '?'='U',
+                            # '?'='U', '?'='U', '?'='U', '?'='Y', '?'='B', '?'='Ss', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='a', '?'='c',
+                            # '?'='e', '?'='e', '?'='e', '?'='e', '?'='i', '?'='i', '?'='i', '?'='i', '?'='o', '?'='n', '?'='o', '?'='o', '?'='o', '?'='o',
+                            # '?'='o', '?'='o', '?'='u', '?'='u', '?'='u', '?'='y', '?'='y', '?'='b', '?'='y', '?' = 'ê')
   d$WordResp[d$WordResp==1|d$WordResp==0] <- NA
   d$WordResp <- str_remove_all(d$WordResp, "[?-]")
   d$WordResp <- str_remove_all(d$WordResp, "[²]")
   for (i in c(1:length(d$NS))){
-    d$Word[i] <- chartr(paste(names(unwanted_array), collapse=''),
-                        paste(unwanted_array, collapse=''),
-                        d$Word[i])
+    # d$Word[i] <- chartr(paste(names(unwanted_array), collapse=''),
+    #                     paste(unwanted_array, collapse=''),
+    #                     d$Word[i])
     d$Word[i] <- rm_accent(d$Word[i])
     d$Word[i] <- tolower(d$Word[i])
-    d$WordResp[i] <- chartr(paste(names(unwanted_array), collapse=''),
-                        paste(unwanted_array, collapse=''),
-                        d$WordResp[i])
+    # d$WordResp[i] <- chartr(paste(names(unwanted_array), collapse=''),
+    #                     paste(unwanted_array, collapse=''),
+    #                     d$WordResp[i])
     d$WordResp[i] <- rm_accent(d$WordResp[i])
     d$WordResp[i] <- tolower(d$WordResp[i])
   }
