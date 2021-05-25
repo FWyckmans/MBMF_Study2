@@ -73,7 +73,7 @@ dClin <- AddDummyCol(dClin, ToAdd)
 dClin$Sample <- "HC"
 # dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
 dClin$Sample[dClin$AUDIT >= 10] <- "Alc"
-dClin$Sample[dClin$SOGS >= 7] <- "Gambler"
+dClin$Sample[dClin$SOGS >= 5] <- "Gambler"
 
 ########## Other frames
 dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
@@ -111,10 +111,10 @@ dClin$StressGrM[dClin$dCortiM > 0] <- 1
 dClin$StressGrM[is.na(dClin$dCortiM)] <- NA
 
 ##### With self-reported measures
-dClin$StressGrSR[dClin$dStress > 0] <- 1
+dClin$StressGrSR[dClin$dStress > 0.0] <- 1
 dClin$StressGrSR[is.na(dClin$dStress)] <- NA
 
-dClin$StressGrSRM[dClin$dStressM > 0] <- 1
+dClin$StressGrSRM[dClin$dStressM > 0.0] <- 1
 dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
 
 ##### Final stress group
@@ -152,8 +152,8 @@ dClin$StressGrSR[dClin$StressGrSR == -1] <- "NotStressed"
 dClin$StressGrSR[dClin$StressGrSR == 1] <- "Stressed"
 dClin$StressGrSR <- as.factor(dClin$StressGrSR)
 
-dClin$StressGrSRM[dClin$StressGrSRM == -1] <- "Stressed"
-dClin$StressGrSRM[dClin$StressGrSRM == 1] <- "NotStressed"
+dClin$StressGrSRM[dClin$StressGrSRM == -1] <- "NotStressed"
+dClin$StressGrSRM[dClin$StressGrSRM == 1] <- "Stressed"
 dClin$StressGrSRM <- as.factor(dClin$StressGrSRM)
 
 # Create dFinal where we only keep participant who did OK at DAW task AND get their Cortisol analyses
