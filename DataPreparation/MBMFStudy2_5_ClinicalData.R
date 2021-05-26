@@ -72,7 +72,7 @@ dClin <- AddDummyCol(dClin, ToAdd)
 ##### Change AUDIT >= 10 to Alcoholic
 dClin$Sample <- "HC"
 # dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
-dClin$Sample[dClin$DSMal >= 3] <- "Alc"
+dClin$Sample[dClin$AUDIT >= 15] <- "Alc"
 dClin$Sample[dClin$SOGS >= 5 & dClin$DSM >= 2] <- "Gambler"
 
 ########## Other frames
@@ -176,3 +176,4 @@ write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F
 write.table(dOKAlc, paste0(Output_path, "dOKAlc.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKGam, paste0(Output_path, "dOKGam.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKTot, paste0(Output_path, "dOKTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
+# dClinAlc <- select(dClin, subjID, NS, Initiales, Sample, Condition, AUDIT, DSMal)
