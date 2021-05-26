@@ -39,7 +39,7 @@ dClin <- dClin%>%
   select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
          FinalCondition, Condition, Sample, OKCort, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
-         AUDIT, SOGS, DSM, Craving,
+         AUDIT, DSMal, SOGS, DSM, Craving,
          
          dCraving, dResist, dStress, dPain, dCorti,
          dCravingM, dResistM, dStressM, dPainM, dCortiM,
@@ -72,8 +72,8 @@ dClin <- AddDummyCol(dClin, ToAdd)
 ##### Change AUDIT >= 10 to Alcoholic
 dClin$Sample <- "HC"
 # dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
-dClin$Sample[dClin$AUDIT >= 10] <- "Alc"
-dClin$Sample[dClin$SOGS >= 5] <- "Gambler"
+dClin$Sample[dClin$DSMal >= 3] <- "Alc"
+dClin$Sample[dClin$SOGS >= 5 & dClin$DSM >= 2] <- "Gambler"
 
 ########## Other frames
 dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
@@ -104,10 +104,10 @@ dClin$OKd[is.na(dClin$PRCd)] <- 0
 
 ########## Indicate if the participant was stressed (1) or not (-1)
 ##### With Cortisol
-dClin$StressGr[dClin$dCorti > 0] <- 1
+dClin$StressGr[dClin$dCorti >= 0.02] <- 1
 dClin$StressGr[is.na(dClin$dCorti)] <- NA
 
-dClin$StressGrM[dClin$dCortiM > 0] <- 1
+dClin$StressGrM[dClin$dCortiM >= 0.02] <- 1
 dClin$StressGrM[is.na(dClin$dCortiM)] <- NA
 
 ##### With self-reported measures

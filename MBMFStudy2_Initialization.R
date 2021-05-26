@@ -61,7 +61,7 @@ AllCol <- list(
   Demo = c("Age", "StudyLevel"),
   Condition = c("FinalCondition", "Condition", "Sample", "StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "Patho"),
   Gamb = c("SOGS", "DSM", "Craving"),
-  Alc = c("AUDIT"),
+  Alc = c("AUDIT", "DSMal"),
   Cog = c("OSPAN", "WAIS", "Raven"),
   FR = c("dCraving", "dResist", "dStress", "dPain", "dCorti",
          "dCravingM", "dResistM", "dStressM", "dPainM", "dCortiM",
