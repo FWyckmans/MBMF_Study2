@@ -72,8 +72,8 @@ dClin <- AddDummyCol(dClin, ToAdd)
 ##### Change AUDIT >= 10 to Alcoholic
 dClin$Sample <- "HC"
 # dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
-dClin$Sample[dClin$AUDIT >= 15] <- "Alc"
-dClin$Sample[dClin$SOGS >= 5 & dClin$DSM >= 2] <- "Gambler"
+dClin$Sample[dClin$AUDIT >= 16 | dClin$DSMal >= 3] <- "Alc"
+dClin$Sample[dClin$SOGS >= 5 | dClin$DSM >= 3] <- "Gambler"
 
 ########## Other frames
 dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
