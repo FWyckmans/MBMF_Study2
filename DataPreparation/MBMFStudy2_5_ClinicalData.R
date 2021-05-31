@@ -72,7 +72,7 @@ dClin <- AddDummyCol(dClin, ToAdd)
 ##### Change AUDIT >= 10 to Alcoholic
 dClin$Sample <- "HC"
 # dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
-dClin$Sample[dClin$AUDIT >= 16 | dClin$DSMal >= 3] <- "Alc"
+dClin$Sample[dClin$AUDIT >= 20 | dClin$DSMal >= 3] <- "Alc"
 dClin$Sample[dClin$SOGS >= 5 | dClin$DSM >= 3] <- "Gambler"
 
 ########## Other frames
