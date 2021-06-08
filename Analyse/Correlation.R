@@ -94,6 +94,8 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   TilePlot <- function(d, Title = ""){
     Tile <- ggplot(data = d, aes(x = X, y = Y, fill = Z)) +
       geom_tile() +
+      scale_fill_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0) +
+      # scale_fill_gradientn(colours = c("blue", "white", "red"), values = c(-0.5, 0, 0.5)) +
       geom_text(aes(label = Label)) +
       theme(axis.text.x = element_text(face="bold", color="#993333", 
                                        size=8, angle=45),
@@ -101,7 +103,7 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
                                        size=8, angle=0)) +
       # scale_fill_distiller(palette = "RdPu") +
       # theme_ipsum() +
-      scale_fill_gradient(low = "white", high = "red") +
+      # scale_fill_gradient(low = "white", high = "red") +
       xlab("") +
       ylab("") +
       ggtitle(Title)
