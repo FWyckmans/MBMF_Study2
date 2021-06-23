@@ -10,6 +10,9 @@ rstan_options(javascript = FALSE)
 
 ############################################# Frame ###############################################
 d <- read.csv(paste0(Output_path, "ComputationsReady.txt"), sep="")
+dOK <- read.delim(paste0(Output_path, "dOKTot.txt"))
+
+d <- filter(d, subjID %in% dOK$subjID)
 
 if (Test != 0){
   d <- filter(d, subjID == Test)
