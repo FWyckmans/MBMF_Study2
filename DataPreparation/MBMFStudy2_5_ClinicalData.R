@@ -117,6 +117,9 @@ dClin$StressGrSR[is.na(dClin$dStress)] <- NA
 dClin$StressGrSRM[dClin$dStressM > 0.0] <- 1
 dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
 
+dClin$dCorti <- log10(dClin$dCorti + 1)
+dClin$dCortiM <- log10(dClin$dCortiM + 1)
+
 ##### Final stress group
 # dClin$FinalCondition[((dClin$Sample == i) & (dClin[x] == 1)] <- ""
 dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGrM == 1))] <- "G_Str"
