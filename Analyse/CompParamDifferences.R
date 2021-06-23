@@ -26,6 +26,7 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 MainAOV(d, VoI = "w", Groups = c("Sample", "StressGrM"), RemoveOutTechnique = NA)
 
 MainAOV(d, VoI = "MBsw", Groups = c("Sample", "StressGrSR"), RemoveOutTechnique = NA)
+MainAOV(d, VoI = "MBURsw", Groups = c("Sample", "StressGrSR"), RemoveOutTechnique = NA)
 
 # bp(d, "w", "Condition")
 # bp(d, "w", "Sample")
@@ -43,4 +44,3 @@ MainAOV(d, VoI = "MBsw", Groups = c("Sample", "StressGrSR"), RemoveOutTechnique 
 
 # dA <- OutliersModif(d, c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda"), Groups = "Sample")
 # dA <- OutliersModif(d, c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda"), Groups = "Condition")
-
