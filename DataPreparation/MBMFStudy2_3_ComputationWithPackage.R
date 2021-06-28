@@ -10,7 +10,8 @@ rstan_options(javascript = FALSE)
 
 ############################################# Frame ###############################################
 d <- read.csv(paste0(Output_path, "ComputationsReady.txt"), sep="")
-dOK <- read.delim(paste0(Output_path, "dOKTot.txt"))
+dOK <- read.delim(paste0(Output_path, "dTot.txt"))%>%
+  filter(OKd == 1)
 
 d <- filter(d, subjID %in% dOK$subjID)
 
@@ -29,7 +30,7 @@ if (StartOver == 0){
 
 niter = 4000
 nwarmup = niter/2
-output <- ts_par7(data = d, niter = 3000, nwarmup = 1500, nchain = 4, ncore = 4)
+output <- ts_par7(data = d, niter = 4000, nwarmup = 2000, nchain = 4, ncore = 4)
 
 ########################################## Save Output ###########################################
 dOutput <- output$allIndPars

@@ -13,7 +13,7 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 # d$WAIS = 1
 
 # Outlierremoval
-d <- OutliersModif(d, c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso), Groups = "Sample")
+# d <- OutliersModif(d, c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso), Groups = "Sample")
 
 ############################################ Graphics ##############################################
 HeatMap <- function(VD = "Computation", Pop = "All"){

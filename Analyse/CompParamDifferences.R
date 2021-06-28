@@ -23,8 +23,13 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 ########## Parameter = w
 ##### Main ANOVA
 # d <- filter(d, Sample != "Gambler")
+# Cortisol
 MainAOV(d, VoI = "w", Groups = c("Sample", "StressGrM"), RemoveOutTechnique = NA)
+MainAOV(d, VoI = "MBsw", Groups = c("Sample", "StressGrM"), RemoveOutTechnique = NA)
+MainAOV(d, VoI = "MBURsw", Groups = c("Sample", "StressGrM"), RemoveOutTechnique = NA)
 
+# Self Report
+MainAOV(d, VoI = "w", Groups = c("Sample", "StressGrSR"), RemoveOutTechnique = NA)
 MainAOV(d, VoI = "MBsw", Groups = c("Sample", "StressGrSR"), RemoveOutTechnique = NA)
 MainAOV(d, VoI = "MBURsw", Groups = c("Sample", "StressGrSR"), RemoveOutTechnique = NA)
 

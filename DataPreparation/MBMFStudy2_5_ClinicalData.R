@@ -25,9 +25,9 @@ dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSR
 dClin$OKCort[dClin$Analyse_1==9999] <- 0
 dClin$OKCort[dClin$Analyse_1!=9999] <- 1
 dClin$Analyse_1[dClin$Analyse_1 == 9999] <- NA
-dClin$Analyse_1[dClin$Analyse_2 == 9999] <- NA
-dClin$Analyse_1[dClin$Analyse_3 == 9999] <- NA
-dClin$Analyse_1[dClin$Analyse_4 == 9999] <- NA
+dClin$Analyse_2[dClin$Analyse_2 == 9999] <- NA
+dClin$Analyse_3[dClin$Analyse_3 == 9999] <- NA
+dClin$Analyse_4[dClin$Analyse_4 == 9999] <- NA
 
 ##### Select the necessary columns
 dClin <- dClin%>%
