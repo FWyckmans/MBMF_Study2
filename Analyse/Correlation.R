@@ -19,7 +19,7 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 HeatMap <- function(VD = "Computation", Pop = "All"){
   
   # Independent variables
-  X = c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso)
+  X = c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso, AllCol$Interaction)
   
   # Dependent variables
   if (VD == "Computation"){
@@ -116,6 +116,7 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   Tile5 <- TilePlot(dCorr[dCorr$X %in% AllCol$Cog,], paste0("Correlation facteur cognitif - ", Pop))
   Tile6 <- TilePlot(dCorr[dCorr$X %in% AllCol$FR,], paste0("Correlation Facteur Risque - ", Pop))
   Tile7 <- TilePlot(dCorr[dCorr$X %in% AllCol$Perso,], paste0("Correlation Facteur Personnalite - ", Pop))
+  Tile8 <- TilePlot(dCorr[dCorr$X %in% AllCol$Interaction,], paste0("Correlation interaction - ", Pop))
   
   print(Tile1)
   print(Tile2)
@@ -124,6 +125,7 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   print(Tile5)
   print(Tile6)
   print(Tile7)
+  print(Tile8)
   
   dCorr <<- dCorr
 }
