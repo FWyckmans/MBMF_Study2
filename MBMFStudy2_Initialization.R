@@ -80,7 +80,7 @@ AllCol <- list(
   ProbaM = c("PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd",
              "MBsw", "MFsw", "MBURsw", "MBRsw",
              "MBsd", "MFsd", "MBURsd", "MBRsd"),
-  Interaction = c("OSPANxdCraving"),
+  Interaction = c("RavenXdCortM", "OSPANxdCortM"),
   ManipCheck = c("OKd"),
   PCA = c("SOGS", "AUDIT", "Fagerstrom",
           "Beck", "PANASPos", "PANASNeg", "SCL90R",
