@@ -72,10 +72,10 @@ dClin <- AddDummyCol(dClin, ToAdd)
 ##### Change AUDIT >= 10 to Alcoholic
 dClin$Sample <- "HC"
 # dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
-# dClin$Sample[dClin$AUDIT >= 20 & dClin$DSMal >= 2] <- "Alc"
-# dClin$Sample[dClin$SOGS >= 5 & dClin$DSM >= 2] <- "Gambler"
-dClin$Sample[dClin$AUDIT >= 16] <- "Alc"
-dClin$Sample[dClin$SOGS >= 6] <- "Gambler"
+dClin$Sample[(dClin$AUDIT >= 15 & dClin$DSMal >= 2) | dClin$DSMal >= 3] <- "Alc"
+# dClin$Sample[dClin$AUDIT >= 16] <- "Alc"
+dClin$Sample[dClin$SOGS >= 6 | dClin$DSM >= 3] <- "Gambler"
+# dClin$Sample[dClin$SOGS >= 6] <- "Gambler"
 
 ########## Other frames
 dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
@@ -168,10 +168,7 @@ dClin <- dClin%>%
   mutate(RavenXdCortM = Raven * dCortiM,  # Raven*dCortiM
          OSPANxdCortM = OSPAN * dCortiM)  # OSPAN*dCortiM
 
-
-# d <- dClin
-# i = "MFsw"
-
+# zScores
 ScaleCol <- function(d, ScaleToDo){
   d <- AddDummyCol(d, ScaleToDo[[2]], NA)
   Compt = 1
