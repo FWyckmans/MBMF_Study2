@@ -72,8 +72,10 @@ dClin <- AddDummyCol(dClin, ToAdd)
 ##### Change AUDIT >= 10 to Alcoholic
 dClin$Sample <- "HC"
 # dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
-dClin$Sample[dClin$AUDIT >= 20 | dClin$DSMal >= 3] <- "Alc"
-dClin$Sample[dClin$SOGS >= 5 | dClin$DSM >= 3] <- "Gambler"
+# dClin$Sample[dClin$AUDIT >= 20 & dClin$DSMal >= 2] <- "Alc"
+# dClin$Sample[dClin$SOGS >= 5 & dClin$DSM >= 2] <- "Gambler"
+dClin$Sample[dClin$AUDIT >= 16] <- "Alc"
+dClin$Sample[dClin$SOGS >= 6] <- "Gambler"
 
 ########## Other frames
 dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
@@ -104,10 +106,11 @@ dClin$OKd[is.na(dClin$PRCd)] <- 0
 
 ########## Indicate if the participant was stressed (1) or not (-1)
 ##### With Cortisol
-dClin$StressGr[dClin$dCorti >= 0.02] <- 1
+Threshold = 0.02 # OR Threshold = 0.02
+dClin$StressGr[dClin$dCorti >= Threshold] <- 1
 dClin$StressGr[is.na(dClin$dCorti)] <- NA
 
-dClin$StressGrM[dClin$dCortiM >= 0.02] <- 1
+dClin$StressGrM[dClin$dCortiM >= Threshold] <- 1
 dClin$StressGrM[is.na(dClin$dCortiM)] <- NA
 
 ##### With self-reported measures
@@ -159,6 +162,35 @@ dClin$StressGrSRM[dClin$StressGrSRM == -1] <- "NotStressed"
 dClin$StressGrSRM[dClin$StressGrSRM == 1] <- "Stressed"
 dClin$StressGrSRM <- as.factor(dClin$StressGrSRM)
 
+###################################### Features engineering #######################################
+##### Interaction
+dClin <- dClin%>%
+  mutate(RavenXdCortM = Raven * dCortiM,  # Raven*dCortiM
+         OSPANxdCortM = OSPAN * dCortiM)  # OSPAN*dCortiM
+
+
+# d <- dClin
+# i = "MFsw"
+
+ScaleCol <- function(d, ScaleToDo){
+  d <- AddDummyCol(d, ScaleToDo[[2]], NA)
+  Compt = 1
+  for (i in ScaleToDo[["CoI"]]) {
+    M = mean(d[[i]], na.rm = T)
+    SD = sd(d[[i]], na.rm = T)
+    for (p in c(1:length(d[[i]]))) {
+      NewVal <- (d[[p, i]]-M)/SD
+      d[p, ScaleToDo$NewCol[Compt]] <- NewVal
+    }
+    Compt = Compt+1
+  }
+  return(d)
+}
+
+ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w"), NewCol = c("zMF", "zMB", "zMBUR", "zw"))
+dClin <- ScaleCol(dClin, ScaleToDo)
+
+############################################# Export ##############################################
 # Create dFinal where we only keep participant who did OK at DAW task AND get their Cortisol analyses
 dOKAlc <- dClin%>%
   filter(OKCort == 1)%>%
@@ -174,7 +206,7 @@ dOKTot <- dClin%>%
   filter(OKCort == 1)%>%
   filter(OKd == 1)
 
-############################################# Export ##############################################
+# Write tables
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKAlc, paste0(Output_path, "dOKAlc.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKGam, paste0(Output_path, "dOKGam.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
