@@ -4,7 +4,7 @@ remove(list = ls())
 source("MBMFStudy2_Initialization.R")
 Datapath = "Output/"
 Output_path = "Output/"
-StressThreshold = 0 # Indicate the threshold of deltaCortisol to be considered as stressed
+# StressThreshold = 0.1 # Indicate the threshold of deltaCortisol to be considered as stressed
 
 ############################################ Frame ################################################
 ########## Clinical frame
@@ -37,7 +37,7 @@ Totok <- length(dTot$Sample)
 
 a <- length(dTot$FinalCondition[dTot$FinalCondition=="G_NoStr"])
 b <- length(dTot$FinalCondition[dTot$FinalCondition=="G_Str"])
- 
+
 c <- length(dTot$FinalCondition[dTot$FinalCondition=="A_NoStr"])
 d <- length(dTot$FinalCondition[dTot$FinalCondition=="A_Str"])
 

@@ -4,7 +4,7 @@ remove(list = ls())
 source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
-StressThreshold = 0 # Indicate the threshold of deltaCortisol to be considered as stressed
+StressThreshold = 0.02 # Indicate the threshold of deltaCortisol to be considered as stressed
 
 ############################################ Frame ################################################
 ########## Clinical frame
@@ -72,9 +72,9 @@ dClin <- AddDummyCol(dClin, ToAdd)
 ##### Change AUDIT >= 10 to Alcoholic
 dClin$Sample <- "HC"
 # dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
-dClin$Sample[(dClin$AUDIT >= 15 & dClin$DSMal >= 2) | dClin$DSMal >= 3] <- "Alc"
-# dClin$Sample[dClin$AUDIT >= 16] <- "Alc"
-dClin$Sample[dClin$SOGS >= 6 | dClin$DSM >= 3] <- "Gambler"
+dClin$Sample[(dClin$AUDIT >= 13 & dClin$DSMal >= 2) | dClin$DSMal >= 3] <- "Alc"
+# dClin$Sample[dClin$AUDIT >= 12] <- "Alc"
+dClin$Sample[dClin$SOGS >= 6 | dClin$DSM >= 2] <- "Gambler"
 # dClin$Sample[dClin$SOGS >= 6] <- "Gambler"
 
 ########## Other frames
