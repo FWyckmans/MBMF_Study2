@@ -130,6 +130,8 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   dCorr <<- dCorr
 }
 
+d <- filter(d, Sample != "Alc")
+
 HeatMap("Computation", "All")
 HeatMap("Computation", "Alc")
 HeatMap("Computation", "PG")

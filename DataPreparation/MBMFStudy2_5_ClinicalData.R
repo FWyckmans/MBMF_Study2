@@ -20,6 +20,28 @@ dClin$Sample[dClin$Condition=="A_CPT"|dClin$Condition=="A_WPT"] <- "Alc"
 dClin$Sample[dClin$Condition=="G_CPT"|dClin$Condition=="G_WPT"] <- "Gambler"
 dClin$Sample[dClin$Condition=="HC_CPT"|dClin$Condition=="HC_WPT"] <- "HC"
 
+dClin$Sample <- "HC"
+# dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
+dClin$Sample[(dClin$AUDIT >= 13 & dClin$DSMal >= 2) | dClin$DSMal >= 3] <- "Alc"
+# dClin$Sample[dClin$AUDIT >= 12] <- "Alc"
+dClin$Sample[dClin$SOGS >= 6 | dClin$DSM >= 2] <- "Gambler"
+# dClin$Sample[dClin$SOGS >= 6] <- "Gambler"
+
+dClin$SampleC <- -1
+dClin$SampleC[dClin$Sample == "HC"] <- 1
+
+##### Add Group columns
+# PG 3 groups
+dClin$PG3 <- 0
+dClin$PG3[dClin$SOGS < 6] <- 1
+dClin$PG3[dClin$SOGS >= 12] <- -1
+dClin$PG3[is.na(dClin$SOGS)] <- 1
+
+# Alc 3 groups
+dClin$Alc3 <- 1
+dClin$Alc3[dClin$AUDIT>=12] <- 0
+dClin$Alc3[dClin$AUDIT >= 16] <- -1
+
 ##### Add StressGr to specify participants which saw their cortisol level or their self-reported measure Rise
 dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "FinalCondition", "OKCort"), -1)
 dClin$OKCort[dClin$Analyse_1==9999] <- 0
@@ -68,14 +90,6 @@ ToAdd = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda",
           "OKd")
 
 dClin <- AddDummyCol(dClin, ToAdd)
-
-##### Change AUDIT >= 10 to Alcoholic
-dClin$Sample <- "HC"
-# dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
-dClin$Sample[(dClin$AUDIT >= 13 & dClin$DSMal >= 2) | dClin$DSMal >= 3] <- "Alc"
-# dClin$Sample[dClin$AUDIT >= 12] <- "Alc"
-dClin$Sample[dClin$SOGS >= 6 | dClin$DSM >= 2] <- "Gambler"
-# dClin$Sample[dClin$SOGS >= 6] <- "Gambler"
 
 ########## Other frames
 dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
@@ -163,10 +177,13 @@ dClin$StressGrSRM[dClin$StressGrSRM == 1] <- "Stressed"
 dClin$StressGrSRM <- as.factor(dClin$StressGrSRM)
 
 ###################################### Features engineering #######################################
-##### Interaction
+##### Interaction # Pour le moment, ineraction avec les cortisols 2-3, pas avec grp moyen!
 dClin <- dClin%>%
-  mutate(RavenXdCortM = Raven * dCortiM,  # Raven*dCortiM
-         OSPANxdCortM = OSPAN * dCortiM)  # OSPAN*dCortiM
+  mutate(RavenXdCortM = Raven * dCorti,  # Raven*dCorti
+         OSPANxdCortM = OSPAN * dCorti,  # OSPAN*dCorti
+         GrpXdCortM = SampleC * dCorti,
+         GrpXRaven = SampleC*Raven,
+         GrpXRavenXdCortM = SampleC*Raven*dCorti)  
 
 # zScores
 ScaleCol <- function(d, ScaleToDo){
