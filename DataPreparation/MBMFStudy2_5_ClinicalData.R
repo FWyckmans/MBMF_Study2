@@ -14,6 +14,15 @@ dClin <- read_excel(paste0(Datapath, "Questionnaires.xlsx"), range = "A1:BO500",
 bad <- is.na(dClin$NumDaw)
 dClin <- dClin[!bad, ]
 
+##### Add StressGr to specify participants which saw their cortisol level or their self-reported measure Rise
+dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "FinalCondition", "OKCort"), -1)
+dClin$OKCort[dClin$Analyse_1==9999] <- 0
+dClin$OKCort[dClin$Analyse_1!=9999] <- 1
+dClin$Analyse_1[dClin$Analyse_1 == 9999] <- NA
+dClin$Analyse_2[dClin$Analyse_2 == 9999] <- NA
+dClin$Analyse_3[dClin$Analyse_3 == 9999] <- NA
+dClin$Analyse_4[dClin$Analyse_4 == 9999] <- NA
+
 ##### Add Group columns to specify gamblers, alcoholics and healthy controls
 dClin <- AddDummyCol(dClin, "Sample")
 dClin$Sample[dClin$Condition=="A_CPT"|dClin$Condition=="A_WPT"] <- "Alc"
@@ -30,26 +39,11 @@ dClin$Sample[dClin$SOGS >= 6 | dClin$DSM >= 2] <- "Gambler"
 dClin$SampleC <- -1
 dClin$SampleC[dClin$Sample == "HC"] <- 1
 
-##### Add Group columns
-# PG 3 groups
-dClin$PG3 <- 0
-dClin$PG3[dClin$SOGS < 6] <- 1
-dClin$PG3[dClin$SOGS >= 12] <- -1
-dClin$PG3[is.na(dClin$SOGS)] <- 1
-
-# Alc 3 groups
-dClin$Alc3 <- 1
-dClin$Alc3[dClin$AUDIT>=12] <- 0
-dClin$Alc3[dClin$AUDIT >= 16] <- -1
-
-##### Add StressGr to specify participants which saw their cortisol level or their self-reported measure Rise
-dClin <- AddDummyCol(dClin, c("StressGr", "StressGrM", "StressGrSR", "StressGrSRM", "FinalCondition", "OKCort"), -1)
-dClin$OKCort[dClin$Analyse_1==9999] <- 0
-dClin$OKCort[dClin$Analyse_1!=9999] <- 1
-dClin$Analyse_1[dClin$Analyse_1 == 9999] <- NA
-dClin$Analyse_2[dClin$Analyse_2 == 9999] <- NA
-dClin$Analyse_3[dClin$Analyse_3 == 9999] <- NA
-dClin$Analyse_4[dClin$Analyse_4 == 9999] <- NA
+##### Compute Water Group
+dClin <- AddDummyCol(dClin, "Water", Val = 1)
+dClin$Water[dClin$Condition == "HC_CPT"] <- -1
+dClin$Water[dClin$Condition == "G_CPT"] <- -1
+dClin$Water[dClin$Condition == "A_CPT"] <- -1
 
 ##### Select the necessary columns
 dClin <- dClin%>%
@@ -60,7 +54,7 @@ dClin <- dClin%>%
          dCorti = Analyse_3-Analyse_2, dCortiM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
   select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
-         FinalCondition, Condition, Sample, OKCort, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
+         FinalCondition, Condition, Sample, SampleC, Water, OKCort, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
          AUDIT, DSMal, SOGS, DSM, Craving,
          
          dCraving, dResist, dStress, dPain, dCorti,
@@ -118,6 +112,20 @@ for (i in 1:length(AdditionnalDF)) {
 dClin$OKd <- 1
 dClin$OKd[is.na(dClin$PRCd)] <- 0
 
+############################ Add Group columns
+# PG 3 groups
+dClin$PG3 <- 0
+dClin$PG3[dClin$SOGS < 6] <- 1
+dClin$PG3[dClin$SOGS >= 12] <- -1
+dClin$PG3[is.na(dClin$SOGS)] <- 1
+dClin$PG3[dClin$Sample == "Alc"] <- NA
+
+# Alc 3 groups
+dClin$Alc3 <- 1
+dClin$Alc3[dClin$AUDIT>=12] <- 0
+dClin$Alc3[dClin$AUDIT >= 16] <- -1
+dClin$Alc3[dClin$Sample == "Gambler"] <- NA
+
 ########## Indicate if the participant was stressed (1) or not (-1)
 ##### With Cortisol
 Threshold = 0.02 # OR Threshold = 0.02
@@ -128,14 +136,19 @@ dClin$StressGrM[dClin$dCortiM >= Threshold] <- 1
 dClin$StressGrM[is.na(dClin$dCortiM)] <- NA
 
 ##### With self-reported measures
-dClin$StressGrSR[dClin$dStress > 0.0] <- 1
+dClin$StressGrSR[dClin$dStress > 0.02] <- 1
 dClin$StressGrSR[is.na(dClin$dStress)] <- NA
 
-dClin$StressGrSRM[dClin$dStressM > 0.0] <- 1
+dClin$StressGrSRM[dClin$dStressM > 0.02] <- 1
 dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
 
 dClin$dCorti <- log10(dClin$dCorti + 1)
 dClin$dCortiM <- log10(dClin$dCortiM + 1)
+
+dClin$Corti1 <- log10(dClin$Corti1 + 1)
+dClin$Corti2 <- log10(dClin$Corti2 + 1)
+dClin$Corti3 <- log10(dClin$Corti3 + 1)
+dClin$Corti4 <- log10(dClin$Corti4 + 1)
 
 ##### Final stress group
 # dClin$FinalCondition[((dClin$Sample == i) & (dClin[x] == 1)] <- ""
