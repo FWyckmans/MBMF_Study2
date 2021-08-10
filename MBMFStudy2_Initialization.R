@@ -57,7 +57,7 @@ TestDF()
 
 ##### Vector with column names by type of variable for further references
 AllCol <- list(
-  ID = c("subjID", "NS", "Initiales"),
+  ID = c("subjID", "NS", "Initiales", "Water"),
   Demo = c("Age", "StudyLevel"),
   Condition = c("FinalCondition", "Condition", "Sample", "StressGr", "StressGrM", "StressGrSR", "StressGrSRM",
                 "Patho", "PG3", "Alc3"),
