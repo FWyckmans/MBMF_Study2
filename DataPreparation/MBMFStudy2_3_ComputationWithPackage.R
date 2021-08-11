@@ -6,7 +6,7 @@ Datapath = "Raw_Data/"
 Output_path = "Output/"
 Test = 0
 StartOver = 1 # 1 to start from scratch, 0 to start with only new participants
-rstan_options(javascript = FALSE)
+# rstan_options(javascript = FALSE)
 
 ############################################# Frame ###############################################
 d <- read.csv(paste0(Output_path, "ComputationsReady.txt"), sep="")
@@ -28,9 +28,9 @@ if (StartOver == 0){
 # output <- ts_par7(
 #   data = "example", niter = 2000, nwarmup = 1000, nchain = 4, ncore = 4)
 
-niter = 4000
+niter = 6000
 nwarmup = niter/2
-output <- ts_par7(data = d, niter = 4000, nwarmup = 2000, nchain = 4, ncore = 4)
+output <- ts_par7(data = d, niter = 6000, nwarmup = 3000, nchain = 4, ncore = 4)
 
 ########################################## Save Output ###########################################
 dOutput <- output$allIndPars
