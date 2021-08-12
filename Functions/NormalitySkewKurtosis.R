@@ -1,3 +1,9 @@
+# VoI = FromColNameToIndex(d, c(AllCol$Demo, AllCol$Gamb, AllCol$Alc,
+#                               AllCol$Cog, AllCol$FR, AllCol$Perso,
+#                               AllCol$Computation, AllCol$ProbaM))
+# Groups = "Sample"
+# Format = "Long"
+# 
 NormalitySkewKurtosis <- function(d, VoI, Groups, Format = "Large") {
   # Give the dataframe, the index of the Variable of Interest and the index of the group column
   # Indicate if you want a between-subject comparison
@@ -40,7 +46,7 @@ NormalitySkewKurtosis <- function(d, VoI, Groups, Format = "Large") {
     n = 1
     for (i in VoI){
       vect <- dt[[i]]
-      
+      # print(i)
       # Handle numeric
       if (!(is.character(vect) | is.factor(vect))){
         moy <- mean(vect, na.rm = T)

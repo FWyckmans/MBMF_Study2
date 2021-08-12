@@ -63,7 +63,7 @@ AllCol <- list(
                 "Patho", "PG3", "Alc3"),
   Gamb = c("SOGS", "DSM", "Craving"),
   Alc = c("AUDIT", "DSMal"),
-  Cog = c("OSPAN", "WAIS", "Raven"),
+  Cog = c("OSPAN", "Raven"), # WAIS
   FR = c("dCraving", "dResist", "dStress", "dPain", "dCorti",
          "dCravingM", "dResistM", "dStressM", "dPainM", "dCortiM",
          "Craving1", "Craving2", "Craving3", "Craving4",

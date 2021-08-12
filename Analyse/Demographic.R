@@ -8,7 +8,9 @@ Output_path = "Output/"
 ############################################ Frame ################################################
 d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   filter(OKd == 1)%>%
-  select(subjID, Condition, Sample, Age, StudyLevel)
+  filter(OKCort == 1)%>%
+  filter(Sample != "Alc")#%>%
+  # select(subjID, Condition, Sample, Age, StudyLevel)
 
 ########################################### Descriptive ###########################################
 ########## By group and stressor
@@ -28,3 +30,13 @@ dBG <- d%>%
 
 boxplot(Age ~ Sample, data = d)
 boxplot(StudyLevel ~ Sample, data = d)
+
+FromColNameToIndex(d, "StudyLevel")
+
+dDescr <- NormalitySkewKurtosis(d,
+                                VoI = FromColNameToIndex(d, c(AllCol$Demo, AllCol$Gamb, AllCol$Alc,
+                                                              AllCol$Cog, AllCol$FR, AllCol$Perso,
+                                                              AllCol$Computation, AllCol$ProbaM)),
+                                Groups = "Sample", Format = "Long")
+
+                                
