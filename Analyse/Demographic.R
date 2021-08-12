@@ -39,4 +39,4 @@ dDescr <- NormalitySkewKurtosis(d,
                                                               AllCol$Computation, AllCol$ProbaM)),
                                 Groups = "Sample", Format = "Long")
 
-                                
+write_xlsx(dDescr, paste0(Output_path, "dDescrTot.xlsx"))
