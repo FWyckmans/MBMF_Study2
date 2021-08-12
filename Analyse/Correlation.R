@@ -146,3 +146,53 @@ HeatMap("Seboldw", "All")
 HeatMap("Seboldw", "Alc")
 HeatMap("Seboldw", "PG")
 HeatMap("Seboldw", "HC")
+
+
+d <- filter(d, Sample != "Alc")
+dl <- filter(d, dCorti < median(d$dCorti, na.rm = T))
+dm <- filter(d, dCorti >= median(d$dCorti, na.rm = T))
+
+Nuage(d,
+      paste0(Output_path, "CorrWxdCort.tiff"),
+      VIname = "Elevation du Cortisol",
+      VI = d$dCorti,
+      VDname = "Paramètre w",
+      VD = d$w)
+
+Nuage(d,
+      paste0(Output_path, "CorrWxRaven.tiff"),
+      VIname = "Score aux matrices de Raven",
+      VI = d$Raven,
+      VDname = "Paramètre w",
+      VD = d$w)
+
+Nuage(dm,
+      paste0(Output_path, "CorrWxRaven_Stressed.tiff"),
+      VIname = "Score Raven",
+      VI = dm$Raven,
+      VDname = "Paramètre w",
+      VD = dm$w)
+
+Nuage(dl,
+      paste0(Output_path, "CorrWxRaven_NotStressed.tiff"),
+      VIname = "Score Raven",
+      VI = dl$Raven,
+      VDname = "Paramètre w",
+      VD = dl$w)
+
+dl <- filter(d, StressGr == "NotStressed")
+dm <- filter(d, StressGr == "Stressed")
+
+Nuage(dl,
+      paste0(Output_path, "CorrWxRaven_NotStressed.tiff"),
+      VIname = "Score Raven",
+      VI = dl$Raven,
+      VDname = "Paramètre w",
+      VD = dl$w)
+
+Nuage(dm,
+      paste0(Output_path, "CorrWxRaven_Stressed.tiff"),
+      VIname = "Score Raven",
+      VI = dm$Raven,
+      VDname = "Paramètre w",
+      VD = dm$w)
