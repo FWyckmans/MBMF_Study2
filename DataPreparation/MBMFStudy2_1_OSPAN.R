@@ -6,7 +6,7 @@ Datapath = "Raw_Data/OSPAN/"
 Output_path = "Output/"
 Test = 0
 NSInverseOspan = c(114, 121:145, 200, 201, 214, 218, 219, 244) # Not needed ATM
-Playlist = "This is: Elton John by Spotify, Benny and the Jets"
+Criterion = 0.85
 
 ############################################ Frame ################################################
 if (Test != 0){
@@ -155,7 +155,7 @@ d <- dT%>%
 ######################################### Compute score ###########################################
 CalcOK <- rep(0, length(d$NS))
 d <- cbind(d, CalcOK)
-d$CalcOK[d$Acc>0.79] <- 1
+d$CalcOK[d$Acc >= Criterion] <- 1
 
 d$nWordAcc[d$CalcOK==0] <- 0
 
