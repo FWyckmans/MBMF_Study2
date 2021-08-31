@@ -166,6 +166,13 @@ Nuage(d,
       VDname = "Paramètre w",
       VD = d$w)
 
+Nuage(d,
+      paste0(Output_path, "CorrWxSOGS.tiff"),
+      VIname = "SOGS",
+      VI = d$SOGS,
+      VDname = "Paramètre w",
+      VD = d$w)
+
 Nuage(dm,
       paste0(Output_path, "CorrWxRaven_Stressed.tiff"),
       VIname = "Score Raven",
