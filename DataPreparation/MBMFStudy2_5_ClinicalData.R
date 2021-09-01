@@ -31,7 +31,7 @@ dClin$Sample[dClin$Condition=="HC_CPT"|dClin$Condition=="HC_WPT"] <- "HC"
 
 dClin$Sample <- "HC"
 # dClin$Sample[((dClin$AUDIT < 7) & (dClin$SOGS < 5))] <- "HC"
-dClin$Sample[(dClin$AUDIT >= 13 & dClin$DSMal >= 2) | dClin$DSMal >= 3] <- "Alc"
+dClin$Sample[dClin$DSMal >= 3 | dClin$AUDIT >= 16] <- "Alc"
 # dClin$Sample[dClin$AUDIT >= 12] <- "Alc"
 dClin$Sample[dClin$SOGS >= 6 | dClin$DSM >= 2] <- "Gambler"
 # dClin$Sample[dClin$SOGS >= 6] <- "Gambler"
@@ -198,6 +198,23 @@ dClin <- dClin%>%
          GrpXRaven = SampleC*Raven,
          GrpXRavenXdCortM = SampleC*Raven*dCorti)  
 
+############################################# Export ##############################################
+# Create dFinal where we only keep participant who did OK at DAW task AND get their Cortisol analyses
+dOKAlc <- dClin%>%
+  filter(OKCort == 1)%>%
+  filter(OKd == 1)%>%
+  filter(Sample != "Gambler")
+
+dOKGam <- dClin%>%
+  filter(OKCort == 1)%>%
+  filter(OKd == 1)%>%
+  filter(Sample != "Alc")%>%
+  filter(subjID != 334)
+  
+dOKTot <- dClin%>%
+  filter(OKCort == 1)%>%
+  filter(OKd == 1)
+
 # zScores
 ScaleCol <- function(d, ScaleToDo){
   d <- AddDummyCol(d, ScaleToDo[[2]], NA)
@@ -215,23 +232,11 @@ ScaleCol <- function(d, ScaleToDo){
 }
 
 ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w"), NewCol = c("zMF", "zMB", "zMBUR", "zw"))
+
+dOKTot <- ScaleCol(dOKTot, ScaleToDo)
 dClin <- ScaleCol(dClin, ScaleToDo)
-
-############################################# Export ##############################################
-# Create dFinal where we only keep participant who did OK at DAW task AND get their Cortisol analyses
-dOKAlc <- dClin%>%
-  filter(OKCort == 1)%>%
-  filter(OKd == 1)%>%
-  filter(Sample != "Gambler")
-
-dOKGam <- dClin%>%
-  filter(OKCort == 1)%>%
-  filter(OKd == 1)%>%
-  filter(Sample != "Alc")
-
-dOKTot <- dClin%>%
-  filter(OKCort == 1)%>%
-  filter(OKd == 1)
+dOKGam <- ScaleCol(dOKGam, ScaleToDo)
+dOKAlc <- ScaleCol(dOKAlc, ScaleToDo)
 
 # Write tables
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
@@ -239,3 +244,24 @@ write.table(dOKAlc, paste0(Output_path, "dOKAlc.txt"), col.names = T, row.names 
 write.table(dOKGam, paste0(Output_path, "dOKGam.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKTot, paste0(Output_path, "dOKTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 # dClinAlc <- select(dClin, subjID, NS, Initiales, Sample, Condition, AUDIT, DSMal)
+
+dMod <- dOKGam[c("NS", "subjID", "Sample", "FinalCondition", "SOGS", "DSM", "AUDIT", "DSMal", "zw", "w",
+                 "dCorti", "OSPAN", "Raven")]
+sum(dOKGam$Sample == "Gambler")
+sum(dOKGam$Sample == "HC")
+sum(dOKAlc$Sample == "Alc")
+
+t.test(dOKGam$w[dOKGam$Sample == "Gambler"], dOKGam$w[dOKGam$Sample != "Gambler"], alternative = "less")
+wilcox.test(dOKGam$w[dOKGam$Sample == "Gambler"], dOKGam$w[dOKGam$Sample != "Gambler"])
+
+t.test(dOKGam$OSPAN[dOKGam$Sample == "Gambler"], dOKGam$OSPAN[dOKGam$Sample != "Gambler"], alternative = "less")
+wilcox.test(dOKGam$OSPAN[dOKGam$Sample == "Gambler"], dOKGam$OSPAN[dOKGam$Sample != "Gambler"])
+
+t.test(dOKGam$Raven[dOKGam$Sample == "Gambler"], dOKGam$Raven[dOKGam$Sample != "Gambler"], alternative = "less")
+wilcox.test(dOKGam$Raven[dOKGam$Sample == "Gambler"], dOKGam$Raven[dOKGam$Sample != "Gambler"])
+
+t.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "NotStressed"],
+       dOKGam$w[dOKGam$Sample != "Gambler" & dOKGam$StressGr == "NotStressed"], var.equal = F, alternative = "less")
+
+wilcox.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "NotStressed"],
+       dOKGam$w[dOKGam$Sample != "Gambler" & dOKGam$StressGr == "NotStressed"])

@@ -9,11 +9,10 @@ Output_path = "Output/"
 d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   filter(OKd == 1)%>%
   filter(OKCort != 0)%>%
-  select(subjID, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
+  select(subjID, NS, Condition, Sample, StressGr, StressGrM, StressGrSR, StressGrSRM,
          a1, beta1, a2, beta2, pi, w, lambda,
-         MBsw, MBURsw, MFsw)#%>%
-  # filter(subjID != 302 & subjID != 275 & subjID != 217 & subjID != 211 & subjID != 235 & subjID != 212)#%>%
-  # filter(Sample != "Gambler")
+         MBsw, MBURsw, MFsw)%>%
+  filter(subjID != 334)
 
 # d1 <- read.delim(paste0(Output_path,"ComputationParameter.txt"))
 # d2 <- read.delim(paste0(Output_path,"ComputationParameter2.txt"))
