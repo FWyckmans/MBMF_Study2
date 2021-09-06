@@ -134,9 +134,14 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
 d <- filter(d, Sample != "Alc")
 
 HeatMap("Computation", "All")
-HeatMap("Computation", "Alc")
-HeatMap("Computation", "PG")
-HeatMap("Computation", "HC")
+# HeatMap("Computation", "Alc")
+# HeatMap("Computation", "PG")
+# HeatMap("Computation", "HC")
+# summary(lm(zw ~ OSPAN*SampleC*dCorti, data = d))
+summary(lm(zw ~ OSPAN * dCorti, data = d))
+
+summary(lm(zw ~ Raven*SampleC*dCorti, data = d))
+summary(lm(zw ~ Raven*dCorti, data = d))
 
 # HeatMap("RegLogInd", "All")
 # HeatMap("RegLogInd", "Alc")
