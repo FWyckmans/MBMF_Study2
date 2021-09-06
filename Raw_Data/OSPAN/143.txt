@@ -10,7 +10,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 8	1	dummy	-prix	
 8	1	dummy	pain	
 9	1	IS  (5 : 1) + 4 = 9   ?, lait	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	2954	
-9	2	IS  (9 x 2) - 3 = 16   ?, argent	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2749	
+9	2	IS  (9 x 2) - 3 = 16   ?, argent	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	2749	
 9	3	IS  (8 : 2) + 4 = 2   ?, bois	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	2933	
 10	1	dummy	lait	
 10	1	dummy	argent	

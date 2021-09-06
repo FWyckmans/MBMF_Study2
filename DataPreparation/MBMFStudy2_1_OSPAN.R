@@ -5,8 +5,8 @@ source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/OSPAN/"
 Output_path = "Output/"
 Test = 0
-NSInverseOspan = c(114, 121:145, 200, 201, 214, 218, 219, 244) # Not needed ATM
-Criterion = 0.85
+NSInverseOspan = 0#c(114, 121:145, 200, 201, 214, 218, 219, 244) # Not needed ATM
+Criterion = 0.8
 
 ############################################ Frame ################################################
 if (Test != 0){
@@ -20,6 +20,8 @@ if (Test != 0){
     select(NS, Block = block.number, Trial = trial.number, Content = trial.contents,
            WordResp = set1, WordAcc, RespCorr = correct_operation, Resp = response, Acc, RT)}
 
+f = "110.txt"
+
 if (Test == 0){
   listeFichiers <- dir(path = Datapath, pattern = ".txt")
   d <- data.frame()
@@ -29,10 +31,12 @@ if (Test == 0){
     Acc <- rep(NA, length(s$block.number))
     WordAcc <- rep(NA, length(s$block.number))
     s <- cbind(NS, s, Acc, WordAcc)
-    d <- rbind(d, s)}
+    d <- rbind(d, s)
+    }
   d <- d%>%
     filter(block.number > 8)%>%
-    select(NS, Block = block.number, Trial = trial.number, Content = trial.contents, WordResp = set1, WordAcc, RespCorr = correct_operation, Resp = response, Acc, RT)}
+    select(NS, Block = block.number, Trial = trial.number, Content = trial.contents, WordResp = set1, WordAcc, RespCorr = correct_operation, Resp = response, Acc, RT)
+}
 
 ########################################## Modify frame ###########################################
 ComputeAcc <- function(d){     # Fonction pour calculer les reponses correctes
@@ -130,6 +134,11 @@ CorrectWord <- function(d){
   return(d)
 }
 
+# i = 121
+# i = 110
+i = 143
+NSInverseOspan = c(122, 126, 128, 130, 135, 138, 139, 140, 142, 143)
+
 dT <- data.frame()
 for (i in unique(d$NS)){
   print(i)
@@ -143,6 +152,8 @@ for (i in unique(d$NS)){
   dt <- CorrectWord(dt) # Check if the word is correct
   dT <- rbind(dT, dt) # Final tab
 }
+
+dN <- filter(dT, NS == 143)
 
 d <- dT%>%
   select(NS, Block, Trial, Word, WordResp, WordAcc, Acc, RT)%>%
@@ -158,6 +169,7 @@ d <- cbind(d, CalcOK)
 d$CalcOK[d$Acc >= Criterion] <- 1
 
 d$nWordAcc[d$CalcOK==0] <- 0
+# dN$nWordAcc[dN$CalcOK==0] <- 0
 
 dOspan <- d%>%
   # filter(CalcOK == 1)%>%

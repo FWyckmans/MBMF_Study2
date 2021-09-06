@@ -190,13 +190,23 @@ dClin$StressGrSRM[dClin$StressGrSRM == 1] <- "Stressed"
 dClin$StressGrSRM <- as.factor(dClin$StressGrSRM)
 
 ###################################### Features engineering #######################################
+##### Impute OSPAN
+for (i in 1:length(dClin$OSPAN)) {
+  if (is.na(dClin$dOSPAN[i])){
+    dClin$OSPAN[i] <- mean(dClin$OSPAN[dClin$Sample == dClin$Sample[i]], na.rm = T)
+  }
+}
+
 ##### Interaction # Pour le moment, ineraction avec les cortisols 2-3, pas avec grp moyen!
 dClin <- dClin%>%
   mutate(RavenXdCortM = Raven * dCorti,  # Raven*dCorti
          OSPANxdCortM = OSPAN * dCorti,  # OSPAN*dCorti
          GrpXdCortM = SampleC * dCorti,
          GrpXRaven = SampleC*Raven,
-         GrpXRavenXdCortM = SampleC*Raven*dCorti)  
+         GrpXOSPAN = SampleC*OSPAN,
+         GrpXRavenXdCortM = SampleC*Raven*dCorti,
+         GrpXOSPANXdCortM = SampleC*OSPAN*dCorti)  
+
 
 ############################################# Export ##############################################
 # Create dFinal where we only keep participant who did OK at DAW task AND get their Cortisol analyses
@@ -231,7 +241,7 @@ ScaleCol <- function(d, ScaleToDo){
   return(d)
 }
 
-ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w"), NewCol = c("zMF", "zMB", "zMBUR", "zw"))
+ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w", "OSPAN"), NewCol = c("zMF", "zMB", "zMBUR", "zw", "zOSPAN"))
 
 dOKTot <- ScaleCol(dOKTot, ScaleToDo)
 dClin <- ScaleCol(dClin, ScaleToDo)
@@ -246,22 +256,28 @@ write.table(dOKTot, paste0(Output_path, "dOKTot.txt"), col.names = T, row.names 
 # dClinAlc <- select(dClin, subjID, NS, Initiales, Sample, Condition, AUDIT, DSMal)
 
 dMod <- dOKGam[c("NS", "subjID", "Sample", "FinalCondition", "SOGS", "DSM", "AUDIT", "DSMal", "zw", "w",
-                 "dCorti", "OSPAN", "Raven")]
+                 "dCorti", "OSPAN", "zOSPAN", "Raven")]
 sum(dOKGam$Sample == "Gambler")
 sum(dOKGam$Sample == "HC")
 sum(dOKAlc$Sample == "Alc")
 
-t.test(dOKGam$w[dOKGam$Sample == "Gambler"], dOKGam$w[dOKGam$Sample != "Gambler"], alternative = "less")
+t.test(dOKGam$w[dOKGam$Sample == "Gambler"], dOKGam$w[dOKGam$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(dOKGam$w[dOKGam$Sample == "Gambler"], dOKGam$w[dOKGam$Sample != "Gambler"])
 
-t.test(dOKGam$OSPAN[dOKGam$Sample == "Gambler"], dOKGam$OSPAN[dOKGam$Sample != "Gambler"], alternative = "less")
+t.test(dOKGam$OSPAN[dOKGam$Sample == "Gambler"], dOKGam$OSPAN[dOKGam$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(dOKGam$OSPAN[dOKGam$Sample == "Gambler"], dOKGam$OSPAN[dOKGam$Sample != "Gambler"])
 
-t.test(dOKGam$Raven[dOKGam$Sample == "Gambler"], dOKGam$Raven[dOKGam$Sample != "Gambler"], alternative = "less")
+t.test(dOKGam$Raven[dOKGam$Sample == "Gambler"], dOKGam$Raven[dOKGam$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(dOKGam$Raven[dOKGam$Sample == "Gambler"], dOKGam$Raven[dOKGam$Sample != "Gambler"])
 
 t.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "NotStressed"],
-       dOKGam$w[dOKGam$Sample != "Gambler" & dOKGam$StressGr == "NotStressed"], var.equal = F, alternative = "less")
+       dOKGam$w[dOKGam$Sample == "HC" & dOKGam$StressGr == "NotStressed"])
 
 wilcox.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "NotStressed"],
        dOKGam$w[dOKGam$Sample != "Gambler" & dOKGam$StressGr == "NotStressed"])
+
+t.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "Stressed"],
+       dOKGam$w[dOKGam$Sample == "HC" & dOKGam$StressGr == "Stressed"])
+
+wilcox.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "Stressed"],
+            dOKGam$w[dOKGam$Sample == "HC" & dOKGam$StressGr == "Stressed"])

@@ -8,7 +8,8 @@ Output_path = "Output/"
 ############################################# Frame ###############################################
 d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   filter(OKd == 1)%>%
-  filter(!is.na(StressGr))
+  filter(!is.na(StressGr))%>%
+  filter(subjID != 334)
 
 # d$WAIS = 1
 
