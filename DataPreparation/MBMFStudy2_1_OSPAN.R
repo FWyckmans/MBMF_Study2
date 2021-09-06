@@ -6,7 +6,8 @@ Datapath = "Raw_Data/OSPAN/"
 Output_path = "Output/"
 Test = 0
 NSInverseOspan = 0#c(114, 121:145, 200, 201, 214, 218, 219, 244) # Not needed ATM
-Criterion = 0.8
+Criterion = 0.66
+# Criterion = 0.7999
 
 ############################################ Frame ################################################
 if (Test != 0){
@@ -136,12 +137,15 @@ CorrectWord <- function(d){
 
 # i = 121
 # i = 110
-i = 143
-NSInverseOspan = c(122, 126, 128, 130, 135, 138, 139, 140, 142, 143)
+i = 333
+NSInverseOspan = c(122, 126, 128, 129, 130, 134, 135, 138, 139, 140, 142)
+# NSInverseOspan = c(126, 128, 129, 134, 135, 139, 140, 142, 264)
+NSInverseOspan = c(122, 126, 128, 129, 134, 135, 138, 139, 140, 142,
+                   124, 121, 136, 144, 114, 130, 220)
 
 dT <- data.frame()
 for (i in unique(d$NS)){
-  print(i)
+  # print(i)
   dt <- filter(d, NS == i) # Get frame for participant
   
   dt <- ComputeAcc(dt) # Compute the accuracy for each trial
@@ -153,7 +157,7 @@ for (i in unique(d$NS)){
   dT <- rbind(dT, dt) # Final tab
 }
 
-dN <- filter(dT, NS == 143)
+dN <- filter(dT, NS == 212)
 
 d <- dT%>%
   select(NS, Block, Trial, Word, WordResp, WordAcc, Acc, RT)%>%
@@ -165,7 +169,22 @@ d <- dT%>%
 
 ######################################### Compute score ###########################################
 CalcOK <- rep(0, length(d$NS))
-d <- cbind(d, CalcOK)
+LenOK <- rep(0, length(d$NS))
+d <- cbind(d, CalcOK, LenOK)
+
+# Changed to NA scores from PS who did not finish the OSPAN task
+NSunfinished <- c()
+Compt = 1
+for (i in unique(d$NS)) {
+  if (length(d$NS[d$NS == i]) == 15){
+  d$LenOK[d$NS == i] <- 1
+  } else {
+    d$LenOK[d$NS == i] <- 0
+    NSunfinished[Compt] <- i
+    Compt = Compt + 1
+  }
+}
+
 d$CalcOK[d$Acc >= Criterion] <- 1
 
 d$nWordAcc[d$CalcOK==0] <- 0
@@ -176,6 +195,8 @@ dOspan <- d%>%
   group_by(NS)%>%
   summarise(nWord = sum(nWordAcc, na.rm = T), RT = mean(RT, na.rm = T))%>%
   rename(subjID = NS)
+
+dOspan$nWord[dOspan$subjID %in% NSunfinished] <- NA
 
 ############################################# Export ##############################################
 write.table(dOspan, paste0(Output_path, "dOSPAN.txt"), row.names = F, col.names = T, dec = ".", sep = "\t")
