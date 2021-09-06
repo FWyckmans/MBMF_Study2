@@ -128,7 +128,8 @@ dClin$Alc3[dClin$Sample == "Gambler"] <- NA
 
 ########## Indicate if the participant was stressed (1) or not (-1)
 ##### With Cortisol
-Threshold = 0.02 # OR Threshold = 0.02
+Threshold = 0.01999999999
+# Threshold = 0.02
 dClin$StressGr[dClin$dCorti >= Threshold] <- 1
 dClin$StressGr[is.na(dClin$dCorti)] <- NA
 
@@ -142,24 +143,26 @@ dClin$StressGrSR[is.na(dClin$dStress)] <- NA
 dClin$StressGrSRM[dClin$dStressM > 0.02] <- 1
 dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
 
-dClin$dCorti <- log10(dClin$dCorti + 1)
-dClin$dCortiM <- log10(dClin$dCortiM + 1)
-
-dClin$Corti1 <- log10(dClin$Corti1 + 1)
-dClin$Corti2 <- log10(dClin$Corti2 + 1)
-dClin$Corti3 <- log10(dClin$Corti3 + 1)
-dClin$Corti4 <- log10(dClin$Corti4 + 1)
+# dClin$dCorti <- log10(dClin$dCorti + 1)
+# dClin$dCortiM <- log10(dClin$dCortiM + 1)
+# 
+# dClin$Corti1 <- log10(dClin$Corti1 + 1)
+# dClin$Corti2 <- log10(dClin$Corti2 + 1)
+# dClin$Corti3 <- log10(dClin$Corti3 + 1)
+# dClin$Corti4 <- log10(dClin$Corti4 + 1)
 
 ##### Final stress group
 # dClin$FinalCondition[((dClin$Sample == i) & (dClin[x] == 1)] <- ""
-dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGrM == 1))] <- "G_Str"
-dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGrM == -1))] <- "G_NoStr"
+dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == 1))] <- "G_Str"
+dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == -1))] <- "G_NoStr"
 
-dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGrM == 1))] <- "A_Str"
-dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGrM == -1))] <- "A_NoStr"
+dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGr == 1))] <- "A_Str"
+dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGr == -1))] <- "A_NoStr"
 
-dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGrM == 1))] <- "HC_Str"
-dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGrM == -1))] <- "HC_NoStr"
+dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == 1))] <- "HC_Str"
+dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == -1))] <- "HC_NoStr"
+
+dT <- dClin[c("NS", "FinalCondition", "dCorti", "Corti2", "Corti3")]
 
 ##### Simplified analyses DV
 dClin <- dClin%>%
@@ -189,25 +192,6 @@ dClin$StressGrSRM[dClin$StressGrSRM == -1] <- "NotStressed"
 dClin$StressGrSRM[dClin$StressGrSRM == 1] <- "Stressed"
 dClin$StressGrSRM <- as.factor(dClin$StressGrSRM)
 
-###################################### Features engineering #######################################
-##### Impute OSPAN
-for (i in 1:length(dClin$OSPAN)) {
-  if (is.na(dClin$dOSPAN[i])){
-    dClin$OSPAN[i] <- mean(dClin$OSPAN[dClin$Sample == dClin$Sample[i]], na.rm = T)
-  }
-}
-
-##### Interaction # Pour le moment, ineraction avec les cortisols 2-3, pas avec grp moyen!
-dClin <- dClin%>%
-  mutate(RavenXdCortM = Raven * dCorti,  # Raven*dCorti
-         OSPANxdCortM = OSPAN * dCorti,  # OSPAN*dCorti
-         GrpXdCortM = SampleC * dCorti,
-         GrpXRaven = SampleC*Raven,
-         GrpXOSPAN = SampleC*OSPAN,
-         GrpXRavenXdCortM = SampleC*Raven*dCorti,
-         GrpXOSPANXdCortM = SampleC*OSPAN*dCorti)  
-
-
 ############################################# Export ##############################################
 # Create dFinal where we only keep participant who did OK at DAW task AND get their Cortisol analyses
 dOKAlc <- dClin%>%
@@ -225,59 +209,8 @@ dOKTot <- dClin%>%
   filter(OKCort == 1)%>%
   filter(OKd == 1)
 
-# zScores
-ScaleCol <- function(d, ScaleToDo){
-  d <- AddDummyCol(d, ScaleToDo[[2]], NA)
-  Compt = 1
-  for (i in ScaleToDo[["CoI"]]) {
-    M = mean(d[[i]], na.rm = T)
-    SD = sd(d[[i]], na.rm = T)
-    for (p in c(1:length(d[[i]]))) {
-      NewVal <- (d[[p, i]]-M)/SD
-      d[p, ScaleToDo$NewCol[Compt]] <- NewVal
-    }
-    Compt = Compt+1
-  }
-  return(d)
-}
-
-ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w", "OSPAN"), NewCol = c("zMF", "zMB", "zMBUR", "zw", "zOSPAN"))
-
-dOKTot <- ScaleCol(dOKTot, ScaleToDo)
-dClin <- ScaleCol(dClin, ScaleToDo)
-dOKGam <- ScaleCol(dOKGam, ScaleToDo)
-dOKAlc <- ScaleCol(dOKAlc, ScaleToDo)
-
 # Write tables
 write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKAlc, paste0(Output_path, "dOKAlc.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKGam, paste0(Output_path, "dOKGam.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKTot, paste0(Output_path, "dOKTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
-# dClinAlc <- select(dClin, subjID, NS, Initiales, Sample, Condition, AUDIT, DSMal)
-
-dMod <- dOKGam[c("NS", "subjID", "Sample", "FinalCondition", "SOGS", "DSM", "AUDIT", "DSMal", "zw", "w",
-                 "dCorti", "OSPAN", "zOSPAN", "Raven")]
-sum(dOKGam$Sample == "Gambler")
-sum(dOKGam$Sample == "HC")
-sum(dOKAlc$Sample == "Alc")
-
-t.test(dOKGam$w[dOKGam$Sample == "Gambler"], dOKGam$w[dOKGam$Sample != "Gambler"])#, alternative = "less")
-wilcox.test(dOKGam$w[dOKGam$Sample == "Gambler"], dOKGam$w[dOKGam$Sample != "Gambler"])
-
-t.test(dOKGam$OSPAN[dOKGam$Sample == "Gambler"], dOKGam$OSPAN[dOKGam$Sample != "Gambler"])#, alternative = "less")
-wilcox.test(dOKGam$OSPAN[dOKGam$Sample == "Gambler"], dOKGam$OSPAN[dOKGam$Sample != "Gambler"])
-
-t.test(dOKGam$Raven[dOKGam$Sample == "Gambler"], dOKGam$Raven[dOKGam$Sample != "Gambler"])#, alternative = "less")
-wilcox.test(dOKGam$Raven[dOKGam$Sample == "Gambler"], dOKGam$Raven[dOKGam$Sample != "Gambler"])
-
-t.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "NotStressed"],
-       dOKGam$w[dOKGam$Sample == "HC" & dOKGam$StressGr == "NotStressed"])
-
-wilcox.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "NotStressed"],
-       dOKGam$w[dOKGam$Sample != "Gambler" & dOKGam$StressGr == "NotStressed"])
-
-t.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "Stressed"],
-       dOKGam$w[dOKGam$Sample == "HC" & dOKGam$StressGr == "Stressed"])
-
-wilcox.test(dOKGam$w[dOKGam$Sample == "Gambler" & dOKGam$StressGr == "Stressed"],
-            dOKGam$w[dOKGam$Sample == "HC" & dOKGam$StressGr == "Stressed"])
