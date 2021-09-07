@@ -113,3 +113,6 @@ summary(lm(w ~ Raven*dCorti*SampleC, data = d))
 summary(lm(w ~ OSPAN + Raven, data = d))
 
 # summary(lm(OSPAN ~ SampleC + Raven, data = d))
+summary(lm(w ~ OSPAN*dCorti, data = d))
+t.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])#, alternative = "less")
+wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
