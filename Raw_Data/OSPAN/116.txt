@@ -22,7 +22,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 11	5	IS  (10 : 10) - 1 = 2   ?, rêve	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	27714	
 12	1	dummy	--coeur	
 12	1	dummy	coffre	
-12	1	dummy	mots	
+12	1	dummy	mot	
 12	1	dummy	air	
 12	1	dummy	argent	
 13	1	IS  (9 : 1) - 7 = 4   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	18275	

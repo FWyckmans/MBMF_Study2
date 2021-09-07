@@ -34,14 +34,14 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 15	1	IS  (3 : 1) + 3 = 6   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	6220	
 15	2	IS  (8 x 4) + 2 = 34   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	7134	
 16	1	dummy	²fête	
-16	1	dummy	tissus	
+16	1	dummy	tissu	
 17	1	IS  (4 : 1) + 1 = 4   ?, cri	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	3723	
 17	2	IS  (7 x 2) - 3 = 11   ?, voie	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	3086	
 17	3	IS  (10 x 2) + 3 = 23   ?, verre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	3130	
 17	4	IS  (4 : 1) - 4 = 2   ?, maison	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	7050	
 17	5	IS  (10 : 1) + 1 = 10   ?, pierre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	6260	
 18	1	dummy	-²cri	
-18	1	dummy	voix	
+18	1	dummy	voie	
 18	1	dummy	verre	
 18	1	dummy	maison	
 18	1	dummy	pierre	

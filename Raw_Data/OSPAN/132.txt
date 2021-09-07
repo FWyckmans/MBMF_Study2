@@ -63,7 +63,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 21	6	IS  (10 : 2) - 3 = 2   ?, chemise	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	2769	
 22	1	dummy	²-montagne	
 22	1	dummy	sang	
-22	1	dummy	serrurre	
+22	1	dummy	serrure	
 22	1	dummy	homme	
 22	1	dummy	bouteille	
 22	1	dummy	 	

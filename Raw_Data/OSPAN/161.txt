@@ -30,7 +30,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	3	IS  (9 : 1) - 7 = 4   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	12380	
 14	1	dummy	²sac	
 14	1	dummy	fourchette	
-14	1	dummy	bicycelette	
+14	1	dummy	bicyclette	
 15	1	IS  (3 : 1) + 3 = 6   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4535	
 15	2	IS  (8 x 4) + 2 = 34   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	13455	
 16	1	dummy	--tissu	

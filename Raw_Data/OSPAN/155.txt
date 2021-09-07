@@ -30,7 +30,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	3	IS  (4 x 4) + 1 = 17   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2680	
 14	1	dummy	fourchette	
 14	1	dummy	sac	
-14	1	dummy	byciclette	
+14	1	dummy	bicyclette	
 15	1	IS  (3 : 1) + 3 = 6   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2288	
 15	2	IS  (8 x 4) + 2 = 34   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2675	
 16	1	dummy	tissu	
@@ -40,7 +40,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 17	3	IS  (4 : 1) - 4 = 2   ?, maison	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	2071	
 17	4	IS  (7 x 2) - 3 = 11   ?, pierre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3581	
 17	5	IS  (10 x 2) + 3 = 23   ?, verre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2947	
-18	1	dummy	crie	
+18	1	dummy	cri	
 18	1	dummy	voie	
 18	1	dummy	maison	
 18	1	dummy	pierre	

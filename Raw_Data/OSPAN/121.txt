@@ -44,7 +44,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 18	1	dummy	cri	
 18	1	dummy	verre	
 18	1	dummy	pierre	
-18	1	dummy	voix	
+18	1	dummy	voie	
 19	1	IS  (9 : 1) - 5 = 4   ?, plan	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	4185	
 19	2	IS  (5 x 2) + 1 = 6   ?, enfant	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	2344	
 19	3	IS  (3 x 2) + 1 = 6   ?, escalier	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	2154	

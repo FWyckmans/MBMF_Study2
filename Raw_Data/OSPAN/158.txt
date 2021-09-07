@@ -12,7 +12,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 9	1	IS  (8 : 2) + 4 = 2   ?, bois	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4487	
 9	2	IS  (9 x 2) - 3 = 16   ?, lait	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5198	
 9	3	IS  (5 : 1) + 4 = 9   ?, argent	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6960	
-10	1	dummy	²bois lait argent	
+10	1	dummy	²bois	
 10	1	dummy	bois	
 10	1	dummy	lait	
 11	1	IS  (8 : 8) + 1 = 2   ?, mot	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6689	
@@ -28,7 +28,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	1	IS  (6 x 2) - 3 = 10   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5185	
 13	2	IS  (4 x 4) + 1 = 17   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4083	
 13	3	IS  (9 : 1) - 7 = 4   ?, sac	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	7370	
-14	1	dummy	²-byciclette 	
+14	1	dummy	²-bicyclette 	
 14	1	dummy	fourchette	
 14	1	dummy	bois	
 15	1	IS  (8 x 4) + 2 = 34   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3624	

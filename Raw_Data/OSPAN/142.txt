@@ -34,7 +34,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 15	1	IS  (3 : 1) + 3 = 6   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	3130	
 15	2	IS  (8 x 4) + 2 = 34   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	8488	
 16	1	dummy	fête	
-16	1	dummy	tissus	
+16	1	dummy	tissu	
 17	1	IS  (10 : 1) + 1 = 10   ?, cri	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4710	
 17	2	IS  (10 x 2) + 3 = 23   ?, voie	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	5243	
 17	3	IS  (7 x 2) - 3 = 11   ?, maison	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	7507	
@@ -89,7 +89,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 26	1	dummy	e	
 27	1	IS  (6 : 2) - 2 = 1   ?, point	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4754	
 27	2	IS  (7 x 1) + 6 = 13   ?, travail	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	6463	
-28	1	dummy	point travail$	
+28	1	dummy	point	
 28	1	dummy	travail	
 29	1	IS  (6 : 2) + 1 = 4   ?, banque	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	3373	
 29	2	IS  (9 x 1) + 9 = 1   ?, chien	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	correct	3679	

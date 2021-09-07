@@ -43,7 +43,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 18	1	dummy	²²maison	
 18	1	dummy	pierre	
 18	1	dummy	voie	
-18	1	dummy	cris	
+18	1	dummy	cri	
 18	1	dummy	verre	
 19	1	IS  (9 x 1) - 1 = 8   ?, tête	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3371	
 19	2	IS  (5 x 2) + 1 = 6   ?, enfant	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5171	
@@ -125,7 +125,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 37	2	IS  (9 : 1) + 8 = 18   ?, feuille	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	5660	
 37	3	IS  (10 x 2) - 6 = 12   ?, église	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	4580	
 37	4	IS  (6 x 4) + 1 = 25   ?, poupée	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	correct	6980	
-38	1	dummy	-²lettre feuille eglise poupee	
+38	1	dummy	-²lettre	
 38	1	dummy	feuille	
 38	1	dummy	eglise	
 38	1	dummy	poupee	

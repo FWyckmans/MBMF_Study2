@@ -118,7 +118,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 36	1	dummy	²²- 	
 36	1	dummy	femme	
 36	1	dummy	peinture	
-36	1	dummy	pourpée	
+36	1	dummy	poupée	
 36	1	dummy	 	
 36	1	dummy	 	
 37	1	IS  (5 x 1) - 1 = 5   ?, femme	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	correct	1868	

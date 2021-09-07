@@ -28,7 +28,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	1	IS  (6 x 2) - 3 = 10   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	4150	
 13	2	IS  (4 x 4) + 1 = 17   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	2513	
 13	3	IS  (9 : 1) - 7 = 4   ?, sac	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4846	
-14	1	dummy	²biciclette	
+14	1	dummy	²bicyclette	
 14	1	dummy	fourchette	
 14	1	dummy	 	
 15	1	IS  (8 x 4) + 2 = 34   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4177	
@@ -82,7 +82,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 25	5	IS  (6 : 2) - 2 = 2   ?, village	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	3393	
 25	6	IS  (5 : 5) + 1 = 2   ?, robinet	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	4102	
 26	1	dummy	---assiette	
-26	1	dummy	rouleaux	
+26	1	dummy	rouleau	
 26	1	dummy	bouton	
 26	1	dummy	 	
 26	1	dummy	 	
