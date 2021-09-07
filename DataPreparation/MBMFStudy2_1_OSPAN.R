@@ -83,10 +83,9 @@ rm_accent <- function(str,pattern="all") {
   )
   
   accentTypes <- c("´","`","^","~","¨","ç")
-  
-  if(any(c("all","al","a","todos","t","to","tod","todo")%in%pattern)) # opcao retirar todos
+  if(any(c("all","al","a","todos","t","to","tod","todo") %in% pattern)) # opcao retirar todos
     return(chartr(paste(symbols, collapse=""), paste(nudeSymbols, collapse=""), str))
-  
+  # print("OK")
   for(i in which(accentTypes%in%pattern))
     str <- chartr(symbols[i],nudeSymbols[i], str) 
   
@@ -107,6 +106,7 @@ WordClean <- function(d){
     #                     paste(unwanted_array, collapse=''),
     #                     d$Word[i])
     d$Word[i] <- rm_accent(d$Word[i])
+    # print("OK")
     d$Word[i] <- tolower(d$Word[i])
     # d$WordResp[i] <- chartr(paste(names(unwanted_array), collapse=''),
     #                     paste(unwanted_array, collapse=''),
@@ -136,12 +136,13 @@ CorrectWord <- function(d){
 }
 
 # i = 121
-# i = 110
-i = 333
+i = 110
+
 NSInverseOspan = c(122, 126, 128, 129, 130, 134, 135, 138, 139, 140, 142)
 # NSInverseOspan = c(126, 128, 129, 134, 135, 139, 140, 142, 264)
 NSInverseOspan = c(122, 126, 128, 129, 134, 135, 138, 139, 140, 142,
                    124, 121, 136, 144, 114, 130, 220)
+
 
 dT <- data.frame()
 for (i in unique(d$NS)){
@@ -152,12 +153,17 @@ for (i in unique(d$NS)){
   dt <- separate(dt, Content, into = c("Calc", "Word"), sep = " ?, ")
   dt <- WordClean(dt) # Word = NA for calcul, remove accents and strange symbols
   dt$WordResp[dt$WordResp == " "] <- "NoResp"  # Code forgotten words
+  dt$WordResp[dt$WordResp == "byciclette"] <- "bicyclette" #v
+  dt$WordResp[dt$WordResp == "voix"] <- "voie" #v
+  dt$WordResp[dt$WordResp == "cris"] <- "cri" #v
+  
   dt <- WordRespCol(dt) # Create a col with the word written
   dt <- CorrectWord(dt) # Check if the word is correct
   dT <- rbind(dT, dt) # Final tab
 }
 
-dN <- filter(dT, NS == 212)
+
+dN <- filter(dT, NS == 143)
 
 d <- dT%>%
   select(NS, Block, Trial, Word, WordResp, WordAcc, Acc, RT)%>%
@@ -200,3 +206,9 @@ dOspan$nWord[dOspan$subjID %in% NSunfinished] <- NA
 
 ############################################# Export ##############################################
 write.table(dOspan, paste0(Output_path, "dOSPAN.txt"), row.names = F, col.names = T, dec = ".", sep = "\t")
+
+dCh <- dT%>%
+  filter(WordAcc == 0)%>%
+  filter(NS > 200)%>%
+  filter(WordResp != "NoResp")%>%
+  arrange(NS)
