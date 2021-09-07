@@ -71,7 +71,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 23	2	IS  (9 : 3) - 2 = 2   ?, cheval	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	5692	
 23	3	IS  (9 x 3) - 2 = 25   ?, chaise	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	7100	
 23	4	IS  (8 : 1) - 6 = 4   ?, film	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	16639	
-24	1	dummy	caarte	
+24	1	dummy	carte	
 24	1	dummy	cheval	
 24	1	dummy	chaise	
 24	1	dummy	film	
@@ -90,7 +90,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 27	1	IS  (6 : 2) - 2 = 1   ?, point	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	10843	
 27	2	IS  (7 x 1) + 6 = 13   ?, travail	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	5071	
 28	1	dummy	point	
-28	1	dummy	 trvil	
+28	1	dummy	 travail	
 29	1	IS  (9 x 1) + 9 = 1   ?, voeu	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	9547	
 29	2	IS  (6 : 2) + 1 = 4   ?, moustache	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	5798	
 29	3	IS  (7 : 1) + 2 = 7   ?, chien	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	correct	8569	
