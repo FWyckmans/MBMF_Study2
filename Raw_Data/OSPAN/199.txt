@@ -97,7 +97,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 29	4	IS  (9 x 1) + 9 = 1   ?, voeu	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3780	
 30	1	dummy	chien 	
 30	1	dummy	moustache	
-30	1	dummy	baque	
+30	1	dummy	banque	
 30	1	dummy	voeu	
 31	1	IS  (2 x 1) - 1 = 1   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	2442	
 31	2	IS  (8 : 4) - 1 = 1   ?, mur	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	4757	
@@ -108,7 +108,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 33	1	IS  (7 x 7) + 1 = 49   ?, herbe	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	incorrect	14267	
 33	2	IS  (10 : 2) + 4 = 8   ?, nappe	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	incorrect	8152	
 34	1	dummy	herbe	
-34	1	dummy	nape	
+34	1	dummy	nappe	
 35	1	IS  (9 x 3) - 3 = 24   ?, église	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	correct	6552	
 35	2	IS  (5 x 1) - 1 = 5   ?, lettre	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	3125	
 35	3	IS  (10 x 2) - 6 = 12   ?, femme	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	4787	

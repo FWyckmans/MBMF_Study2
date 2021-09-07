@@ -96,7 +96,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 29	3	IS  (7 : 1) + 2 = 7   ?, chien	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2789	
 29	4	IS  (9 x 1) + 9 = 1   ?, banque	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6471	
 30	1	dummy	moustache	
-30	1	dummy	voeux	
+30	1	dummy	voeu	
 30	1	dummy	m	
 30	1	dummy	m	
 31	1	IS  (8 : 4) - 1 = 1   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	4319	

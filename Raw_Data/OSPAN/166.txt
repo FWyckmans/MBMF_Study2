@@ -72,7 +72,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 23	3	IS  (8 : 1) - 6 = 4   ?, chaise	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3346	
 23	4	IS  (9 : 3) - 2 = 2   ?, carte	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4792	
 24	1	dummy	-²film	
-24	1	dummy	chevase	
+24	1	dummy	cheval	
 24	1	dummy	 	
 24	1	dummy	cheval	
 25	1	IS  (5 : 5) + 1 = 2   ?, bouton	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3090	

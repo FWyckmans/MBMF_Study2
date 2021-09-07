@@ -28,7 +28,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	1	IS  (9 : 1) - 7 = 4   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6042	
 13	2	IS  (4 x 4) + 1 = 17   ?, sac	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3108	
 13	3	IS  (6 x 2) - 3 = 10   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	10066	
-14	1	dummy	$²bicyclette	
+14	1	dummy	bicyclette	
 14	1	dummy	fourchette	
 14	1	dummy	 	
 15	1	IS  (3 : 1) + 3 = 6   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4279	
@@ -128,4 +128,4 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 38	1	dummy	-²²église	
 38	1	dummy	lettre	
 38	1	dummy	femme	
-38	1	dummy	pouppée	
+38	1	dummy	poupée	

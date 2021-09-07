@@ -12,7 +12,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 9	1	IS  (8 : 2) + 4 = 2   ?, argent	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	6061	
 9	2	IS  (5 : 1) + 4 = 9   ?, bois	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	9169	
 9	3	IS  (9 x 2) - 3 = 16   ?, lait	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	9154	
-10	1	dummy	argant 	
+10	1	dummy	argent 	
 10	1	dummy	bois	
 10	1	dummy	lait	
 11	1	IS  (8 x 1) + 8 = 16   ?, coffre	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	8469	
@@ -20,7 +20,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 11	3	IS  (8 : 8) + 1 = 2   ?, air	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	6638	
 11	4	IS  (9 : 3) - 2 = 1   ?, rêve	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	10398	
 11	5	IS  (8 x 1) + 5 = 13   ?, coeur	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	16008	
-12	1	dummy	ciffre	
+12	1	dummy	coffre	
 12	1	dummy	mois	
 12	1	dummy	deux	
 12	1	dummy	air	
@@ -29,7 +29,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	2	IS  (6 x 2) - 3 = 10   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	6668	
 13	3	IS  (4 x 4) + 1 = 17   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	5849	
 14	1	dummy	-sac	
-14	1	dummy	bycclitte	
+14	1	dummy	bicyclette	
 14	1	dummy	 fourchette	
 15	1	IS  (3 : 1) + 3 = 6   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	9560	
 15	2	IS  (8 x 4) + 2 = 34   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5746	
@@ -53,7 +53,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 20	1	dummy	plan	
 20	1	dummy	tete	
 20	1	dummy	 enfant	
-20	1	dummy	 escxalier	
+20	1	dummy	 escalier	
 20	1	dummy	montre	
 21	1	IS  (6 x 1) - 4 = 1   ?, bouteille	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	10378	
 21	2	IS  (4 x 2) + 1 = 9   ?, serrure	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	4578	
@@ -72,7 +72,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 23	3	IS  (9 x 3) - 2 = 25   ?, chaise	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	7100	
 23	4	IS  (8 : 1) - 6 = 4   ?, film	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	16639	
 24	1	dummy	caarte	
-24	1	dummy	chevam	
+24	1	dummy	cheval	
 24	1	dummy	chaise	
 24	1	dummy	film	
 25	1	IS  (3 x 3) - 1 = 8   ?, classe	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	47745	
@@ -81,8 +81,8 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 25	4	IS  (5 : 5) + 1 = 2   ?, bouton	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	4095	
 25	5	IS  (3 x 1) + 2 = 2   ?, rouleau	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	16281	
 25	6	IS  (7 x 2) - 1 = 14   ?, village	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	21574	
-26	1	dummy	clase	
-26	1	dummy	asiette	
+26	1	dummy	classe	
+26	1	dummy	assiette	
 26	1	dummy	robinet	
 26	1	dummy	 lrou	
 26	1	dummy	rouleau	
@@ -97,8 +97,8 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 29	4	IS  (10 : 2) - 4 = 3   ?, banque	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	correct	9430	
 30	1	dummy	²-voeu	
 30	1	dummy	 mouschache	
-30	1	dummy	 chein	
-30	1	dummy	 baque	
+30	1	dummy	 chien	
+30	1	dummy	 banque	
 31	1	IS  (2 x 1) - 1 = 1   ?, mur	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	incorrect	9282	
 31	2	IS  (10 : 1) + 3 = 13   ?, toit	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	incorrect	6153	
 31	3	IS  (8 : 4) - 1 = 1   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	8684	

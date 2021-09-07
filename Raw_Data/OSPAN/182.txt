@@ -84,7 +84,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 26	1	dummy	²²²assiette	
 26	1	dummy	classe	
 26	1	dummy	robinet	
-26	1	dummy	roueau	
+26	1	dummy	rouleau	
 26	1	dummy	classe	
 26	1	dummy	 	
 27	1	IS  (6 : 2) - 2 = 1   ?, travail	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	7915	

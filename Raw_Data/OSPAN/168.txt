@@ -24,7 +24,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 12	1	dummy	coeur	
 12	1	dummy	mot	
 12	1	dummy	 	
-12	1	dummy	cpffre	
+12	1	dummy	coffre	
 13	1	IS  (9 : 1) - 7 = 4   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	15949	
 13	2	IS  (6 x 2) - 3 = 10   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3918	
 13	3	IS  (4 x 4) + 1 = 17   ?, sac	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4049	

@@ -13,7 +13,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 9	2	IS  (9 x 2) - 3 = 16   ?, bois	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	2952	
 9	3	IS  (5 : 1) + 4 = 9   ?, lait	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4972	
 10	1	dummy	 lait boit	
-10	1	dummy	lait bois	
+10	1	dummy	bois	
 10	1	dummy	lait boit	
 11	1	IS  (10 : 10) - 1 = 2   ?, air	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5786	
 11	2	IS  (8 : 8) + 1 = 2   ?, coffre	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3105	
