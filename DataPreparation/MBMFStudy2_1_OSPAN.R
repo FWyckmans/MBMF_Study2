@@ -154,7 +154,7 @@ for (i in unique(d$NS)){
   dt <- WordClean(dt) # Word = NA for calcul, remove accents and strange symbols
   dt$WordResp[dt$WordResp == " "] <- "NoResp"  # Code forgotten words
   dt$WordResp[dt$WordResp == "byciclette"] <- "bicyclette" #v
-  dt$WordResp[dt$WordResp == "voix"] <- "voie" #v
+  dt$WordResp[dt$WordResp == "voie"] <- "voix" #v
   dt$WordResp[dt$WordResp == "cris"] <- "cri" #v
   
   dt <- WordRespCol(dt) # Create a col with the word written
