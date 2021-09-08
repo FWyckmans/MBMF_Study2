@@ -156,6 +156,7 @@ for (i in unique(d$NS)){
   dt$WordResp[dt$WordResp == "byciclette"] <- "bicyclette" #v
   dt$WordResp[dt$WordResp == "voie"] <- "voix" #v
   dt$WordResp[dt$WordResp == "cris"] <- "cri" #v
+  # dt$WordResp[dt$WordResp == "travaille"] <- "travail" #x
   
   dt <- WordRespCol(dt) # Create a col with the word written
   dt <- CorrectWord(dt) # Check if the word is correct
