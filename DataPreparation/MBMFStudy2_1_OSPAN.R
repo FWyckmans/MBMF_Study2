@@ -5,9 +5,9 @@ source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/OSPAN/"
 Output_path = "Output/"
 Test = 0
-NSInverseOspan = 0#c(114, 121:145, 200, 201, 214, 218, 219, 244) # Not needed ATM
-Criterion = 0.66
-# Criterion = 0.7999
+NSInverseOspan = c(122, 126, 128, 129, 134, 135, 138, 139, 140, 142,
+                   124, 121, 136, 144, 114, 130, 220)
+Criterion = 0.666666
 
 ############################################ Frame ################################################
 if (Test != 0){
@@ -135,15 +135,6 @@ CorrectWord <- function(d){
   return(d)
 }
 
-# i = 121
-i = 110
-
-NSInverseOspan = c(122, 126, 128, 129, 130, 134, 135, 138, 139, 140, 142)
-# NSInverseOspan = c(126, 128, 129, 134, 135, 139, 140, 142, 264)
-NSInverseOspan = c(122, 126, 128, 129, 134, 135, 138, 139, 140, 142,
-                   124, 121, 136, 144, 114, 130, 220)
-
-
 dT <- data.frame()
 for (i in unique(d$NS)){
   # print(i)
@@ -154,9 +145,9 @@ for (i in unique(d$NS)){
   dt <- WordClean(dt) # Word = NA for calcul, remove accents and strange symbols
   dt$WordResp[dt$WordResp == " "] <- "NoResp"  # Code forgotten words
   dt$WordResp[dt$WordResp == "byciclette"] <- "bicyclette" #v
-  dt$WordResp[dt$WordResp == "voie"] <- "voix" #v
+  dt$WordResp[dt$WordResp == "voix"] <- "voie" #v
   dt$WordResp[dt$WordResp == "cris"] <- "cri" #v
-  # dt$WordResp[dt$WordResp == "travaille"] <- "travail" #x
+  dt$WordResp[dt$WordResp == "crie"] <- "cri" #
   
   dt <- WordRespCol(dt) # Create a col with the word written
   dt <- CorrectWord(dt) # Check if the word is correct
@@ -195,7 +186,6 @@ for (i in unique(d$NS)) {
 d$CalcOK[d$Acc >= Criterion] <- 1
 
 d$nWordAcc[d$CalcOK==0] <- 0
-# dN$nWordAcc[dN$CalcOK==0] <- 0
 
 dOspan <- d%>%
   # filter(CalcOK == 1)%>%
