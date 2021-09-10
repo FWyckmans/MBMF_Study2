@@ -53,7 +53,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 20	1	dummy	²-plan	
 20	1	dummy	tête	
 20	1	dummy	enfant	
-20	1	dummy	ecalier	
+20	1	dummy	escalier	
 20	1	dummy	montre	
 21	1	IS  (10 : 2) - 3 = 2   ?, sang	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3363	
 21	2	IS  (6 x 1) - 4 = 1   ?, serrure	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3071	
@@ -82,8 +82,8 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 25	5	IS  (3 x 3) - 1 = 8   ?, rouleau	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	4781	
 25	6	IS  (8 x 4) - 2 = 32   ?, village	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2243	
 26	1	dummy	²²²classe	
-26	1	dummy	robinette	
-26	1	dummy	asiette	
+26	1	dummy	robinet	
+26	1	dummy	assiette	
 26	1	dummy	 	
 26	1	dummy	 	
 26	1	dummy	 	
@@ -97,7 +97,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 29	4	IS  (10 : 2) - 4 = 3   ?, banque	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	correct	8022	
 30	1	dummy	-²²chien	
 30	1	dummy	moustache	
-30	1	dummy	vouei	
+30	1	dummy	voeu	
 30	1	dummy	 	
 31	1	IS  (10 : 1) + 3 = 13   ?, toit	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	2773	
 31	2	IS  (8 : 4) - 1 = 1   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	incorrect	6802	

@@ -12,7 +12,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 9	1	IS  (8 : 2) + 4 = 2   ?, lait	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5028	
 9	2	IS  (9 x 2) - 3 = 16   ?, bois	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	3184	
 9	3	IS  (5 : 1) + 4 = 9   ?, argent	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	5403	
-10	1	dummy	lais 	
+10	1	dummy	lait 	
 10	1	dummy	bois	
 10	1	dummy	argent	
 11	1	IS  (9 : 3) - 2 = 1   ?, mot	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6895	
@@ -21,7 +21,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 11	4	IS  (8 x 1) + 8 = 16   ?, air	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5667	
 11	5	IS  (8 : 8) + 1 = 2   ?, coeur	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5119	
 12	1	dummy	mot	
-12	1	dummy	reves	
+12	1	dummy	reve	
 12	1	dummy	coffre	
 12	1	dummy	 	
 12	1	dummy	 	
@@ -33,7 +33,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 14	1	dummy	fourchette	
 15	1	IS  (3 : 1) + 3 = 6   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4201	
 15	2	IS  (8 x 4) + 2 = 34   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	9580	
-16	1	dummy	fêtes	
+16	1	dummy	fete	
 16	1	dummy	tissu	
 17	1	IS  (10 : 1) + 1 = 10   ?, cri	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3896	
 17	2	IS  (7 x 2) - 3 = 11   ?, maison	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3032	
@@ -82,7 +82,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 25	5	IS  (8 x 4) - 2 = 32   ?, assiette	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	7672	
 25	6	IS  (3 x 1) + 2 = 2   ?, village	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	13093	
 26	1	dummy	robinet	
-26	1	dummy	class	
+26	1	dummy	classe	
 26	1	dummy	bouton	
 26	1	dummy	 	
 26	1	dummy	 	

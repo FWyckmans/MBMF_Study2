@@ -81,7 +81,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 25	4	IS  (6 : 2) - 2 = 2   ?, village	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4956	
 25	5	IS  (3 x 3) - 1 = 8   ?, rouleau	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3711	
 25	6	IS  (8 x 4) - 2 = 32   ?, bouton	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	19698	
-26	1	dummy	²²²assiete	
+26	1	dummy	²²²assiette	
 26	1	dummy	robinet	
 26	1	dummy	classe	
 26	1	dummy	village	

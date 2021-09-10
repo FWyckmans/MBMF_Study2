@@ -97,7 +97,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 29	4	IS  (10 : 2) - 4 = 3   ?, chien	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2357	
 30	1	dummy	-²moustache	
 30	1	dummy	banque	
-30	1	dummy	voeux	
+30	1	dummy	voeu	
 30	1	dummy	chien	
 31	1	IS  (8 : 4) - 1 = 1   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	incorrect	2830	
 31	2	IS  (10 : 1) + 3 = 13   ?, toit	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	2948	

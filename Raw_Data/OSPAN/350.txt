@@ -50,7 +50,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 19	3	IS  (5 x 2) + 1 = 6   ?, enfant	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3056	
 19	4	IS  (3 x 2) + 1 = 6   ?, plan	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2273	
 19	5	IS  (9 x 1) - 1 = 8   ?, montre	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6714	
-20	1	dummy	ecalier	
+20	1	dummy	escalier	
 20	1	dummy	tete	
 20	1	dummy	enfant	
 20	1	dummy	montre	

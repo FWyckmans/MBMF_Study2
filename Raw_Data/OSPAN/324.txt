@@ -28,13 +28,13 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	1	IS  (6 x 2) - 3 = 10   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6792	
 13	2	IS  (9 : 1) - 7 = 4   ?, sac	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6832	
 13	3	IS  (4 x 4) + 1 = 17   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4033	
-14	1	dummy	bicyclett	
+14	1	dummy	bicyclette	
 14	1	dummy	 	
 14	1	dummy	 	
 15	1	IS  (3 : 1) + 3 = 6   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3035	
 15	2	IS  (8 x 4) + 2 = 34   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6227	
 16	1	dummy	-fete	
-16	1	dummy	tissou	
+16	1	dummy	tissu	
 17	1	IS  (10 x 2) + 3 = 23   ?, verre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6348	
 17	2	IS  (4 : 1) + 1 = 4   ?, maison	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5171	
 17	3	IS  (4 : 1) - 4 = 2   ?, voie	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6331	
@@ -63,7 +63,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 21	6	IS  (4 x 2) + 1 = 9   ?, bouteille	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	8750	
 22	1	dummy	homme	
 22	1	dummy	sang	
-22	1	dummy	monyagne	
+22	1	dummy	montagne	
 22	1	dummy	chemise	
 22	1	dummy	 	
 22	1	dummy	 	
@@ -71,7 +71,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 23	2	IS  (6 : 3) + 2 = 4   ?, cheval	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	7384	
 23	3	IS  (8 : 1) - 6 = 4   ?, film	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4251	
 23	4	IS  (9 x 3) - 2 = 25   ?, carte	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5653	
-24	1	dummy	chese	
+24	1	dummy	chaise	
 24	1	dummy	cheval	
 24	1	dummy	chemise	
 24	1	dummy	film	
@@ -82,9 +82,9 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 25	5	IS  (8 x 4) - 2 = 32   ?, assiette	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	7590	
 25	6	IS  (3 x 3) - 1 = 8   ?, robinet	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3419	
 26	1	dummy	 	
-26	1	dummy	rouleaux	
+26	1	dummy	rouleau	
 26	1	dummy	classe	
-26	1	dummy	assiete	
+26	1	dummy	assiette	
 26	1	dummy	robinet	
 26	1	dummy	 	
 27	1	IS  (6 : 2) - 2 = 1   ?, point	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4607	
@@ -96,9 +96,9 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 29	3	IS  (9 x 1) + 9 = 1   ?, banque	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6140	
 29	4	IS  (6 : 2) + 1 = 4   ?, voeu	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	correct	6076	
 30	1	dummy	chien	
-30	1	dummy	mustache	
+30	1	dummy	moustache	
 30	1	dummy	 	
-30	1	dummy	voeux	
+30	1	dummy	voeu	
 31	1	IS  (10 : 1) + 3 = 13   ?, mur	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	3395	
 31	2	IS  (2 x 1) - 1 = 1   ?, toit	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	4238	
 31	3	IS  (8 : 4) - 1 = 1   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	4382	
@@ -107,7 +107,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 32	1	dummy	etable	
 33	1	IS  (7 x 7) + 1 = 49   ?, nappe	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	incorrect	9555	
 33	2	IS  (10 : 2) + 4 = 8   ?, herbe	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	incorrect	3537	
-34	1	dummy	nape	
+34	1	dummy	nappe	
 34	1	dummy	herbe	
 35	1	IS  (5 x 1) - 1 = 5   ?, peinture	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	4654	
 35	2	IS  (10 x 2) - 6 = 12   ?, église	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	7099	
@@ -119,7 +119,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 36	1	dummy	chien	
 36	1	dummy	eglise	
 36	1	dummy	femme	
-36	1	dummy	feuill	
+36	1	dummy	feuille	
 36	1	dummy	 	
 37	1	IS  (7 : 1) + 6 = 12   ?, voix	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	incorrect	8030	
 37	2	IS  (10 : 1) - 1 = 9   ?, guide	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	correct	7897	

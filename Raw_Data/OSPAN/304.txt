@@ -51,10 +51,10 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 19	4	IS  (9 x 1) - 1 = 8   ?, montre	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4898	
 19	5	IS  (3 x 2) + 1 = 6   ?, escalier	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4552	
 20	1	dummy	²-plan	
-20	1	dummy	enfants	
+20	1	dummy	enfant	
 20	1	dummy	tête	
 20	1	dummy	montre	
-20	1	dummy	escaliers	
+20	1	dummy	escalier	
 21	1	IS  (6 x 1) - 4 = 1   ?, serrure	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5863	
 21	2	IS  (4 : 2) + 1 = 6   ?, montagne	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5040	
 21	3	IS  (4 x 2) + 1 = 9   ?, bouteille	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	7912	

@@ -54,7 +54,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 20	1	dummy	enfant	
 20	1	dummy	tete	
 20	1	dummy	plan	
-20	1	dummy	escaliers	
+20	1	dummy	escalier	
 21	1	IS  (6 x 1) - 4 = 1   ?, homme	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6868	
 21	2	IS  (4 : 2) + 1 = 6   ?, serrure	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4692	
 21	3	IS  (4 x 2) + 1 = 9   ?, bouteille	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4796	

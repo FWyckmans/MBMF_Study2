@@ -13,7 +13,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 9	2	IS  (9 x 2) - 3 = 16   ?, bois	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	10432	
 9	3	IS  (8 : 2) + 4 = 2   ?, argent	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	7938	
 10	1	dummy	-²lait	
-10	1	dummy	boit	
+10	1	dummy	bois	
 10	1	dummy	argent	
 11	1	IS  (8 x 1) + 8 = 16   ?, rêve	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6711	
 11	2	IS  (8 : 8) + 1 = 2   ?, air	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	7293	
@@ -28,7 +28,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	1	IS  (9 : 1) - 7 = 4   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	7244	
 13	2	IS  (4 x 4) + 1 = 17   ?, sac	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	8274	
 13	3	IS  (6 x 2) - 3 = 10   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6887	
-14	1	dummy	²²bicyclete	
+14	1	dummy	²²bicyclette	
 14	1	dummy	sac	
 14	1	dummy	 	
 15	1	IS  (8 x 4) + 2 = 34   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	11068	
@@ -52,7 +52,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 19	5	IS  (9 x 2) + 1 = 18   ?, enfant	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5337	
 20	1	dummy	²-montre	
 20	1	dummy	tete	
-20	1	dummy	plant	
+20	1	dummy	plan	
 20	1	dummy	escalier	
 20	1	dummy	 	
 21	1	IS  (10 : 2) - 3 = 2   ?, chemise	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	7460	
@@ -98,7 +98,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 30	1	dummy	²²banque	
 30	1	dummy	chien	
 30	1	dummy	moucehette	
-30	1	dummy	voeux	
+30	1	dummy	voeu	
 31	1	IS  (2 x 1) - 1 = 1   ?, toit	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	11196	
 31	2	IS  (10 : 1) + 3 = 13   ?, mur	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	3199	
 31	3	IS  (8 : 4) - 1 = 1   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	incorrect	3338	

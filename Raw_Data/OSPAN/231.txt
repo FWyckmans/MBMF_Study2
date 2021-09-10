@@ -63,7 +63,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 21	6	IS  (4 x 2) + 1 = 9   ?, homme	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3189	
 22	1	dummy	²-²montre	
 22	1	dummy	montagne	
-22	1	dummy	serrue	
+22	1	dummy	serrure	
 22	1	dummy	bouteille	
 22	1	dummy	sang	
 22	1	dummy	 	

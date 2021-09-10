@@ -30,7 +30,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	3	IS  (9 : 1) - 7 = 4   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3758	
 14	1	dummy	-sac	
 14	1	dummy	fourchette	
-14	1	dummy	bycylette	
+14	1	dummy	bicylette	
 15	1	IS  (3 : 1) + 3 = 6   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3110	
 15	2	IS  (8 x 4) + 2 = 34   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3109	
 16	1	dummy	--tissu	
@@ -41,7 +41,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 17	4	IS  (4 : 1) - 4 = 2   ?, voie	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5008	
 17	5	IS  (10 x 2) + 3 = 23   ?, cri	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4693	
 18	1	dummy	²maison	
-18	1	dummy	piere	
+18	1	dummy	pierre	
 18	1	dummy	mer	
 18	1	dummy	verre	
 18	1	dummy	voie	
@@ -61,7 +61,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 21	4	IS  (4 : 2) + 1 = 6   ?, serrure	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3982	
 21	5	IS  (4 x 2) + 1 = 9   ?, bouteille	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4549	
 21	6	IS  (10 : 2) - 3 = 2   ?, sang	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	10024	
-22	1	dummy	--montage	
+22	1	dummy	--montagne	
 22	1	dummy	homme	
 22	1	dummy	chemise	
 22	1	dummy	serrure	

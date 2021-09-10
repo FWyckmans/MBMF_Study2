@@ -64,7 +64,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 22	1	dummy	homme	
 22	1	dummy	serrure	
 22	1	dummy	chemise	
-22	1	dummy	montail	
+22	1	dummy	montagne	
 22	1	dummy	g	
 22	1	dummy	g	
 23	1	IS  (6 : 3) + 2 = 4   ?, film	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2972	

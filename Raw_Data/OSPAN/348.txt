@@ -12,7 +12,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 9	1	IS  (5 : 1) + 4 = 9   ?, bois	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	12728	
 9	2	IS  (8 : 2) + 4 = 2   ?, lait	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2906	
 9	3	IS  (9 x 2) - 3 = 16   ?, argent	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	4226	
-10	1	dummy	i-bois	
+10	1	dummy	bois	
 10	1	dummy	lait	
 10	1	dummy	argent	
 11	1	IS  (10 : 10) - 1 = 2   ?, mot	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	10375	
@@ -21,7 +21,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 11	4	IS  (8 x 1) + 5 = 13   ?, rêve	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5282	
 11	5	IS  (9 : 3) - 2 = 1   ?, coeur	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	6074	
 12	1	dummy	---mot	
-12	1	dummy	corrfre	
+12	1	dummy	coffre	
 12	1	dummy	reve	
 12	1	dummy	coeur	
 12	1	dummy	  	
@@ -42,7 +42,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 17	5	IS  (7 x 2) - 3 = 11   ?, verre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4316	
 18	1	dummy	²²maison	
 18	1	dummy	cri	
-18	1	dummy	voix	
+18	1	dummy	voie	
 18	1	dummy	pierre	
 18	1	dummy	verre	
 19	1	IS  (5 x 2) + 1 = 6   ?, escalier	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2183	

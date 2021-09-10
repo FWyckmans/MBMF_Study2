@@ -20,7 +20,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 11	3	IS  (8 x 1) + 8 = 16   ?, rêve	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3882	
 11	4	IS  (9 : 3) - 2 = 1   ?, coeur	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	12095	
 11	5	IS  (10 : 10) - 1 = 2   ?, coffre	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6507	
-12	1	dummy	--aire	
+12	1	dummy	--air	
 12	1	dummy	mot	
 12	1	dummy	reve	
 12	1	dummy	coeur	
@@ -42,7 +42,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 17	5	IS  (4 : 1) - 4 = 2   ?, pierre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	10708	
 18	1	dummy	-²²-verre	
 18	1	dummy	voie	
-18	1	dummy	crie 	
+18	1	dummy	cri 	
 18	1	dummy	maison	
 18	1	dummy	 	
 19	1	IS  (9 x 2) + 1 = 18   ?, tête	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6536	

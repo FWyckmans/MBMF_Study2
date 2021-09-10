@@ -126,6 +126,6 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 37	3	IS  (6 x 2) - 2 = 10   ?, voix	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	correct	6672	
 37	4	IS  (8 : 2) - 1 = 3   ?, bras	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	correct	5241	
 38	1	dummy	--guide	
-38	1	dummy	voie	
+38	1	dummy	voix	
 38	1	dummy	bras	
 38	1	dummy	bras	

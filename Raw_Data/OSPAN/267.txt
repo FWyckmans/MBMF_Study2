@@ -62,8 +62,8 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 21	5	IS  (10 : 2) - 3 = 2   ?, montagne	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	7161	
 21	6	IS  (4 : 2) + 1 = 6   ?, sang	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	16048	
 22	1	dummy	-²coffre	
-22	1	dummy	chemisse	
-22	1	dummy	serure	
+22	1	dummy	chemise	
+22	1	dummy	serrure	
 22	1	dummy	bouteille	
 22	1	dummy	 	
 22	1	dummy	 	
@@ -82,7 +82,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 25	5	IS  (6 : 2) - 2 = 2   ?, assiette	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	7843	
 25	6	IS  (3 x 3) - 1 = 8   ?, village	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5956	
 26	1	dummy	²²rouleau	
-26	1	dummy	assiete	
+26	1	dummy	assiette	
 26	1	dummy	village	
 26	1	dummy	 	
 26	1	dummy	 	

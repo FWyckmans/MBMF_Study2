@@ -126,6 +126,6 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 37	3	IS  (6 x 3) - 2 = 11   ?, peinture	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	4589	
 37	4	IS  (9 : 1) + 8 = 18   ?, église	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	10401	
 38	1	dummy	²²eglise	
-38	1	dummy	pouppée	
+38	1	dummy	poupée	
 38	1	dummy	feuille	
 38	1	dummy	eglise	

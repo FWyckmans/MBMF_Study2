@@ -22,7 +22,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 11	5	IS  (8 x 1) + 5 = 13   ?, coeur	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	10670	
 12	1	dummy	mot	
 12	1	dummy	air	
-12	1	dummy	coffe	
+12	1	dummy	coffre	
 12	1	dummy	bois	
 12	1	dummy	reve	
 13	1	IS  (9 : 1) - 7 = 4   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	8673	
@@ -41,7 +41,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 17	4	IS  (4 : 1) - 4 = 2   ?, verre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4968	
 17	5	IS  (4 : 1) + 1 = 4   ?, voie	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5289	
 18	1	dummy	-²pierre	
-18	1	dummy	crie	
+18	1	dummy	cri	
 18	1	dummy	verre	
 18	1	dummy	bois	
 18	1	dummy	casse	

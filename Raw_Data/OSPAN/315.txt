@@ -42,7 +42,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 17	5	IS  (4 : 1) - 4 = 2   ?, verre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6995	
 18	1	dummy	--²maison	
 18	1	dummy	voie	
-18	1	dummy	crie	
+18	1	dummy	cri	
 18	1	dummy	pierre	
 18	1	dummy	eau	
 19	1	IS  (9 x 1) - 1 = 8   ?, enfant	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3706	

@@ -108,7 +108,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 33	1	IS  (7 x 7) + 1 = 49   ?, nappe	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	incorrect	3432	
 33	2	IS  (10 : 2) + 4 = 8   ?, herbe	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	incorrect	8878	
 34	1	dummy	²nappe	
-34	1	dummy	herb	
+34	1	dummy	herbe
 35	1	IS  (10 x 2) - 6 = 12   ?, église	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	7570	
 35	2	IS  (9 x 3) - 3 = 24   ?, femme	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	correct	15387	
 35	3	IS  (6 x 3) - 2 = 11   ?, peinture	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	4133	
@@ -125,7 +125,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 37	2	IS  (9 x 3) - 3 = 24   ?, poupée	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	correct	2200	
 37	3	IS  (6 x 4) + 1 = 25   ?, église	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	correct	3805	
 37	4	IS  (5 x 1) - 1 = 5   ?, lettre	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	2794	
-38	1	dummy	pfeuille	
+38	1	dummy	feuille	
 38	1	dummy	poupée	
 38	1	dummy	église	
 38	1	dummy	lettre	

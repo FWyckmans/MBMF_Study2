@@ -28,19 +28,19 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 13	1	IS  (9 : 1) - 7 = 4   ?, fourchette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	6180	
 13	2	IS  (6 x 2) - 3 = 10   ?, bicyclette	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3144	
 13	3	IS  (4 x 4) + 1 = 17   ?, sac	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2365	
-14	1	dummy	²fouchette	
+14	1	dummy	²fourchette	
 14	1	dummy	byciclette	
 14	1	dummy	bac	
 15	1	IS  (8 x 4) + 2 = 34   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4306	
 15	2	IS  (3 : 1) + 3 = 6   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2305	
-16	1	dummy	tissus	
+16	1	dummy	tissu	
 16	1	dummy	fête	
 17	1	IS  (4 : 1) - 4 = 2   ?, voie	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4596	
 17	2	IS  (10 x 2) + 3 = 23   ?, cri	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3391	
 17	3	IS  (4 : 1) + 1 = 4   ?, maison	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2827	
 17	4	IS  (10 : 1) + 1 = 10   ?, pierre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2102	
 17	5	IS  (7 x 2) - 3 = 11   ?, verre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2638	
-18	1	dummy	voix	
+18	1	dummy	voie	
 18	1	dummy	cri	
 18	1	dummy	maison 	
 18	1	dummy	pierre	
@@ -51,7 +51,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 19	4	IS  (5 x 2) + 1 = 6   ?, enfant	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2346	
 19	5	IS  (9 x 1) - 1 = 8   ?, plan	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3744	
 20	1	dummy	²tête	
-20	1	dummy	esclaier	
+20	1	dummy	escalier	
 20	1	dummy	montre	
 20	1	dummy	enfant	
 20	1	dummy	plan	
@@ -98,7 +98,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 30	1	dummy	moustache	
 30	1	dummy	chien	
 30	1	dummy	banque	
-30	1	dummy	voeux	
+30	1	dummy	voeu	
 31	1	IS  (2 x 1) - 1 = 1   ?, toit	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	3126	
 31	2	IS  (10 : 1) + 3 = 13   ?, mur	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	correct	3245	
 31	3	IS  (8 : 4) - 1 = 1   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	incorrect	3159	
@@ -117,7 +117,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 35	6	IS  (10 x 2) - 6 = 12   ?, lettre	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	3832	
 36	1	dummy	²poupée	
 36	1	dummy	femme	
-36	1	dummy	églis	
+36	1	dummy	église	
 36	1	dummy	peinture	
 36	1	dummy	ferme	
 36	1	dummy	femme	

@@ -125,7 +125,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 37	2	IS  (6 x 4) + 1 = 25   ?, lettre	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	1	0	correct	6436	
 37	3	IS  (5 x 1) - 1 = 5   ?, peinture	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	2922	
 37	4	IS  (9 : 1) + 8 = 18   ?, poupée	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	incorrect	5406	
-38	1	dummy	--²égliste	
+38	1	dummy	--²église	
 38	1	dummy	lettre	
 38	1	dummy	peinture	
 38	1	dummy	 	

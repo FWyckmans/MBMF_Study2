@@ -40,7 +40,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 17	3	IS  (10 x 2) + 3 = 23   ?, maison	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3521	
 17	4	IS  (10 : 1) + 1 = 10   ?, cri	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2069	
 17	5	IS  (7 x 2) - 3 = 11   ?, voie	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3015	
-18	1	dummy	-²-verr	
+18	1	dummy	-²-verre	
 18	1	dummy	pierre	
 18	1	dummy	maison	
 18	1	dummy	croix	

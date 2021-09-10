@@ -34,7 +34,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 15	1	IS  (8 x 4) + 2 = 34   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4273	
 15	2	IS  (3 : 1) + 3 = 6   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2983	
 16	1	dummy	-fête	
-16	1	dummy	tissus	
+16	1	dummy	tissu	
 17	1	IS  (10 x 2) + 3 = 23   ?, voie	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	2413	
 17	2	IS  (4 : 1) + 1 = 4   ?, verre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	3801	
 17	3	IS  (7 x 2) - 3 = 11   ?, cri	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	5268	
@@ -74,7 +74,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 24	1	dummy	cheval	
 24	1	dummy	carte	
 24	1	dummy	film	
-24	1	dummy	chaaise	
+24	1	dummy	chaise	
 25	1	IS  (5 : 5) + 1 = 2   ?, assiette	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4717	
 25	2	IS  (7 x 2) - 1 = 14   ?, village	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	2610	
 25	3	IS  (3 x 3) - 1 = 8   ?, rouleau	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3261	

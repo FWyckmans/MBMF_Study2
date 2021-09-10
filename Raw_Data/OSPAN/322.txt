@@ -54,7 +54,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 20	1	dummy	escalier	
 20	1	dummy	tête	
 20	1	dummy	 	
-20	1	dummy	enfnt	
+20	1	dummy	enfant	
 21	1	IS  (6 x 1) - 4 = 1   ?, sang	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5655	
 21	2	IS  (9 : 3) - 1 = 2   ?, homme	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	4288	
 21	3	IS  (10 : 2) - 3 = 2   ?, serrure	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	7942	
@@ -126,6 +126,6 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 37	3	IS  (6 x 2) - 2 = 10   ?, guide	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	correct	3514	
 37	4	IS  (10 : 1) - 1 = 9   ?, bras	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	correct	4235	
 38	1	dummy	-nuit	
-38	1	dummy	voie	
+38	1	dummy	voix	
 38	1	dummy	guide	
-38	1	dummy	voie	
+38	1	dummy	voix	

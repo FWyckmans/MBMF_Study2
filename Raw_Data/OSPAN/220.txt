@@ -34,7 +34,7 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 15	1	IS  (8 x 4) + 2 = 34   ?, fête	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3717	
 15	2	IS  (3 : 1) + 3 = 6   ?, tissu	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3978	
 16	1	dummy	--fete	
-16	1	dummy	tissus	
+16	1	dummy	tissu	
 17	1	IS  (4 : 1) + 1 = 4   ?, maison	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4238	
 17	2	IS  (7 x 2) - 3 = 11   ?, cri	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	correct	3902	
 17	3	IS  (4 : 1) - 4 = 2   ?, pierre	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	5176	

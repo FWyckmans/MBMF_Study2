@@ -4,11 +4,11 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 3	1	IS  (6 x 3) + 2 = 17   ?, sol	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	correct	4527	
 4	1	IS  (2 x 2) + 1 = 4   ?, groupe	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	correct	2060	
 5	1	dummy	sol	
-5	1	dummy	droupe	
+5	1	dummy	groupe	
 6	1	IS  (3 : 1) - 2 = 3   ?, prix	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	correct	3624	
 7	1	IS  (10 : 2) + 4 = 3   ?, pain	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	correct	3722	
 8	1	dummy	-prix	
-8	1	dummy	pin	
+8	1	dummy	pain	
 9	1	IS  (9 x 2) - 3 = 16   ?, argent	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	incorrect	4021	
 9	2	IS  (8 : 2) + 4 = 2   ?, bois	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	correct	5178	
 9	3	IS  (5 : 1) + 4 = 9   ?, lait	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	6542	
@@ -95,8 +95,8 @@ block number	trial number	trial contents	set1	set2	set3	set4	set5	set6	set7	set8
 29	2	IS  (7 : 1) + 2 = 7   ?, voeu	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	correct	3726	
 29	3	IS  (6 : 2) + 1 = 4   ?, chien	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1	0	incorrect	4883	
 29	4	IS  (10 : 2) - 4 = 3   ?, banque	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	correct	7533	
-30	1	dummy	moiustache	
-30	1	dummy	voeux	
+30	1	dummy	moustache	
+30	1	dummy	voeu	
 30	1	dummy	chien	
 30	1	dummy	banque	
 31	1	IS  (10 : 1) + 3 = 13   ?, étable	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	incorrect	5179	
