@@ -202,9 +202,7 @@ dOKAlc <- dClin%>%
 dOKGam <- dClin%>%
   filter(OKCort == 1)%>%
   filter(OKd == 1)%>%
-  filter(Sample != "Alc")%>%
-  filter(subjID != 334)%>%
-  filter(subjID != 136)
+  filter(Sample != "Alc")
   
 dOKTot <- dClin%>%
   filter(OKCort == 1)%>%
