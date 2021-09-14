@@ -5,6 +5,7 @@ source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/OSPAN/"
 Output_path = "Output/"
 Test = 0
+# Participant who were instructed to press left for correct and right for false
 NSInverseOspan = c(122, 126, 128, 129, 134, 135, 138, 139, 140, 142,
                    124, 121, 136, 144, 114, 130, 220)
 Criterion = 0.666666
@@ -128,7 +129,6 @@ CorrectWord <- function(d){
 
 dT <- data.frame()
 for (i in unique(d$NS)){
-  # print(i)
   dt <- filter(d, NS == i) # Get frame for participant
   
   dt <- ComputeAcc(dt) # Compute the accuracy for each trial
