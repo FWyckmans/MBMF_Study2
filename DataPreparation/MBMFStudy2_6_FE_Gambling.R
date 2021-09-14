@@ -71,3 +71,48 @@ sum(d$Sample == "HC")
 
 ############################################# Export ##############################################
 write.table(d, paste0(Output_path, "dOKGamFE.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
+
+########################################## Manip check ############################################
+t.test(d$w[d$Sample == "Gambler"], d$w[d$Sample != "Gambler"])#, alternative = "less")
+wilcox.test(d$w[d$Sample == "Gambler"], d$w[d$Sample != "Gambler"])
+
+t.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])#, alternative = "less")
+wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
+
+t.test(d$Raven[d$Sample == "Gambler"], d$Raven[d$Sample != "Gambler"])#, alternative = "less")
+wilcox.test(d$Raven[d$Sample == "Gambler"], d$Raven[d$Sample != "Gambler"])
+
+t.test(d$w[d$Sample == "Gambler" & d$StressGr == "NotStressed"],
+       d$w[d$Sample == "HC" & d$StressGr == "NotStressed"])
+
+wilcox.test(d$w[d$Sample == "Gambler" & d$StressGr == "NotStressed"],
+            d$w[d$Sample != "Gambler" & d$StressGr == "NotStressed"])
+
+t.test(d$w[d$Sample == "Gambler" & d$StressGr == "Stressed"],
+       d$w[d$Sample == "HC" & d$StressGr == "Stressed"])
+
+wilcox.test(d$w[d$Sample == "Gambler" & d$StressGr == "Stressed"],
+            d$w[d$Sample == "HC" & d$StressGr == "Stressed"])
+
+t.test(d$w[d$Sample == "Gambler" & d$Water == 1],
+       d$w[d$Sample == "HC" & d$Water == 1])
+
+wilcox.test(d$w[d$Sample == "Gambler" & d$Water == 1],
+            d$w[d$Sample != "Gambler" & d$Water == 1])
+
+
+cor.test(d$w, d$OSPAN)
+cor.test(d$w, d$Raven)
+summary(lm(w ~ OSPAN, data = d))
+summary(lm(w ~ OSPAN*dCorti, data = d))
+summary(lm(w ~ OSPAN*dCorti*SampleC, data = d))
+
+summary(lm(w ~ Raven*dCorti, data = d))
+summary(lm(w ~ Raven*dCorti*SampleC, data = d))
+
+summary(lm(w ~ OSPAN + Raven, data = d))
+
+# summary(lm(OSPAN ~ SampleC + Raven, data = d))
+summary(lm(w ~ OSPAN*dCorti, data = d))
+t.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])#, alternative = "less")
+wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])

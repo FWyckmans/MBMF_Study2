@@ -21,8 +21,6 @@ if (Test != 0){
     select(NS, Block = block.number, Trial = trial.number, Content = trial.contents,
            WordResp = set1, WordAcc, RespCorr = correct_operation, Resp = response, Acc, RT)}
 
-f = "110.txt"
-
 if (Test == 0){
   listeFichiers <- dir(path = Datapath, pattern = ".txt")
   d <- data.frame()
@@ -102,15 +100,8 @@ WordClean <- function(d){
   d$WordResp <- str_remove_all(d$WordResp, "[?-]")
   d$WordResp <- str_remove_all(d$WordResp, "[²]")
   for (i in c(1:length(d$NS))){
-    # d$Word[i] <- chartr(paste(names(unwanted_array), collapse=''),
-    #                     paste(unwanted_array, collapse=''),
-    #                     d$Word[i])
     d$Word[i] <- rm_accent(d$Word[i])
-    # print("OK")
     d$Word[i] <- tolower(d$Word[i])
-    # d$WordResp[i] <- chartr(paste(names(unwanted_array), collapse=''),
-    #                     paste(unwanted_array, collapse=''),
-    #                     d$WordResp[i])
     d$WordResp[i] <- rm_accent(d$WordResp[i])
     d$WordResp[i] <- tolower(d$WordResp[i])
   }
@@ -144,18 +135,15 @@ for (i in unique(d$NS)){
   dt <- separate(dt, Content, into = c("Calc", "Word"), sep = " ?, ")
   dt <- WordClean(dt) # Word = NA for calcul, remove accents and strange symbols
   dt$WordResp[dt$WordResp == " "] <- "NoResp"  # Code forgotten words
-  dt$WordResp[dt$WordResp == "byciclette"] <- "bicyclette" #v
-  dt$WordResp[dt$WordResp == "voix"] <- "voie" #v
-  dt$WordResp[dt$WordResp == "cris"] <- "cri" #v
-  dt$WordResp[dt$WordResp == "crie"] <- "cri" #
+  dt$WordResp[dt$WordResp == "byciclette"] <- "bicyclette"
+  dt$WordResp[dt$WordResp == "voix"] <- "voie"
+  dt$WordResp[dt$WordResp == "cris"] <- "cri"
+  dt$WordResp[dt$WordResp == "crie"] <- "cri"
   
   dt <- WordRespCol(dt) # Create a col with the word written
   dt <- CorrectWord(dt) # Check if the word is correct
   dT <- rbind(dT, dt) # Final tab
 }
-
-
-dN <- filter(dT, NS == 143)
 
 d <- dT%>%
   select(NS, Block, Trial, Word, WordResp, WordAcc, Acc, RT)%>%
@@ -188,7 +176,7 @@ d$CalcOK[d$Acc >= Criterion] <- 1
 d$nWordAcc[d$CalcOK==0] <- 0
 
 dOspan <- d%>%
-  # filter(CalcOK == 1)%>%
+  filter(CalcOK == 1)%>%
   group_by(NS)%>%
   summarise(nWord = sum(nWordAcc, na.rm = T), RT = mean(RT, na.rm = T))%>%
   rename(subjID = NS)
