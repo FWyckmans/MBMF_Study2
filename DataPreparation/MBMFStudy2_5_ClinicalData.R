@@ -200,9 +200,9 @@ dOKAlc <- dClin%>%
   filter(Sample != "Gambler")
 
 dOKGam <- dClin%>%
+  filter(Sample != "Alc")%>%
   filter(OKCort == 1)%>%
-  filter(OKd == 1)%>%
-  filter(Sample != "Alc")
+  filter(OKd == 1)
   
 dOKTot <- dClin%>%
   filter(OKCort == 1)%>%
@@ -213,3 +213,8 @@ write.table(dClin, paste0(Output_path, "dTot.txt"), col.names = T, row.names = F
 write.table(dOKAlc, paste0(Output_path, "dOKAlc.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKGam, paste0(Output_path, "dOKGam.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 write.table(dOKTot, paste0(Output_path, "dOKTot.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
+
+# Make a dCompReady specific for gamblers
+dCompReadyGamblers <- read.csv(paste0(Output_path, "ComputationsReady.txt"), sep="")%>%
+  filter(subjID %in% dOKGam$subjID)
+write.table(dCompReadyGamblers, paste0(Output_path, "dCompReadyGamb.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")

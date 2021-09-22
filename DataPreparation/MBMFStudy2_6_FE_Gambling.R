@@ -9,6 +9,8 @@ OSPANImputer = "RavenSample"
 ############################################ Frame ################################################
 ########## Clinical frame
 d <- read.delim(paste0(Output_path, "dOKGam.txt"))
+dCompParameter <- read.delim(paste0(Output_path, "ComputationParameter7P_OK_HCPGAL.txt"))
+# ModelFit <- readRDS(paste0(Output_path, "Models/output7P_OKHCPG.Rdata"))
 
 ###################################### Features engineering #######################################
 ##### Impute OSPAN
@@ -58,6 +60,16 @@ d <- d%>%
          GrpXRavenXdCortM = SampleC*Raven*dCorti,
          GrpXOSPANXdCortM = SampleC*OSPAN*dCorti)  
 
+##### Add test computations
+AdditionnalDF <- list(dCompParameter)
+ToFillbyDF <- list(dCP = colnames(dCompParameter)[-1])
+
+for (i in 1:length(AdditionnalDF)) {
+  dt <- as.data.frame(AdditionnalDF[i])
+  ToFill <- ToFillbyDF[[i]]
+  d <- FillCol(d, dt, ToFill)
+}
+
 # zScores
 ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w", "OSPAN"), NewCol = c("zMF", "zMB", "zMBUR", "zw", "zOSPAN"))
 
@@ -73,6 +85,8 @@ sum(d$Sample == "HC")
 write.table(d, paste0(Output_path, "dOKGamFE.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
 
 ########################################## Manip check ############################################
+# rhat(ModelFit)
+
 t.test(d$w[d$Sample == "Gambler"], d$w[d$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(d$w[d$Sample == "Gambler"], d$w[d$Sample != "Gambler"])
 
@@ -102,6 +116,7 @@ wilcox.test(d$w[d$Sample == "Gambler" & d$Water == 1],
 
 
 cor.test(d$w, d$OSPAN)
+cor.test(d$w[d$StressGr == "NotStressed"], d$OSPAN[d$StressGr == "NotStressed"])
 cor.test(d$w, d$Raven)
 summary(lm(w ~ OSPAN, data = d))
 summary(lm(w ~ OSPAN*dCorti, data = d))
@@ -113,6 +128,6 @@ summary(lm(w ~ Raven*dCorti*SampleC, data = d))
 summary(lm(w ~ OSPAN + Raven, data = d))
 
 # summary(lm(OSPAN ~ SampleC + Raven, data = d))
-summary(lm(w ~ OSPAN*dCorti, data = d))
+summary(lm(w ~ SampleC + OSPAN + dCorti, data = d))
 t.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
