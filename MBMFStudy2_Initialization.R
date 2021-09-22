@@ -7,7 +7,7 @@ Output_path = "Output/"
 ## Install
 packages <- c("dplyr", "tidyr",
               "ggplot2", "gridExtra", "cowplot", "corrplot",
-              "nlme", "lmerTest", "BayesFactor", "stats",
+              "nlme", "lmerTest", "BayesFactor", "stats", "glmnet",
               "car", "readxl", "readr", "Hmisc", "rms", "ISLR", "e1071", "stringr", "writexl",
               "hBayesDM", "FactoMineR", "factoextra")
 
