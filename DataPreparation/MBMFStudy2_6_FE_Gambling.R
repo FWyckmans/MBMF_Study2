@@ -71,7 +71,10 @@ for (i in 1:length(AdditionnalDF)) {
 }
 
 # zScores
-ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w", "OSPAN"), NewCol = c("zMF", "zMB", "zMBUR", "zw", "zOSPAN"))
+ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w", "OSPAN", "dCorti",
+                          "OSPANxdCortM", "GrpXdCortM", "GrpXOSPAN", "GrpXOSPANXdCortM"),
+                  NewCol = c("zMF", "zMB", "zMBUR", "zw", "zOSPAN", "zdCorti",
+                             "zOSPANxdCortM", "zGrpXdCortM", "zGrpXOSPAN", "zGrpXOSPANXdCortM"))
 
 d <- ScaleCol(d, ScaleToDo)
 
@@ -131,3 +134,21 @@ summary(lm(w ~ OSPAN + Raven, data = d))
 summary(lm(w ~ SampleC + OSPAN + dCorti, data = d))
 t.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
+
+##### LASSO regression
+# Fit the LASSO model (Lasso: Alpha = 1)
+# set.seed(100)
+x <- as.matrix(d[c("zdCorti", "zOSPAN", "SampleC", "zOSPANxdCortM", "zGrpXdCortM", "zGrpXOSPAN", "zGrpXOSPANXdCortM")])
+y <- as.double(d$zw)
+
+cv.lasso <- cv.glmnet(x, y, nfolds = 30)
+
+# Results
+plot(cv.lasso)
+
+# plot(cv.lasso$glmnet.fit, xvar="lambda", label=TRUE)
+cat('Min Lambda: ', cv.lasso$lambda.min, '\n 1Sd Lambda: ', cv.lasso$lambda.1se)
+df_coef <- round(as.matrix(coef(cv.lasso, s=cv.lasso$lambda.min)), 2)
+
+# See all contributing variables
+df_coef[df_coef[, 1] != 0, ]
