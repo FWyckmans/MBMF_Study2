@@ -10,7 +10,7 @@ StartOver = 1 # 1 to start from scratch, 0 to start with only new participants
 
 ############################################# Frame ###############################################
 d <- read.csv(paste0(Output_path, "ComputationsReady.txt"), sep="")
-# d <- read.csv(paste0(Output_path, "dCompReady_OKHCPG.txt"), sep="")
+d <- read.csv(paste0(Output_path, "dCompReadyGamb.txt"), sep="")
 
 dOK <- read.delim(paste0(Output_path, "dTot.txt"))%>%
   filter(OKd == 1)
