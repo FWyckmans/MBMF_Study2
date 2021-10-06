@@ -31,6 +31,7 @@ library(BayesFactor)
 library(stats)
 library(FactoMineR)
 library(factoextra)
+library(glmnet) # Lasso selection
 
 ## Misc (or don't remember and imported anyway)
 library(car)
