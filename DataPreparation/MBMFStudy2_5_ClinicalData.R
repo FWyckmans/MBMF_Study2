@@ -81,6 +81,7 @@ dClin <- dClin%>%
 ToAdd = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda",
           "MB", "MF", "RewMB", "UnrewMB", "MBp", "MFp", "RewMBp", "UnrewMBp",
           "PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd",
+          "RewRT1", "UnRewRT1", "CommonRT2", "RareRT2", "dRT1", "dRT2", 
           "OKd")
 
 dClin <- AddDummyCol(dClin, ToAdd)
@@ -93,14 +94,16 @@ dRegLogInd <- read.delim(paste0(Output_path, "dRegLogIndLarge.txt"))
 dProba <- read.delim(paste0(Output_path, "ProbaLarge.txt"))
 dProbaD <- read.table(paste0(Datapath, "/DataFromORScript/choice_probs.dat"))%>%
   rename(subjID = V1, PRCd = V2, PRRd = V3, PUCd = V4, PURd = V5)
+dRT <- read.delim(paste0(Output_path, "dRT.txt"), sep = "\t")
 
 ########## Add all these columns to dClin and creation of the complete DF
-AdditionnalDF <- list(dComputationParameter, dOspan, dRegLogInd, dProba, dProbaD)
+AdditionnalDF <- list(dComputationParameter, dOspan, dRegLogInd, dProba, dProbaD, dRT)
 ToFillbyDF <- list(dCP = colnames(dComputationParameter)[-1],
                    dOsp = colnames(dOspan)[2],
                    dRegLogInd = colnames(dRegLogInd)[-1],
                    dProba = colnames(dProba)[-1],
-                   dProbaD = colnames(dProbaD)[-1])
+                   dProbaD = colnames(dProbaD)[-1],
+                   dReaTime = colnames(dRT)[-1])
 
 for (i in 1:length(AdditionnalDF)) {
   dt <- as.data.frame(AdditionnalDF[i])

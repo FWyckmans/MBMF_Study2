@@ -81,6 +81,7 @@ AllCol <- list(
   ProbaM = c("PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd",
              "MBsw", "MFsw", "MBURsw", "MBRsw",
              "MBsd", "MFsd", "MBURsd", "MBRsd"),
+  RT = c("RewRT1", "UnRewRT1", "CommonRT2", "RareRT2", "dRT1", "dRT2"),
   Interaction = c("RavenXdCortM", "OSPANxdCortM",
                   "GrpXdCortM", "GrpXRaven", "GrpXOSPAN",
                   "GrpXRavenXdCortM", "GrpXOSPANXdCortM"),

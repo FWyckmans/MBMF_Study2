@@ -11,6 +11,8 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
   filter(!is.na(StressGr))%>%
   filter(subjID != 334)
 
+d <- read.delim(paste0(Output_path,"dOKGamFE.txt"))
+
 # d$WAIS = 1
 
 # Outlierremoval
@@ -20,7 +22,7 @@ d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
 HeatMap <- function(VD = "Computation", Pop = "All"){
   
   # Independent variables
-  X = c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso, AllCol$Interaction)
+  X = c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso, AllCol$RT, AllCol$Interaction)
   
   # Dependent variables
   if (VD == "Computation"){
@@ -117,7 +119,8 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   Tile5 <- TilePlot(dCorr[dCorr$X %in% AllCol$Cog,], paste0("Correlation facteur cognitif - ", Pop))
   Tile6 <- TilePlot(dCorr[dCorr$X %in% AllCol$FR,], paste0("Correlation Facteur Risque - ", Pop))
   Tile7 <- TilePlot(dCorr[dCorr$X %in% AllCol$Perso,], paste0("Correlation Facteur Personnalite - ", Pop))
-  Tile8 <- TilePlot(dCorr[dCorr$X %in% AllCol$Interaction,], paste0("Correlation interaction - ", Pop))
+  Tile8 <- TilePlot(dCorr[dCorr$X %in% AllCol$RT,], paste0("Correlation Reaction Time - ", Pop))
+  Tile9 <- TilePlot(dCorr[dCorr$X %in% AllCol$Interaction,], paste0("Correlation interaction - ", Pop))
   
   print(Tile1)
   print(Tile2)
@@ -127,13 +130,14 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   print(Tile6)
   print(Tile7)
   print(Tile8)
+  print(Tile9)
   
   dCorr <<- dCorr
 }
 
 d <- filter(d, Sample != "Alc")
 
-HeatMap("Computation", "All")
+HeatMap("Computation", "All")Y
 # HeatMap("Computation", "Alc")
 # HeatMap("Computation", "PG")
 # HeatMap("Computation", "HC")

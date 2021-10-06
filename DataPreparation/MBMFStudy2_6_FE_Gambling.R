@@ -72,9 +72,11 @@ for (i in 1:length(AdditionnalDF)) {
 
 # zScores
 ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w", "OSPAN", "dCorti",
-                          "OSPANxdCortM", "GrpXdCortM", "GrpXOSPAN", "GrpXOSPANXdCortM"),
+                          "OSPANxdCortM", "GrpXdCortM", "GrpXOSPAN", "GrpXOSPANXdCortM",
+                          "RewRT1", "UnRewRT1", "CommonRT2", "RareRT2", "dRT1", "dRT2"),
                   NewCol = c("zMF", "zMB", "zMBUR", "zw", "zOSPAN", "zdCorti",
-                             "zOSPANxdCortM", "zGrpXdCortM", "zGrpXOSPAN", "zGrpXOSPANXdCortM"))
+                             "zOSPANxdCortM", "zGrpXdCortM", "zGrpXOSPAN", "zGrpXOSPANXdCortM",
+                             "zRewRT1", "zUnRewRT1", "zCommonRT2", "zRareRT2", "zdRT1", "zdRT2"))
 
 d <- ScaleCol(d, ScaleToDo)
 

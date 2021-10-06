@@ -153,5 +153,31 @@ d <- filter(d, level2_choice > 0)
 
 d$level2_choice <- d$level2_choice - 2 
 
+############################################### RT ###########################################
+dRT1 <- d%>%
+  group_by(subjID, PrReward)%>%
+  summarise(RT1 = mean(RT1), .groups = 'drop')%>%
+  spread(key = PrReward, value = "RT1")%>%
+  arrange(subjID)
+
+colnames(dRT1)[2] <- "UnRewRT1"
+colnames(dRT1)[3] <- "RewRT1"
+
+dRT2 <- d%>%
+  group_by(subjID, transition)%>%
+  summarise(RT2 = mean(RT2), .groups = 'drop')%>%
+  spread(key = transition, value = "RT2")%>%
+  arrange(subjID)
+
+colnames(dRT2)[2] <- "RareRT2"
+colnames(dRT2)[3] <- "CommonRT2"
+
+dRT <- cbind(dRT1, dRT2[c(2,3)])
+
+dRT <- dRT%>%
+  mutate(dRT1 = RewRT1 - UnRewRT1,
+         dRT2 = RareRT2 - CommonRT2)
+
 ############################################# Export #########################################
 write.table(d, paste0(Output_path, "ComputationsReady.txt"), row.names = F, col.names = T)
+write.table(dRT, paste0(Output_path, "dRT.txt"), row.names = F, col.names = T, sep = "\t", dec = ".")
