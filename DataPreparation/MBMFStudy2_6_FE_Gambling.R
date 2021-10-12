@@ -9,7 +9,7 @@ OSPANImputer = "RavenSample"
 ############################################ Frame ################################################
 ########## Clinical frame
 d <- read.delim(paste0(Output_path, "dOKGam.txt"))
-dCompParameter <- read.delim(paste0(Output_path, "ComputationParameter7P_OK_HCPGAL.txt"))
+dCompParameter <- read.delim(paste0(Output_path, "ComputationParameter7P_OK_HCPG.txt"))
 # ModelFit <- readRDS(paste0(Output_path, "Models/output7P_OKHCPG.Rdata"))
 
 ###################################### Features engineering #######################################
@@ -49,6 +49,13 @@ if (OSPANImputer == "RavenSample"){
     }
   }
 }
+
+##### Stress Response Baseline
+d <- AddDummyCol(d, c("CrtB1", "CrtB2", "CrtB3", "CrtB4"))
+d$CrtB1[!is.na(d$Corti1)] <- 0
+d$CrtB2 <- d$Corti2 - d$Corti1
+d$CrtB3 <- d$Corti3 - d$Corti2
+d$CrtB4 <- d$Corti4 - d$Corti3
 
 ##### Interaction
 d <- d%>%
