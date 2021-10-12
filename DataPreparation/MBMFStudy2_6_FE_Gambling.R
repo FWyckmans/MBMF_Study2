@@ -65,13 +65,13 @@ d <- AddDummyCol(d, c("CrtBM12", "CrtBM34", "dCrtBM", "CrtB32_2", "dCrtB32"))
 # Like OR (difference between the means)
 d$CrtBM12 <- (d$CrtB1+d$CrtB2)/2
 d$CrtBM34 <- (d$CrtB3+d$CrtB4)/2
-d$CrtBM <- d$CrtBM34 - d$CrtBM12
+d$dCrtBM <- d$CrtBM34 - d$CrtBM12
 
 # Other test (only keep T2 and T3)
 d$CrtB32_2 <- 0
 d$dCrtB32 <- d$Corti3-d$Corti2
 
-## LogTransform
+## LogTransform cortisol values to remove skew
 # Single Measures
 d$dCorti <- log10(d$dCorti + 1)
 d$dCortiM <- log10(d$dCortiM + 1)
@@ -90,7 +90,7 @@ d$CrtB4 <- log10(d$CrtB4 + 1)
 # Composite scores
 d$CrtBM12 <- log10(d$CrtBM12 + 1)
 d$CrtBM34 <- log10(d$CrtBM34 + 1)
-d$CrtBM <- log10(d$CrtBM + 1)
+d$dCrtBM <- log10(d$dCrtBM + 1)
 d$dCrtB32 <- log10(d$dCrtB32 + 1)
 
 ########## Interaction
@@ -113,11 +113,11 @@ d <- d%>%
          GrpxOSPANxdCortiM = SampleC*OSPAN*dCortiM,
          
          # With cortisol from baseline measures (like OR 2013)
-         RavenxCrtBM = Raven * CrtBM,  # Raven*dCortiM
-         OSPANxCrtBM = OSPAN * CrtBM,  # OSPAN*dCortiM
-         GrpxCrtBM = SampleC * CrtBM,
-         GrpxRavenxCrtBM = SampleC*Raven*CrtBM,
-         GrpxOSPANxCrtBM = SampleC*OSPAN*CrtBM,
+         RavenxdCrtBM = Raven * dCrtBM,  # Raven*dCortiM
+         OSPANxdCrtBM = OSPAN * dCrtBM,  # OSPAN*dCortiM
+         GrpxdCrtBM = SampleC * dCrtBM,
+         GrpxRavenxdCrtBM = SampleC*Raven*dCrtBM,
+         GrpxOSPANxdCrtBM = SampleC*OSPAN*dCrtBM,
          
          # With cortisol from baseline measures but only considering 3 - 2 (for visualization purpose)
          RavenxdCrtB32 = Raven * dCrtB32,  # Raven*dCortiM
@@ -142,18 +142,18 @@ ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w",
                           "RewRT1", "UnRewRT1", "CommonRT2", "RareRT2", "dRT1", "dRT2",
                           "OSPAN", "Raven",
                           "GrpxOSPAN", "GrpxRaven",
-                          "RavenxdCorti", "OSPANxdCorti", "GrpxdCorti", "GrpxRavenxdCorti", "GrpxOSPANxdCorti",
-                          "RavenxdCortiM", "OSPANxdCortiM", "GrpxdCortiM", "GrpxRavenxdCortiM", "GrpxOSPANxdCortiM",
-                          "RavenxCrtBM", "OSPANxCrtBM", "GrpxCrtBM", "GrpxRavenxCrtBM", "GrpxOSPANxCrtBM",
-                          "RavenxdCrtB32", "OSPANxdCrtB32", "GrpxdCrtB32", "GrpxRavenxdCrtB32", "GrpxOSPANxdCrtB32"),
+                          "dCorti", "RavenxdCorti", "OSPANxdCorti", "GrpxdCorti", "GrpxRavenxdCorti", "GrpxOSPANxdCorti",
+                          "dCortiM", "RavenxdCortiM", "OSPANxdCortiM", "GrpxdCortiM", "GrpxRavenxdCortiM", "GrpxOSPANxdCortiM",
+                          "dCrtBM", "RavenxdCrtBM", "OSPANxdCrtBM", "GrpxdCrtBM", "GrpxRavenxdCrtBM", "GrpxOSPANxdCrtBM",
+                          "dCrtB32", "RavenxdCrtB32", "OSPANxdCrtB32", "GrpxdCrtB32", "GrpxRavenxdCrtB32", "GrpxOSPANxdCrtB32"),
                   NewCol = c("zMF", "zMB", "zMBUR", "zw",
                              "zRewRT1", "zUnRewRT1", "zCommonRT2", "zRareRT2", "zdRT1", "zdRT2",
                              "zOSPAN", "zRaven",
                              "zGrpxOSPAN", "zGrpxRaven",
-                             "zRavenxdCorti", "zOSPANxdCorti", "zGrpxdCorti", "zGrpxRavenxdCorti", "zGrpxOSPANxdCorti",
-                             "zRavenxdCortiM", "zOSPANxdCortiM", "zGrpxdCortiM", "zGrpxRavenxdCortiM", "zGrpxOSPANxdCortiM",
-                             "zRavenxCrtBM", "zOSPANxCrtBM", "zGrpxCrtBM", "zGrpxRavenxCrtBM", "zGrpxOSPANxCrtBM",
-                             "zRavenxdCrtB32", "zOSPANxdCrtB32", "zGrpxdCrtB32", "zGrpxRavenxdCrtB32", "zGrpxOSPANxdCrtB32"))
+                             "zdCorti", "zRavenxdCorti", "zOSPANxdCorti", "zGrpxdCorti", "zGrpxRavenxdCorti", "zGrpxOSPANxdCorti",
+                             "zdCortiM", "zRavenxdCortiM", "zOSPANxdCortiM", "zGrpxdCortiM", "zGrpxRavenxdCortiM", "zGrpxOSPANxdCortiM",
+                             "zdCrtBM", "zRavenxdCrtBM", "zOSPANxdCrtBM", "zGrpxdCrtBM", "zGrpxRavenxdCrtBM", "zGrpxOSPANxdCrtBM",
+                             "zdCrtB32", "zRavenxdCrtB32", "zOSPANxdCrtB32", "zGrpxdCrtB32", "zGrpxRavenxdCrtB32", "zGrpxOSPANxdCrtB32"))
 
 d <- ScaleCol(d, ScaleToDo)
 
