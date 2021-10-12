@@ -13,7 +13,7 @@ dCompParameter <- read.delim(paste0(Output_path, "ComputationParameter7P_OK_HCPG
 # ModelFit <- readRDS(paste0(Output_path, "Models/output7P_OKHCPG.Rdata"))
 
 ###################################### Features engineering #######################################
-##### Impute OSPAN
+########## Impute OSPAN
 ### Impute OSPAN with Group
 if (OSPANImputer == "Mean"){
   for (i in 1:length(d$OSPAN)) {
@@ -50,24 +50,84 @@ if (OSPANImputer == "RavenSample"){
   }
 }
 
-##### Stress Response Baseline
+########## Stress Response Baseline
+##### Compute baseline
+## For single measures
 d <- AddDummyCol(d, c("CrtB1", "CrtB2", "CrtB3", "CrtB4"))
 d$CrtB1[!is.na(d$Corti1)] <- 0
 d$CrtB2 <- d$Corti2 - d$Corti1
-d$CrtB3 <- d$Corti3 - d$Corti2
-d$CrtB4 <- d$Corti4 - d$Corti3
+d$CrtB3 <- d$Corti3 - d$Corti1
+d$CrtB4 <- d$Corti4 - d$Corti1
 
-##### Interaction
+## Compute composite score
+d <- AddDummyCol(d, c("CrtBM12", "CrtBM34", "dCrtBM", "CrtB32_2", "dCrtB32"))
+
+# Like OR (difference between the means)
+d$CrtBM12 <- (d$CrtB1+d$CrtB2)/2
+d$CrtBM34 <- (d$CrtB3+d$CrtB4)/2
+d$CrtBM <- d$CrtBM34 - d$CrtBM12
+
+# Other test (only keep T2 and T3)
+d$CrtB32_2 <- 0
+d$dCrtB32 <- d$Corti3-d$Corti2
+
+## LogTransform
+# Single Measures
+d$dCorti <- log10(d$dCorti + 1)
+d$dCortiM <- log10(d$dCortiM + 1)
+
+d$Corti1 <- log10(d$Corti1 + 1)
+d$Corti2 <- log10(d$Corti2 + 1)
+d$Corti3 <- log10(d$Corti3 + 1)
+d$Corti4 <- log10(d$Corti4 + 1)
+
+# Baselines
+d$CrtB1 <- log10(d$CrtB1 + 1)
+d$CrtB2 <- log10(d$CrtB2 + 1)
+d$CrtB3 <- log10(d$CrtB3 + 1)
+d$CrtB4 <- log10(d$CrtB4 + 1)
+
+# Composite scores
+d$CrtBM12 <- log10(d$CrtBM12 + 1)
+d$CrtBM34 <- log10(d$CrtBM34 + 1)
+d$CrtBM <- log10(d$CrtBM + 1)
+d$dCrtB32 <- log10(d$dCrtB32 + 1)
+
+########## Interaction
 d <- d%>%
-  mutate(RavenXdCortM = Raven * dCorti,  # Raven*dCorti
-         OSPANxdCortM = OSPAN * dCorti,  # OSPAN*dCorti
-         GrpXdCortM = SampleC * dCorti,
-         GrpXRaven = SampleC*Raven,
-         GrpXOSPAN = SampleC*OSPAN,
-         GrpXRavenXdCortM = SampleC*Raven*dCorti,
-         GrpXOSPANXdCortM = SampleC*OSPAN*dCorti)  
+  mutate(GrpxRaven = SampleC*Raven,
+         GrpxOSPAN = SampleC*OSPAN,
+         
+         # With normal Cortisol Measures (3-2)
+         RavenxdCorti = Raven * dCorti,  # Raven*dCorti
+         OSPANxdCorti = OSPAN * dCorti,  # OSPAN*dCorti
+         GrpxdCorti = SampleC * dCorti,
+         GrpxRavenxdCorti = SampleC*Raven*dCorti,
+         GrpxOSPANxdCorti = SampleC*OSPAN*dCorti,
+         
+         # With normal Cortisol Measures ((3_4)-(1_2))
+         RavenxdCortiM = Raven * dCortiM,  # Raven*dCortiM
+         OSPANxdCortiM = OSPAN * dCortiM,  # OSPAN*dCortiM
+         GrpxdCortiM = SampleC * dCortiM,
+         GrpxRavenxdCortiM = SampleC*Raven*dCortiM,
+         GrpxOSPANxdCortiM = SampleC*OSPAN*dCortiM,
+         
+         # With cortisol from baseline measures (like OR 2013)
+         RavenxCrtBM = Raven * CrtBM,  # Raven*dCortiM
+         OSPANxCrtBM = OSPAN * CrtBM,  # OSPAN*dCortiM
+         GrpxCrtBM = SampleC * CrtBM,
+         GrpxRavenxCrtBM = SampleC*Raven*CrtBM,
+         GrpxOSPANxCrtBM = SampleC*OSPAN*CrtBM,
+         
+         # With cortisol from baseline measures but only considering 3 - 2 (for visualization purpose)
+         RavenxdCrtB32 = Raven * dCrtB32,  # Raven*dCortiM
+         OSPANxdCrtB32 = OSPAN * dCrtB32,  # OSPAN*dCortiM
+         GrpxdCrtB32 = SampleC * dCrtB32,
+         GrpxRavenxdCrtB32 = SampleC*Raven*dCrtB32,
+         GrpxOSPANxdCrtB32 = SampleC*OSPAN*dCrtB32
+         )  
 
-##### Add test computations
+########## Add test computations
 AdditionnalDF <- list(dCompParameter)
 ToFillbyDF <- list(dCP = colnames(dCompParameter)[-1])
 
@@ -77,13 +137,23 @@ for (i in 1:length(AdditionnalDF)) {
   d <- FillCol(d, dt, ToFill)
 }
 
-# zScores
-ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w", "OSPAN", "dCorti",
-                          "OSPANxdCortM", "GrpXdCortM", "GrpXOSPAN", "GrpXOSPANXdCortM",
-                          "RewRT1", "UnRewRT1", "CommonRT2", "RareRT2", "dRT1", "dRT2"),
-                  NewCol = c("zMF", "zMB", "zMBUR", "zw", "zOSPAN", "zdCorti",
-                             "zOSPANxdCortM", "zGrpXdCortM", "zGrpXOSPAN", "zGrpXOSPANXdCortM",
-                             "zRewRT1", "zUnRewRT1", "zCommonRT2", "zRareRT2", "zdRT1", "zdRT2"))
+########## zScores
+ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w",
+                          "RewRT1", "UnRewRT1", "CommonRT2", "RareRT2", "dRT1", "dRT2",
+                          "OSPAN", "Raven",
+                          "GrpxOSPAN", "GrpxRaven",
+                          "RavenxdCorti", "OSPANxdCorti", "GrpxdCorti", "GrpxRavenxdCorti", "GrpxOSPANxdCorti",
+                          "RavenxdCortiM", "OSPANxdCortiM", "GrpxdCortiM", "GrpxRavenxdCortiM", "GrpxOSPANxdCortiM",
+                          "RavenxCrtBM", "OSPANxCrtBM", "GrpxCrtBM", "GrpxRavenxCrtBM", "GrpxOSPANxCrtBM",
+                          "RavenxdCrtB32", "OSPANxdCrtB32", "GrpxdCrtB32", "GrpxRavenxdCrtB32", "GrpxOSPANxdCrtB32"),
+                  NewCol = c("zMF", "zMB", "zMBUR", "zw",
+                             "zRewRT1", "zUnRewRT1", "zCommonRT2", "zRareRT2", "zdRT1", "zdRT2",
+                             "zOSPAN", "zRaven",
+                             "zGrpxOSPAN", "zGrpxRaven",
+                             "zRavenxdCorti", "zOSPANxdCorti", "zGrpxdCorti", "zGrpxRavenxdCorti", "zGrpxOSPANxdCorti",
+                             "zRavenxdCortiM", "zOSPANxdCortiM", "zGrpxdCortiM", "zGrpxRavenxdCortiM", "zGrpxOSPANxdCortiM",
+                             "zRavenxCrtBM", "zOSPANxCrtBM", "zGrpxCrtBM", "zGrpxRavenxCrtBM", "zGrpxOSPANxCrtBM",
+                             "zRavenxdCrtB32", "zOSPANxdCrtB32", "zGrpxdCrtB32", "zGrpxRavenxdCrtB32", "zGrpxOSPANxdCrtB32"))
 
 d <- ScaleCol(d, ScaleToDo)
 
@@ -147,17 +217,17 @@ wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
 ##### LASSO regression
 # Fit the LASSO model (Lasso: Alpha = 1)
 # set.seed(100)
-x <- as.matrix(d[c("zdCorti", "zOSPAN", "SampleC", "zOSPANxdCortM", "zGrpXdCortM", "zGrpXOSPAN", "zGrpXOSPANXdCortM")])
-y <- as.double(d$zw)
-
-cv.lasso <- cv.glmnet(x, y, nfolds = 30)
-
-# Results
-plot(cv.lasso)
-
-# plot(cv.lasso$glmnet.fit, xvar="lambda", label=TRUE)
-cat('Min Lambda: ', cv.lasso$lambda.min, '\n 1Sd Lambda: ', cv.lasso$lambda.1se)
-df_coef <- round(as.matrix(coef(cv.lasso, s=cv.lasso$lambda.min)), 2)
-
-# See all contributing variables
-df_coef[df_coef[, 1] != 0, ]
+# x <- as.matrix(d[c("zdCorti", "zOSPAN", "SampleC", "zOSPANxdCortM", "zGrpXdCortM", "zGrpXOSPAN", "zGrpXOSPANXdCortM")])
+# y <- as.double(d$zw)
+# 
+# cv.lasso <- cv.glmnet(x, y, nfolds = 30)
+# 
+# # Results
+# plot(cv.lasso)
+# 
+# # plot(cv.lasso$glmnet.fit, xvar="lambda", label=TRUE)
+# cat('Min Lambda: ', cv.lasso$lambda.min, '\n 1Sd Lambda: ', cv.lasso$lambda.1se)
+# df_coef <- round(as.matrix(coef(cv.lasso, s=cv.lasso$lambda.min)), 2)
+# 
+# # See all contributing variables
+# df_coef[df_coef[, 1] != 0, ]
