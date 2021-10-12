@@ -6,11 +6,7 @@ Datapath = "Raw_Data/"
 Output_path = "Output/"
 
 ############################################ Frame ################################################
-d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
-  filter(OKd == 1)%>%
-  filter(OKCort == 1)%>%
-  filter(Sample != "Alc")#%>%
-  # select(subjID, Condition, Sample, Age, StudyLevel)
+d <- read.delim(paste0(Output_path,"dOKGamFE.txt"))
 
 ########################################### Descriptive ###########################################
 ########## By group and stressor
