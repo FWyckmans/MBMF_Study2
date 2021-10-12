@@ -146,13 +146,14 @@ dClin$StressGrSR[is.na(dClin$dStress)] <- NA
 dClin$StressGrSRM[dClin$dStressM > 0.02] <- 1
 dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
 
-# dClin$dCorti <- log10(dClin$dCorti + 1)
-# dClin$dCortiM <- log10(dClin$dCortiM + 1)
-# 
-# dClin$Corti1 <- log10(dClin$Corti1 + 1)
-# dClin$Corti2 <- log10(dClin$Corti2 + 1)
-# dClin$Corti3 <- log10(dClin$Corti3 + 1)
-# dClin$Corti4 <- log10(dClin$Corti4 + 1)
+# LogTransform
+dClin$dCorti <- log10(dClin$dCorti + 1)
+dClin$dCortiM <- log10(dClin$dCortiM + 1)
+
+dClin$Corti1 <- log10(dClin$Corti1 + 1)
+dClin$Corti2 <- log10(dClin$Corti2 + 1)
+dClin$Corti3 <- log10(dClin$Corti3 + 1)
+dClin$Corti4 <- log10(dClin$Corti4 + 1)
 
 ##### Final stress group
 # dClin$FinalCondition[((dClin$Sample == i) & (dClin[x] == 1)] <- ""
