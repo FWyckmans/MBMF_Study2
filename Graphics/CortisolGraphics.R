@@ -4,7 +4,7 @@ remove(list = ls())
 source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
-multEB = 1
+multEB = 2
 
 ############################################# Frame ###############################################
 d <- read.delim(paste0(Output_path,"dOKGamFE.txt"))
@@ -12,7 +12,7 @@ d <- read.delim(paste0(Output_path,"dOKGamFE.txt"))
 ############################################ Graphics #############################################
 ##### Cortisol like Otto Ross 2013
 # Prepare Frame
-dGC <- d%>%
+dGCB <- d%>%
   select(NS, Water, SampleC, CrtB1, CrtB2, CrtB3, CrtB4)%>%
   group_by(Water)%>%
   summarise(CrtB1M = mean(CrtB1), CrtB1sd = sd(CrtB1),
@@ -26,25 +26,25 @@ dGC <- d%>%
   gather(key = "Time", value = "Mean_SD", T1:T4)%>%
   separate("Mean_SD", c("LogCortisol", "sd"), sep = "_")
 
-dGC$LogCortisol <- as.numeric(dGC$LogCortisol)
-dGC$sd <- as.numeric(dGC$sd)
+dGCB$LogCortisol <- as.numeric(dGCB$LogCortisol)
+dGCB$sd <- as.numeric(dGCB$sd)
 
 # Compute SE
-dGC <- AddDummyCol(dGC, "n")
+dGCB <- AddDummyCol(dGCB, "n")
 
-dGC$n[dGC$Water == 1] <- length(d$subjID[d$Water == 1])
-dGC$n[dGC$Water == -1] <- length(d$subjID[d$Water == -1])
+dGCB$n[dGCB$Water == 1] <- length(d$subjID[d$Water == 1])
+dGCB$n[dGCB$Water == -1] <- length(d$subjID[d$Water == -1])
 
-dGC <- mutate(dGC, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
-dGC$SE[dGC$Time == "T1"] <- NA
-dGC$EBmin[dGC$Time == "T1"] <- NA
-dGC$EBmax[dGC$Time == "T1"] <- NA
+dGCB <- mutate(dGCB, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
+dGCB$SE[dGCB$Time == "T1"] <- NA
+dGCB$EBmin[dGCB$Time == "T1"] <- NA
+dGCB$EBmax[dGCB$Time == "T1"] <- NA
 
 # Rename for convenience
-dGC$Water[dGC$Water == 1] <- "WPT"
-dGC$Water[dGC$Water == -1] <- "CPT"
+dGCB$Water[dGCB$Water == 1] <- "WPT"
+dGCB$Water[dGCB$Water == -1] <- "CPT"
 
-CortGraph <- ggplot(dGC, aes(x = Time, y = LogCortisol, group = Water)) +
+CortGraph <- ggplot(dGCB, aes(x = Time, y = LogCortisol, group = Water)) +
   geom_line(aes(colour = Water),size = 1) +
   geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2)
 CortGraph
