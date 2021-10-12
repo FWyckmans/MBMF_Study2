@@ -4,7 +4,7 @@ remove(list = ls())
 source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
-multEB = 2
+multEB = 1
 
 ############################################# Frame ###############################################
 d <- read.delim(paste0(Output_path,"dOKGamFE.txt"))
