@@ -2,14 +2,26 @@ remove(list = ls())
 
 ############################################ Parameter ############################################
 source("MBMFStudy2_Initialization.R")
+# source("DataPreparation/MBMFStudy2_5_ClinicalData.R")
 Datapath = "Output/"
 Output_path = "Output/"
 OSPANImputer = "RavenSample"
+TypeComp = "PGHC"
 
 ############################################ Frame ################################################
 ########## Clinical frame
 d <- read.delim(paste0(Output_path, "dOKGam.txt"))
-dCompParameter <- read.delim(paste0(Output_path, "ComputationParameter7P_OK_HCPG.txt"))
+
+if (TypeComp == "Tot"){
+  dCompParameter <- read.delim(paste0(Output_path, "ComputationParameter7P_OK_HCPGAL.txt"))
+  OutputName = "dOKGamFE_Comp7P_OK_HCPGAL.txt"
+}
+
+if (TypeComp == "PGHC"){
+  dCompParameter <- read.delim(paste0(Output_path, "ComputationParameter7P_OK_HCPG.txt"))
+  OutputName = "dOKGamFE_Comp7P_OK_HCPG.txt"
+}
+
 # ModelFit <- readRDS(paste0(Output_path, "Models/output7P_OKHCPG.Rdata"))
 
 ###################################### Features engineering #######################################
@@ -164,11 +176,42 @@ sum(d$Sample == "Gambler")
 sum(d$Sample == "HC")
 
 ############################################# Export ##############################################
-write.table(d, paste0(Output_path, "dOKGamFE.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
+write.table(d, paste0(Output_path, OutputName), col.names = T, row.names = F, sep = "\t", dec = ".")
 
 ########################################## Manip check ############################################
-# rhat(ModelFit)
+cor.test(d$zw, d$zOSPAN)
 
+cor.test(d$w[d$dCorti>median(d$dCorti)], d$OSPAN[d$dCorti>median(d$dCorti)])
+cor.test(d$w[d$dCorti<median(d$dCorti)], d$OSPAN[d$dCorti<median(d$dCorti)])
+
+cor.test(d$w[d$dCortiM>median(d$dCortiM)], d$OSPAN[d$dCortiM>median(d$dCortiM)])
+cor.test(d$w[d$dCortiM<median(d$dCortiM)], d$OSPAN[d$dCortiM<median(d$dCortiM)])
+
+cor.test(d$w[d$OSPAN>median(d$OSPAN)], d$dCorti[d$OSPAN>median(d$OSPAN)])
+cor.test(d$w[d$OSPAN<median(d$OSPAN)], d$dCorti[d$OSPAN<median(d$OSPAN)])
+
+cor.test(d$w[d$OSPAN>median(d$OSPAN)], d$dCortiM[d$OSPAN>median(d$OSPAN)])
+cor.test(d$w[d$OSPAN<median(d$OSPAN)], d$dCortiM[d$OSPAN<median(d$OSPAN)])
+
+t.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])#, alternative = "less")
+wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
+
+summary(lm(zw ~ zOSPAN + zdCorti + zOSPANxdCorti, data = d))
+summary(lm(zw ~ zOSPAN + zdCortiM + zOSPANxdCortiM, data = d))
+
+
+
+cor.test(d$w, d$dCorti)
+cor.test(d$w, d$dCortiM)
+
+summary(lm(w ~ OSPAN*dCorti*SampleC, data = d))
+summary(lm(w ~ OSPAN*dCortiM*SampleC, data = d))
+
+summary(lm(w ~ Raven*dCortiM, data = d))
+summary(lm(w ~ Raven*dCortiM*SampleC, data = d))
+
+
+# rhat(ModelFit)
 t.test(d$w[d$Sample == "Gambler"], d$w[d$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(d$w[d$Sample == "Gambler"], d$w[d$Sample != "Gambler"])
 
@@ -199,18 +242,15 @@ wilcox.test(d$w[d$Sample == "Gambler" & d$Water == 1],
 
 cor.test(d$w, d$OSPAN)
 cor.test(d$w[d$StressGr == "NotStressed"], d$OSPAN[d$StressGr == "NotStressed"])
+cor.test(d$w[d$StressGr == "Stressed"], d$OSPAN[d$StressGr == "Stressed"])
+
 cor.test(d$w, d$Raven)
 summary(lm(w ~ OSPAN, data = d))
-summary(lm(w ~ OSPAN*dCorti, data = d))
-summary(lm(w ~ OSPAN*dCorti*SampleC, data = d))
-
-summary(lm(w ~ Raven*dCorti, data = d))
-summary(lm(w ~ Raven*dCorti*SampleC, data = d))
 
 summary(lm(w ~ OSPAN + Raven, data = d))
 
 # summary(lm(OSPAN ~ SampleC + Raven, data = d))
-summary(lm(w ~ SampleC + OSPAN + dCorti, data = d))
+summary(lm(w ~ SampleC + OSPAN + dCortiM, data = d))
 t.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
 

@@ -8,7 +8,7 @@ Test = 0
 # Participant who were instructed to press left for correct and right for false
 NSInverseOspan = c(122, 126, 128, 129, 134, 135, 138, 139, 140, 142,
                    124, 121, 136, 144, 114, 130, 220)
-Criterion = 0.66666
+Criterion = 0
 
 ############################################ Frame ################################################
 if (Test != 0){
@@ -136,9 +136,9 @@ for (i in unique(d$NS)){
   dt <- WordClean(dt) # Word = NA for calcul, remove accents and strange symbols
   dt$WordResp[dt$WordResp == " "] <- "NoResp"  # Code forgotten words
   dt$WordResp[dt$WordResp == "byciclette"] <- "bicyclette"
-  dt$WordResp[dt$WordResp == "voix"] <- "voie"
-  dt$WordResp[dt$WordResp == "cris"] <- "cri"
-  dt$WordResp[dt$WordResp == "crie"] <- "cri"
+  # dt$WordResp[dt$WordResp == "voix"] <- "voie"
+  # dt$WordResp[dt$WordResp == "cris"] <- "cri"
+  # dt$WordResp[dt$WordResp == "crie"] <- "cri"
   
   dt <- WordRespCol(dt) # Create a col with the word written
   dt <- CorrectWord(dt) # Check if the word is correct
@@ -173,12 +173,20 @@ for (i in unique(d$NS)) {
 
 d$CalcOK[d$Acc >= Criterion] <- 1
 
-d$nWordAcc[d$CalcOK==0] <- 0
+# d$nWordAcc[d$CalcOK==0] <- 0
 
-dOspan <- d%>%
-  filter(CalcOK == 1)%>%
+##### Scoring
+# dOspan <- d%>%   # Original
+#   filter(CalcOK == 1)%>%
+#   group_by(NS)%>%
+#   summarise(nWord = sum(nWordAcc, na.rm = T), RT = mean(RT, na.rm = T))%>%
+#   rename(subjID = NS)
+
+dOspan <- d%>% # PCU (Unsworth, 2005)
+  # filter(CalcOK == 1)%>%
+  mutate(Prop = nWordAcc/nTrial)%>%
   group_by(NS)%>%
-  summarise(nWord = mean(nWordAcc, na.rm = T), RT = mean(RT, na.rm = T))%>%
+  summarise(nWord = mean(Prop, na.rm = T), RT = mean(RT, na.rm = T))%>%
   rename(subjID = NS)
 
 dOspan$nWord[dOspan$subjID %in% NSunfinished] <- NA
