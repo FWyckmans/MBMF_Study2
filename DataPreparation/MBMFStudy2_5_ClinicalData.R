@@ -187,6 +187,10 @@ dClin$StressGrSRM[dClin$StressGrSRM == -1] <- "NotStressed"
 dClin$StressGrSRM[dClin$StressGrSRM == 1] <- "Stressed"
 dClin$StressGrSRM <- as.factor(dClin$StressGrSRM)
 
+##### Create Smoker Grp
+dClin <- AddDummyCol(dClin, "Smoker", 0)
+dClin$Smoker[dClin$Fagerstrom >= 0] <- 1
+
 ############################################# Export ##############################################
 # Create dFinal where we only keep participant who did OK at DAW task AND get their Cortisol analyses
 dOKAlc <- dClin%>%
