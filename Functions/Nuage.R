@@ -1,7 +1,8 @@
 Nuage <- function(d, NameSave, VIname, VDname, VI, VD,
                   VImin = 0, VImax = 0,
                   VDmin = 0, VDmax = 0,
-                  EqX = 0, EqY = 0) {
+                  EqX = 0, EqY = 0, EqCol = "Black", EqAngle = 0,
+                  Title = "", SE = F) {
   
   if (VDmin == 0){
     VDmin = min(VD, na.rm = T)}
@@ -29,14 +30,19 @@ Nuage <- function(d, NameSave, VIname, VDname, VI, VD,
   
   Plot <- ggplot(d, aes(x = VI, y = VD)) +
     geom_point() +
-    geom_smooth(method=lm, se=F) +
+    geom_smooth(method=lm, se=SE, fullrange = T) +
     theme_classic() +
     xlab(VIname) +
     ylab(VDname) +
-    xlim(VImin, VImax) +
-    ylim(VDmin, VDmax) +
+    # xlim(VImin, VImax) +
+    # ylim(VDmin, VDmax) +
+    coord_cartesian(xlim=c(VImin,VImax), ylim=c(VDmin,VDmax)) +
     
-    geom_text(x = EqX, y = EqY, label = Eq)
+    # geom_text(x = EqX, y = EqY, label = Eq) +
+    annotate(geom = "text", x = EqX, y = EqY, label = Eq, color = EqCol,
+             angle = EqAngle) +
+    
+    labs(title = Title)
   ggsave(NameSave, dpi=300)
   Plot
 }
