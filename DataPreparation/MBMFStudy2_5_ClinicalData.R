@@ -157,7 +157,7 @@ dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGr == -1))] <- "A_N
 dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == 1))] <- "HC_Str"
 dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == -1))] <- "HC_NoStr"
 
-dT <- dClin[c("NS", "FinalCondition", "dCorti", "Corti2", "Corti3")]
+# dT <- dClin[c("NS", "FinalCondition", "Corti", "Corti2", "Corti3")]
 
 ##### Simplified analyses DV
 dClin <- dClin%>%

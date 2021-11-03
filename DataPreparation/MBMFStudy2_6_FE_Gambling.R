@@ -75,8 +75,12 @@ d$CrtB4 <- d$Corti4 - d$Corti1
 d <- AddDummyCol(d, c("CrtBM12", "CrtBM34", "dCrtBM", "CrtB32_2", "dCrtB32"))
 
 # Like OR (difference between the means)
-d$CrtBM12 <- (d$CrtB1+d$CrtB2)/2
-d$CrtBM34 <- (d$CrtB3+d$CrtB4)/2
+d$CrtM12 <- (d$Corti1+d$Corti2)/2
+d$CrtM34 <- (d$Corti3+d$Corti4)/2
+d$dCrtM <- d$CrtM34 - d$CrtM12
+
+d$CrtBM12 <- 0
+d$CrtBM34 <- d$CrtM34 - d$CrtM12
 d$dCrtBM <- d$CrtBM34 - d$CrtBM12
 
 # Other test (only keep T2 and T3)
@@ -100,6 +104,10 @@ d$CrtB3 <- log10(d$CrtB3 + 1)
 d$CrtB4 <- log10(d$CrtB4 + 1)
 
 # Composite scores
+d$CrtM12 <- log10(d$CrtM12 + 1)
+d$CrtM34 <- log10(d$CrtM34 + 1)
+d$dCrtM <- log10(d$dCrtM + 1)
+
 d$CrtBM12 <- log10(d$CrtBM12 + 1)
 d$CrtBM34 <- log10(d$CrtBM34 + 1)
 d$dCrtBM <- log10(d$dCrtBM + 1)
@@ -136,8 +144,7 @@ d <- d%>%
          OSPANxdCrtB32 = OSPAN * dCrtB32,  # OSPAN*dCortiM
          GrpxdCrtB32 = SampleC * dCrtB32,
          GrpxRavenxdCrtB32 = SampleC*Raven*dCrtB32,
-         GrpxOSPANxdCrtB32 = SampleC*OSPAN*dCrtB32
-         )  
+         GrpxOSPANxdCrtB32 = SampleC*OSPAN*dCrtB32)  
 
 ########## Add test computations
 AdditionnalDF <- list(dCompParameter)
@@ -180,6 +187,7 @@ write.table(d, paste0(Output_path, OutputName), col.names = T, row.names = F, se
 
 ########################################## Manip check ############################################
 cor.test(d$zw, d$zOSPAN)
+cor.test(d$zw, d$zRaven)
 
 cor.test(d$w[d$dCorti>median(d$dCorti)], d$OSPAN[d$dCorti>median(d$dCorti)])
 cor.test(d$w[d$dCorti<median(d$dCorti)], d$OSPAN[d$dCorti<median(d$dCorti)])
@@ -198,8 +206,6 @@ wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
 
 summary(lm(zw ~ zOSPAN + zdCorti + zOSPANxdCorti, data = d))
 summary(lm(zw ~ zOSPAN + zdCortiM + zOSPANxdCortiM, data = d))
-
-
 
 cor.test(d$w, d$dCorti)
 cor.test(d$w, d$dCortiM)
@@ -238,7 +244,6 @@ t.test(d$w[d$Sample == "Gambler" & d$Water == 1],
 
 wilcox.test(d$w[d$Sample == "Gambler" & d$Water == 1],
             d$w[d$Sample != "Gambler" & d$Water == 1])
-
 
 cor.test(d$w, d$OSPAN)
 cor.test(d$w[d$StressGr == "NotStressed"], d$OSPAN[d$StressGr == "NotStressed"])

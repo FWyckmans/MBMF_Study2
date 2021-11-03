@@ -15,12 +15,24 @@ Gt <- sum(dTot$Sample=="Gambler")
 HCt <- sum(dTot$Sample=="HC")
 Tott <- length(dTot$Sample)
 
+sum(dTot$Sample == "Gambler" & dTot$Water == 1)
+sum(dTot$Sample == "Gambler" & dTot$Water == -1)
+
+sum(dTot$Sample == "HC" & dTot$Water == 1)
+sum(dTot$Sample == "HC" & dTot$Water == -1)
+
 dTot <- filter(dTot, OKd == 1)
 
 Aokd <- sum(dTot$Sample=="Alc")
 Gokd <- sum(dTot$Sample=="Gambler")
 HCokd <- sum(dTot$Sample=="HC")
 Totokd <- length(dTot$Sample)
+
+sum(dTot$Sample == "Gambler" & dTot$Water == 1)
+sum(dTot$Sample == "Gambler" & dTot$Water == -1)
+
+sum(dTot$Sample == "HC" & dTot$Water == 1)
+sum(dTot$Sample == "HC" & dTot$Water == -1)
 
 dTot <- filter(dTot, OKCort != 0)
 
@@ -78,3 +90,12 @@ Mat <- matrix(c(a, c, e, j, b, d, f, k, g, h, i, l), ncol = 3)
 colnames(Mat) <- c("Non stressé", "Stressé", "Total")
 rownames(Mat) <- c("Gambler", "Alcoolique", "Controle", "Total")
 Mat
+
+sum(dTot$Sample == "Gambler" & dTot$Water == 1)
+sum(dTot$Sample == "Gambler" & dTot$Water == -1)
+
+sum(dTot$Sample == "HC" & dTot$Water == 1)
+sum(dTot$Sample == "HC" & dTot$Water == -1)
+
+dMod <- filter(dTot, Sample != "Alc")
+dMod <- dMod[c("NS", "Sample", "Water", "dCortiM", "dCorti")]
