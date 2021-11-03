@@ -51,7 +51,8 @@ CortGraph <- ggplot(dGCB, aes(x = Time, y = LogCortisol, group = Water)) +
   geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank())
+  theme(axis.title.x=element_blank()) +
+  guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "CrtB1234.tiff"), dpi = 300)
 
@@ -77,9 +78,9 @@ dGCBMd$n[dGCBMd$Water == 1] <- length(d$subjID[d$Water == 1])
 dGCBMd$n[dGCBMd$Water == -1] <- length(d$subjID[d$Water == -1])
 
 dGCBMd <- mutate(dGCBMd, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
-# dGCBMd$SE[dGCBMd$Time == "Before"] <- NA
-# dGCBMd$EBmin[dGCBMd$Time == "Before"] <- NA
-# dGCBMd$EBmax[dGCBMd$Time == "Before"] <- NA
+dGCBMd$SE[dGCBMd$Time == "Before"] <- NA
+dGCBMd$EBmin[dGCBMd$Time == "Before"] <- NA
+dGCBMd$EBmax[dGCBMd$Time == "Before"] <- NA
 
 # Rename for convenience
 dGCBMd$Water[dGCBMd$Water == 1] <- "WPT"
@@ -94,7 +95,8 @@ CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
   geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank())
+  theme(axis.title.x=element_blank()) +
+  guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "CrtBM1234.tiff"), dpi = 300)
 
@@ -137,7 +139,8 @@ CortGraph <- ggplot(dGCBM, aes(x = Time, y = LogCortisol, group = Water)) +
   geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank())
+  theme(axis.title.x=element_blank()) +
+  guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "CrtB23.tiff"), dpi = 300)
 
@@ -183,7 +186,8 @@ CortGraph <- ggplot(dGCBM234, aes(x = Time, y = LogCortisol, group = Water)) +
   geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank())
+  theme(axis.title.x=element_blank()) +
+  guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "CrtB234.tiff"), dpi = 300)
 
@@ -199,3 +203,97 @@ ggsave(paste0(Graphic_path, "CrtB234.tiff"), dpi = 300)
 #   geom_text(x = EqX, y = EqY, label = Eq)
 # ggsave(NameSave, dpi=300)
 # Plot
+
+##### Cortisol mean(T1B_T2B) and mean(T3B_T4B) only HC
+dHC <- filter(d, SampleC == 1)
+
+# Prepare Frame
+dGCBMd <- dHC%>%
+  select(NS, Water, SampleC, CrtBM12, CrtBM34)%>%
+  group_by(Water)%>%
+  summarise(CrtBBeforePTM = mean(CrtBM12), CrtBBeforePTsd = sd(CrtBM12),
+            CrtBAfterPTM = mean(CrtBM34), CrtBAfterPTsd = sd(CrtBM34))%>%
+  unite("Before", CrtBBeforePTM:CrtBBeforePTsd, sep = "_")%>%
+  unite("After", CrtBAfterPTM:CrtBAfterPTsd, sep = "_")%>%
+  gather(key = "Time", value = "Mean_SD", Before:After)%>%
+  separate("Mean_SD", c("LogCortisol", "sd"), sep = "_")
+
+dGCBMd$LogCortisol <- as.numeric(dGCBMd$LogCortisol)
+dGCBMd$sd <- as.numeric(dGCBMd$sd)
+
+# Compute SE
+dGCBMd <- AddDummyCol(dGCBMd, "n")
+
+dGCBMd$n[dGCBMd$Water == 1] <- length(d$subjID[d$Water == 1])
+dGCBMd$n[dGCBMd$Water == -1] <- length(d$subjID[d$Water == -1])
+
+dGCBMd <- mutate(dGCBMd, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
+dGCBMd$SE[dGCBMd$Time == "Before"] <- NA
+dGCBMd$EBmin[dGCBMd$Time == "Before"] <- NA
+dGCBMd$EBmax[dGCBMd$Time == "Before"] <- NA
+
+# Rename for convenience
+dGCBMd$Water[dGCBMd$Water == 1] <- "WPT"
+dGCBMd$Water[dGCBMd$Water == -1] <- "CPT"
+
+#Re-order Time
+dGCBMd$Time <- factor(dGCBMd$Time, levels = c("Before", "After"))
+
+# Graphic
+CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
+  geom_line(aes(colour = Water),size = 1) +
+  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
+  theme_classic() +
+  ylab("Log Cortisol (nmol/ml)") +
+  theme(axis.title.x=element_blank()) +
+  guides(col=guide_legend("Procedure")) +
+  labs(title = "HC")
+CortGraph
+ggsave(paste0(Graphic_path, "CrtBM1234HC.tiff"), dpi = 300)
+
+##### Cortisol mean(T1B_T2B) and mean(T3B_T4B) only HC
+dPG <- filter(d, SampleC == -1)
+
+# Prepare Frame
+dGCBMd <- dPG%>%
+  select(NS, Water, SampleC, CrtBM12, CrtBM34)%>%
+  group_by(Water)%>%
+  summarise(CrtBBeforePTM = mean(CrtBM12), CrtBBeforePTsd = sd(CrtBM12),
+            CrtBAfterPTM = mean(CrtBM34), CrtBAfterPTsd = sd(CrtBM34))%>%
+  unite("Before", CrtBBeforePTM:CrtBBeforePTsd, sep = "_")%>%
+  unite("After", CrtBAfterPTM:CrtBAfterPTsd, sep = "_")%>%
+  gather(key = "Time", value = "Mean_SD", Before:After)%>%
+  separate("Mean_SD", c("LogCortisol", "sd"), sep = "_")
+
+dGCBMd$LogCortisol <- as.numeric(dGCBMd$LogCortisol)
+dGCBMd$sd <- as.numeric(dGCBMd$sd)
+
+# Compute SE
+dGCBMd <- AddDummyCol(dGCBMd, "n")
+
+dGCBMd$n[dGCBMd$Water == 1] <- length(d$subjID[d$Water == 1])
+dGCBMd$n[dGCBMd$Water == -1] <- length(d$subjID[d$Water == -1])
+
+dGCBMd <- mutate(dGCBMd, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
+dGCBMd$SE[dGCBMd$Time == "Before"] <- NA
+dGCBMd$EBmin[dGCBMd$Time == "Before"] <- NA
+dGCBMd$EBmax[dGCBMd$Time == "Before"] <- NA
+
+# Rename for convenience
+dGCBMd$Water[dGCBMd$Water == 1] <- "WPT"
+dGCBMd$Water[dGCBMd$Water == -1] <- "CPT"
+
+#Re-order Time
+dGCBMd$Time <- factor(dGCBMd$Time, levels = c("Before", "After"))
+
+# Graphic
+CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
+  geom_line(aes(colour = Water),size = 1) +
+  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
+  theme_classic() +
+  ylab("Log Cortisol (nmol/ml)") +
+  theme(axis.title.x=element_blank()) +
+  guides(col=guide_legend("Procedure")) +
+  labs(title = "PG")
+CortGraph
+ggsave(paste0(Graphic_path, "CrtBM1234PG.tiff"), dpi = 300)
