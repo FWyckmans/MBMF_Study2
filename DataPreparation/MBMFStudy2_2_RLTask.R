@@ -19,6 +19,7 @@ if (Test == 0){
   d <- data.frame()
   for (f in listeFichiers){
     s <- read.delim(paste0(Datapath, f), header=FALSE, stringsAsFactors=FALSE)
+    # print(f)
     d <- rbind(d, s)}}
 
 d <- d%>%
