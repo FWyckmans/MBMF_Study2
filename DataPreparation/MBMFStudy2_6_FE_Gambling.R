@@ -62,6 +62,10 @@ if (OSPANImputer == "RavenSample"){
   }
 }
 
+######### OSPAN group
+d <- AddDummyCol(d, "OSPANgr", -1)
+d$OSPANgr[d$OSPAN>=median(d$OSPAN, na.rm = T)] <- 1
+
 ########## Stress Response Baseline
 ##### Compute baseline
 ## For single measures
@@ -157,7 +161,7 @@ for (i in 1:length(AdditionnalDF)) {
 }
 
 ########## zScores
-ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w",
+ScaleToDo <- list(CoI = c("SRRS", "MFsw", "MBsw", "MBURsw", "w",
                           "RewRT1", "UnRewRT1", "CommonRT2", "RareRT2", "dRT1", "dRT2",
                           "OSPAN", "Raven",
                           "GrpxOSPAN", "GrpxRaven",
@@ -165,7 +169,7 @@ ScaleToDo <- list(CoI = c("MFsw", "MBsw", "MBURsw", "w",
                           "dCortiM", "RavenxdCortiM", "OSPANxdCortiM", "GrpxdCortiM", "GrpxRavenxdCortiM", "GrpxOSPANxdCortiM",
                           "dCrtBM", "RavenxdCrtBM", "OSPANxdCrtBM", "GrpxdCrtBM", "GrpxRavenxdCrtBM", "GrpxOSPANxdCrtBM",
                           "dCrtB32", "RavenxdCrtB32", "OSPANxdCrtB32", "GrpxdCrtB32", "GrpxRavenxdCrtB32", "GrpxOSPANxdCrtB32"),
-                  NewCol = c("zMF", "zMB", "zMBUR", "zw",
+                  NewCol = c("zSRRS", "zMF", "zMB", "zMBUR", "zw",
                              "zRewRT1", "zUnRewRT1", "zCommonRT2", "zRareRT2", "zdRT1", "zdRT2",
                              "zOSPAN", "zRaven",
                              "zGrpxOSPAN", "zGrpxRaven",
@@ -211,7 +215,7 @@ cor.test(d$w, d$dCorti)
 cor.test(d$w, d$dCortiM)
 
 summary(lm(w ~ OSPAN*dCorti*SampleC, data = d))
-summary(lm(w ~ OSPAN*dCortiM*SampleC, data = d))
+summary(lm(zw ~ zOSPAN*zdCortiM*SampleC, data = d))
 
 summary(lm(w ~ Raven*dCortiM, data = d))
 summary(lm(w ~ Raven*dCortiM*SampleC, data = d))
