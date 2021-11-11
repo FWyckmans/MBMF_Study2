@@ -125,9 +125,12 @@ dClin$PG3[dClin$Sample == "Alc"] <- NA
 
 # Alc 3 groups
 dClin$Alc3 <- 1
-dClin$Alc3[dClin$AUDIT>=12] <- 0
-dClin$Alc3[dClin$AUDIT >= 16] <- -1
-dClin$Alc3[dClin$Sample == "Gambler"] <- NA
+dClin$Alc3[dClin$AUDIT >= 12] <- -1
+# dClin$Alc3[dClin$AUDIT >= 16] <- -1
+
+dClin$PGAlc <- 1
+dClin$PGAlc[dClin$SampleC == -1] <- -1
+dClin$PGAlc[dClin$Alc3 == -1 & dClin$SampleC == -1] <- -1
 
 ########## Indicate if the participant was stressed (1) or not (-1)
 ##### With Cortisol
