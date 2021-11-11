@@ -5,7 +5,7 @@ source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
 Graphic_path = "Graphics/Graph/"
-multEB = 1
+multEB = 2
 
 ############################################# Frame ###############################################
 d <- read.delim(paste0(Output_path,"dOKGamFE_Comp7P_OK_HCPG.txt"))
