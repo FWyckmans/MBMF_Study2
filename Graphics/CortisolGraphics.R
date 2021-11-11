@@ -297,3 +297,86 @@ CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
   labs(title = "PG")
 CortGraph
 ggsave(paste0(Graphic_path, "CrtBM1234PG.tiff"), dpi = 300)
+
+################### Self-reported
+##### Stress
+dSSR <- d%>%
+  select(NS, Water, SampleC, Stress2, Stress3)%>%
+  group_by(Water)%>%
+  summarise(BeforeM = mean(Stress2), Beforesd = sd(Stress2),
+            AfterM = mean(Stress3), Aftersd = sd(Stress3))%>%
+  unite("Before", BeforeM:Beforesd, sep = "_")%>%
+  unite("After", AfterM:Aftersd, sep = "_")%>%
+  gather(key = "Time", value = "Mean_SD", Before:After)%>%
+  separate("Mean_SD", c("SRStress", "sd"), sep = "_")
+
+dSSR$SRStress <- as.numeric(dSSR$SRStress)
+dSSR$sd <- as.numeric(dSSR$sd)
+
+# Compute SE
+dSSR <- AddDummyCol(dSSR, "n")
+
+dSSR$n[dSSR$Water == 1] <- length(d$subjID[d$Water == 1])
+dSSR$n[dSSR$Water == -1] <- length(d$subjID[d$Water == -1])
+
+dSSR <- mutate(dSSR, SE = (sd/(sqrt(n))), EBmin = SRStress - multEB*SE, EBmax = SRStress + multEB*SE)
+
+#Re-order Time
+dSSR$Time <- factor(dSSR$Time, levels = c("Before", "After"))
+
+# Rename for convenience
+dSSR$Water[dSSR$Water == 1] <- "WPT"
+dSSR$Water[dSSR$Water == -1] <- "CPT"
+
+# Graphic
+CortGraph <- ggplot(dSSR, aes(x = Time, y = SRStress, group = Water)) +
+  geom_line(aes(colour = Water),size = 1) +
+  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
+  theme_classic() +
+  ylab("Self-reported Stress (/10)") +
+  theme(axis.title.x=element_blank()) +
+  guides(col=guide_legend("Procedure"))
+CortGraph
+ggsave(paste0(Graphic_path, "SRStress.tiff"), dpi = 300)
+
+
+################### Self-reported
+##### Pain
+dSSR <- d%>%
+  select(NS, Water, SampleC, Pain2, Pain3)%>%
+  group_by(Water)%>%
+  summarise(BeforeM = mean(Pain2), Beforesd = sd(Pain2),
+            AfterM = mean(Pain3), Aftersd = sd(Pain3))%>%
+  unite("Before", BeforeM:Beforesd, sep = "_")%>%
+  unite("After", AfterM:Aftersd, sep = "_")%>%
+  gather(key = "Time", value = "Mean_SD", Before:After)%>%
+  separate("Mean_SD", c("SRPain", "sd"), sep = "_")
+
+dSSR$SRPain <- as.numeric(dSSR$SRPain)
+dSSR$sd <- as.numeric(dSSR$sd)
+
+# Compute SE
+dSSR <- AddDummyCol(dSSR, "n")
+
+dSSR$n[dSSR$Water == 1] <- length(d$subjID[d$Water == 1])
+dSSR$n[dSSR$Water == -1] <- length(d$subjID[d$Water == -1])
+
+dSSR <- mutate(dSSR, SE = (sd/(sqrt(n))), EBmin = SRPain - multEB*SE, EBmax = SRPain + multEB*SE)
+
+#Re-order Time
+dSSR$Time <- factor(dSSR$Time, levels = c("Before", "After"))
+
+# Rename for convenience
+dSSR$Water[dSSR$Water == 1] <- "WPT"
+dSSR$Water[dSSR$Water == -1] <- "CPT"
+
+# Graphic
+CortGraph <- ggplot(dSSR, aes(x = Time, y = SRPain, group = Water)) +
+  geom_line(aes(colour = Water),size = 1) +
+  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
+  theme_classic() +
+  ylab("Self-reported Pain (/10)") +
+  theme(axis.title.x=element_blank()) +
+  guides(col=guide_legend("Procedure"))
+CortGraph
+ggsave(paste0(Graphic_path, "SRPain.tiff"), dpi = 300)
