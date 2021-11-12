@@ -66,6 +66,9 @@ if (OSPANImputer == "RavenSample"){
 d <- AddDummyCol(d, "OSPANgr", -1)
 d$OSPANgr[d$OSPAN>=median(d$OSPAN, na.rm = T)] <- 1
 
+########## Correct study Level
+d$StudyLevel[d$StudyLevel == 0] <- NA
+
 ########## Stress Response Baseline
 ##### Compute baseline
 ## For single measures
@@ -262,6 +265,7 @@ summary(lm(w ~ OSPAN + Raven, data = d))
 summary(lm(w ~ SampleC + OSPAN + dCortiM, data = d))
 t.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
+
 
 ##### LASSO regression
 # Fit the LASSO model (Lasso: Alpha = 1)
