@@ -52,3 +52,4 @@ gHCS <- ClassicGraph(dHCS, dHCS$RewTrans, dHCS$Proba, dHCS$ymin, dHCS$ymax, Titl
 # Multiple plots in one
 g <- plot_grid(gPGU, gPGS, gHCU, gHCS, ncol = 2, labels = c("A", "B", "C", "D"))
 g
+ggsave(paste0(Graphic_path, "ClassicGraph.tiff"), dpi = 300)
