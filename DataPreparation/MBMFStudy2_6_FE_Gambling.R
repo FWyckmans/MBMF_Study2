@@ -69,6 +69,10 @@ d$OSPANgr[d$OSPAN>=median(d$OSPAN, na.rm = T)] <- 1
 ########## Correct study Level
 d$StudyLevel[d$StudyLevel == 0] <- NA
 
+########## Change Stress Grp to coded
+d$StressGrM[d$StressGrM == "Stressed"] <- -1
+d$StressGrM[d$StressGrM == "NotStressed"] <- 1
+
 ########## Stress Response Baseline
 ##### Compute baseline
 ## For single measures
