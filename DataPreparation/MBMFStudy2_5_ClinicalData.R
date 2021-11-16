@@ -129,7 +129,7 @@ dClin$Alc3[dClin$AUDIT >= 12] <- -1
 # dClin$Alc3[dClin$AUDIT >= 16] <- -1
 
 dClin$PGAlc <- 1
-dClin$PGAlc[dClin$SampleC == -1] <- -1
+dClin$PGAlc[dClin$SampleC == -1] <- 0
 dClin$PGAlc[dClin$Alc3 == -1 & dClin$SampleC == -1] <- -1
 
 ########## Indicate if the participant was stressed (1) or not (-1)
@@ -151,14 +151,14 @@ dClin$StressGrSRM[is.na(dClin$dStressM)] <- NA
 
 ##### Final stress group
 # dClin$FinalCondition[((dClin$Sample == i) & (dClin[x] == 1)] <- ""
-dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == 1))] <- "G_Str"
-dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGr == -1))] <- "G_NoStr"
+dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGrM == 1))] <- "G_Str"
+dClin$FinalCondition[((dClin$Sample == "Gambler") & (dClin$StressGrM == -1))] <- "G_NoStr"
 
-dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGr == 1))] <- "A_Str"
-dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGr == -1))] <- "A_NoStr"
+dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGrM == 1))] <- "A_Str"
+dClin$FinalCondition[((dClin$Sample == "Alc") & (dClin$StressGrM == -1))] <- "A_NoStr"
 
-dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == 1))] <- "HC_Str"
-dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGr == -1))] <- "HC_NoStr"
+dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGrM == 1))] <- "HC_Str"
+dClin$FinalCondition[((dClin$Sample == "HC") & (dClin$StressGrM == -1))] <- "HC_NoStr"
 
 # dT <- dClin[c("NS", "FinalCondition", "Corti", "Corti2", "Corti3")]
 
