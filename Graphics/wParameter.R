@@ -30,16 +30,22 @@ dg <- mutate(dg, SE = wSD/sqrt(n), ymin = wM - multEB*SE, ymax = wM + multEB*SE)
 dg$Group <- factor(dg$Group,
                    levels = c("Gambler Not Stressed", "Gambler Stressed", "HC Not Stressed", "HC Stressed"))
 
-g <- ggplot(dg, aes(x = Group, y = wM)) +
-  geom_bar(stat = "identity") +
+g <- ggplot(dg, aes(x = Group, y = wM, fill = Group)) +
+  geom_bar(stat = "identity", color="black") +
   geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2) +
+  
   # Title
   # ggtitle(Title) +
+  
   # Axis
   ylab("w-parameter") +
   # ylim(0, 1) +
-  scale_y_continuous(limits=c(0.2, 0.6), oob = rescale_none) +
+  scale_y_continuous(limits=c(0.3, 0.6), oob = rescale_none) +
+  
+  # Theme
   theme_classic() +
+  scale_fill_manual(values=c("blue3", "blue3", "gray80", "gray80")) +
+  theme(legend.title = element_blank(), legend.position = "none") +
   theme(plot.title = element_text(),
         axis.title.x = element_blank(),
         axis.title.y = element_text(size = 12))

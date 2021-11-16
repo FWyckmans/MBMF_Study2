@@ -12,6 +12,9 @@ d <- read.delim(paste0(Output_path,"dOKGamFE_Comp7P_OK_HCPG.txt"))
 
 dt <- d[c("NS", "Sample", "StressGrM", "OSPANgr", "PRCw", "PRRw", "PUCw", "PURw")]
 
+dt$StressGrM[dt$StressGrM == 1] <- "NotStressed"
+dt$StressGrM[dt$StressGrM == -1] <- "Stressed"
+
 dLong <- dt%>%
   gather(key = "RewTrans", value = "Prob", PRCw:PURw)%>%
   group_by(Sample, StressGrM, RewTrans)%>%
@@ -20,10 +23,10 @@ dLong <- dt%>%
   unite("Group", c(Sample:StressGrM), sep = "_")
 
 dLong <- AddDummyCol(dLong, "n")
-dLong$n[dLong$Group=="Gambler_NotStressed"] <- length(d$NS[d$SampleC == -1 & d$StressGrM == "NotStressed"])
-dLong$n[dLong$Group=="Gambler_Stressed"] <- length(d$NS[d$SampleC == -1 & d$StressGrM == "Stressed"])
-dLong$n[dLong$Group=="HC_NotStressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == "NotStressed"])
-dLong$n[dLong$Group=="HC_Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == "Stressed"])
+dLong$n[dLong$Group=="Gambler_NotStressed"] <- length(d$NS[d$SampleC == -1 & d$StressGrM == 1])
+dLong$n[dLong$Group=="Gambler_Stressed"] <- length(d$NS[d$SampleC == -1 & d$StressGrM == -1])
+dLong$n[dLong$Group=="HC_NotStressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == 1])
+dLong$n[dLong$Group=="HC_Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1])
 
 dLong <- mutate(dLong, SE = ProbaSD/sqrt(n),
                 ymin = Proba - multEB*SE, ymax = Proba + multEB*SE)
