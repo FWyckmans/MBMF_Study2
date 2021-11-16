@@ -38,7 +38,7 @@ g <- ggplot(dg, aes(x = Group, y = wM)) +
   # Axis
   ylab("w-parameter") +
   # ylim(0, 1) +
-  # scale_y_continuous(limits=c(0.4, 1), oob = rescale_none) +
+  scale_y_continuous(limits=c(0.2, 0.6), oob = rescale_none) +
   theme_classic() +
   theme(plot.title = element_text(),
         axis.title.x = element_blank(),
