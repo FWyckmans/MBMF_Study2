@@ -47,11 +47,12 @@ dGCB$Water[dGCB$Water == -1] <- "CPT"
 
 # Graphic
 CortGraph <- ggplot(dGCB, aes(x = Time, y = LogCortisol, group = Water)) +
-  geom_line(aes(colour = Water),size = 1) +
+  geom_line(aes(colour = Water), size = 1) +
   geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
   theme(axis.title.x=element_blank()) +
+  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "CrtB1234.tiff"), dpi = 300)
@@ -96,6 +97,7 @@ CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
   theme(axis.title.x=element_blank()) +
+  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "CrtBM1234.tiff"), dpi = 300)
@@ -140,6 +142,7 @@ CortGraph <- ggplot(dGCBM, aes(x = Time, y = LogCortisol, group = Water)) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
   theme(axis.title.x=element_blank()) +
+  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "CrtB23.tiff"), dpi = 300)
@@ -187,6 +190,7 @@ CortGraph <- ggplot(dGCBM234, aes(x = Time, y = LogCortisol, group = Water)) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
   theme(axis.title.x=element_blank()) +
+  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "CrtB234.tiff"), dpi = 300)
@@ -246,6 +250,7 @@ CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
   theme(axis.title.x=element_blank()) +
+  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure")) +
   labs(title = "HC")
 CortGraph
@@ -293,6 +298,7 @@ CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
   theme_classic() +
   ylab("Log Cortisol (nmol/ml)") +
   theme(axis.title.x=element_blank()) +
+  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure")) +
   labs(title = "PG")
 CortGraph
@@ -335,6 +341,7 @@ CortGraph <- ggplot(dSSR, aes(x = Time, y = SRStress, group = Water)) +
   theme_classic() +
   ylab("Self-reported Stress (/10)") +
   theme(axis.title.x=element_blank()) +
+  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "SRStress.tiff"), dpi = 300)
@@ -377,6 +384,7 @@ CortGraph <- ggplot(dSSR, aes(x = Time, y = SRPain, group = Water)) +
   theme_classic() +
   ylab("Self-reported Pain (/10)") +
   theme(axis.title.x=element_blank()) +
+  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure"))
 CortGraph
 ggsave(paste0(Graphic_path, "SRPain.tiff"), dpi = 300)
