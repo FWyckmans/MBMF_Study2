@@ -11,8 +11,8 @@ multEB = 2
 d <- read.delim(paste0(Output_path,"dOKGamFE_Comp7P_OK_HCPG.txt"))
 
 dt <- d[c("NS", "Sample", "StressGrM", "w")]
-dt$StressGrM[dt$StressGrM == 1] <- "Stressed"
-dt$StressGrM[dt$StressGrM == -1] <- "Not Stressed"
+dt$StressGrM[dt$StressGrM == -1] <- "Stressed"
+dt$StressGrM[dt$StressGrM == 1] <- "Not Stressed"
 
 dg <- dt%>%
   unite("Group", Sample:StressGrM, sep = " ")%>%
@@ -44,4 +44,5 @@ g <- ggplot(dg, aes(x = Group, y = wM)) +
         axis.title.x = element_blank(),
         axis.title.y = element_text(size = 12))
 
+ggsave(paste0(Graphic_path, "wParameterByGroup.tiff"), dpi=300)
 g
