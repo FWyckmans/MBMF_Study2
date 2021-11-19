@@ -63,8 +63,17 @@ OutliersModif <- function(d, Columns, Groups = F, Within = F, Proxy = "MAD", mul
           max = Mdn + mult*SD
         }
         
-        vect[vect<min] = as
-        vect[vect>max] = as
+        # Replace
+        if (is.na(as)) {
+          vect[vect<min] = as
+          vect[vect>max] = as
+        } else {
+          if (as == "MinMax"){
+            vect[vect<min] = min
+            vect[vect>max] = max
+          }
+        }
+        
         dTemp[,i] <- vect
       }
       # # Print outliers
