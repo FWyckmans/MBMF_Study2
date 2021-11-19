@@ -7,7 +7,7 @@ Output_path = "Output/"
 ## Install
 packages <- c("dplyr", "tidyr",
               "ggplot2", "gridExtra", "cowplot", "corrplot", "scales",
-              "nlme", "lmerTest", "BayesFactor", "stats", "glmnet",
+              "nlme", "lmerTest", "BayesFactor", "stats", "glmnet", "interactions", "emmeans",
               "car", "readxl", "readr", "Hmisc", "rms", "ISLR", "e1071", "stringr", "writexl",
               "hBayesDM", "FactoMineR", "factoextra")
 
@@ -33,6 +33,8 @@ library(stats)
 library(FactoMineR)
 library(factoextra)
 library(glmnet) # Lasso selection
+library(interactions)
+library(emmeans)
 
 ## Misc (or don't remember and imported anyway)
 library(car)
