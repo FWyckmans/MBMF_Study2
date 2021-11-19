@@ -40,7 +40,7 @@ dClin$SampleC <- -1
 dClin$SampleC[dClin$Sample == "HC"] <- 1
 
 ##### Compute Water Group
-dClin <- AddDummyCol(dClin, "Water", Val = 1)
+dClin <- AddDummyCol(dClin, c("Water", "BaselineGr"), Val = 1)
 dClin$Water[dClin$Condition == "HC_CPT"] <- -1
 dClin$Water[dClin$Condition == "G_CPT"] <- -1
 dClin$Water[dClin$Condition == "A_CPT"] <- -1
@@ -54,7 +54,7 @@ dClin <- dClin%>%
          dCorti = Analyse_3-Analyse_2, dCortiM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
   select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
-         FinalCondition, Condition, Sample, SampleC, Water, OKCort, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
+         FinalCondition, Condition, Sample, SampleC, Water, BaselineGr, OKCort, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
          AUDIT, DSMal, SOGS, DSM, Craving,
          
          dCraving, dResist, dStress, dPain, dCorti,
@@ -87,7 +87,7 @@ ToAdd = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda",
 dClin <- AddDummyCol(dClin, ToAdd)
 
 ########## Other frames
-dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
+# dComputationParameter <- read.delim(paste0(Output_path, "ComputationParameter.txt"))
 dOspan <- read.delim(paste0(Output_path, "dOspan.txt"))%>%
   rename(OSPAN = nWord)
 dRegLogInd <- read.delim(paste0(Output_path, "dRegLogIndLarge.txt"))
@@ -97,8 +97,11 @@ dProbaD <- read.table(paste0(Datapath, "/DataFromORScript/choice_probs.dat"))%>%
 dRT <- read.delim(paste0(Output_path, "dRT.txt"), sep = "\t")
 
 ########## Add all these columns to dClin and creation of the complete DF
-AdditionnalDF <- list(dComputationParameter, dOspan, dRegLogInd, dProba, dProbaD, dRT)
-ToFillbyDF <- list(dCP = colnames(dComputationParameter)[-1],
+# AdditionnalDF <- list(dComputationParameter, dOspan, dRegLogInd, dProba, dProbaD, dRT)
+AdditionnalDF <- list(dOspan, dRegLogInd, dProba, dProbaD, dRT)
+
+ToFillbyDF <- list(
+  # dCP = colnames(dComputationParameter)[-1],
                    dOsp = colnames(dOspan)[2],
                    dRegLogInd = colnames(dRegLogInd)[-1],
                    dProba = colnames(dProba)[-1],
@@ -131,6 +134,8 @@ dClin$Alc3[dClin$AUDIT >= 12] <- -1
 dClin$PGAlc <- 1
 dClin$PGAlc[dClin$SampleC == -1] <- 0
 dClin$PGAlc[dClin$Alc3 == -1 & dClin$SampleC == -1] <- -1
+
+# Baseline Groups
 
 ########## Indicate if the participant was stressed (1) or not (-1)
 ##### With Cortisol

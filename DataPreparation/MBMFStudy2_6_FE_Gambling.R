@@ -124,6 +124,16 @@ d$CrtBM34 <- log10(d$CrtBM34 + 1)
 d$dCrtBM <- log10(d$dCrtBM + 1)
 d$dCrtB32 <- log10(d$dCrtB32 + 1)
 
+##### Compute Baseline cortisol group (cfr Biback et al. 2015)
+d$BaselineGr[d$Corti1 < median(d$Corti1)] <- -1
+
+########## LogTransform RT values to remove skew
+# d$RewRT1 <- log10(d$RewRT1 + 1)
+# d$UnRewRT1 <- log10(d$UnRewRT1 + 1)
+# 
+# d$CommonRT2 <- log10(d$CommonRT2 + 1)
+# d$RareRT2 <- log10(d$RareRT2 + 1)
+
 ########## Interaction
 d <- d%>%
   mutate(GrpxRaven = SampleC*Raven,
@@ -157,7 +167,7 @@ d <- d%>%
          GrpxRavenxdCrtB32 = SampleC*Raven*dCrtB32,
          GrpxOSPANxdCrtB32 = SampleC*OSPAN*dCrtB32)  
 
-########## Add test computations
+########## Add computations
 AdditionnalDF <- list(dCompParameter)
 ToFillbyDF <- list(dCP = colnames(dCompParameter)[-1])
 
@@ -166,6 +176,17 @@ for (i in 1:length(AdditionnalDF)) {
   ToFill <- ToFillbyDF[[i]]
   d <- FillCol(d, dt, ToFill)
 }
+
+########## MB/MF scores
+d <- d%>%
+  mutate(MBv = beta1*w, MFv = beta1*(1-w))
+
+########## Remove outliers
+d <- OutliersModif(d, c("w"), Proxy = "SD", mult = 4, as = NA)
+sum(is.na(d$w))
+
+d <- d%>%
+  filter(!is.na(w))
 
 ########## zScores
 ScaleToDo <- list(CoI = c("SRRS", "MFsw", "MBsw", "MBURsw", "w",
@@ -185,7 +206,7 @@ ScaleToDo <- list(CoI = c("SRRS", "MFsw", "MBsw", "MBURsw", "w",
                              "zdCrtBM", "zRavenxdCrtBM", "zOSPANxdCrtBM", "zGrpxdCrtBM", "zGrpxRavenxdCrtBM", "zGrpxOSPANxdCrtBM",
                              "zdCrtB32", "zRavenxdCrtB32", "zOSPANxdCrtB32", "zGrpxdCrtB32", "zGrpxRavenxdCrtB32", "zGrpxOSPANxdCrtB32"))
 
-d <- ScaleCol(d, ScaleToDo)
+d <- ScaleCol(d, ScaleToDo, "center")
 
 # Smaller df for testing
 dMod <- d[c("NS", "subjID", "Sample", "FinalCondition", "SOGS", "DSM", "AUDIT", "DSMal", "zw", "w",
@@ -200,14 +221,8 @@ write.table(d, paste0(Output_path, OutputName), col.names = T, row.names = F, se
 cor.test(d$zw, d$zOSPAN)
 cor.test(d$zw, d$zRaven)
 
-cor.test(d$w[d$dCorti>median(d$dCorti)], d$OSPAN[d$dCorti>median(d$dCorti)])
-cor.test(d$w[d$dCorti<median(d$dCorti)], d$OSPAN[d$dCorti<median(d$dCorti)])
-
 cor.test(d$w[d$dCortiM>median(d$dCortiM)], d$OSPAN[d$dCortiM>median(d$dCortiM)])
 cor.test(d$w[d$dCortiM<median(d$dCortiM)], d$OSPAN[d$dCortiM<median(d$dCortiM)])
-
-cor.test(d$w[d$OSPAN>median(d$OSPAN)], d$dCorti[d$OSPAN>median(d$OSPAN)])
-cor.test(d$w[d$OSPAN<median(d$OSPAN)], d$dCorti[d$OSPAN<median(d$OSPAN)])
 
 cor.test(d$w[d$OSPAN>median(d$OSPAN)], d$dCortiM[d$OSPAN>median(d$OSPAN)])
 cor.test(d$w[d$OSPAN<median(d$OSPAN)], d$dCortiM[d$OSPAN<median(d$OSPAN)])
@@ -215,13 +230,10 @@ cor.test(d$w[d$OSPAN<median(d$OSPAN)], d$dCortiM[d$OSPAN<median(d$OSPAN)])
 t.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])#, alternative = "less")
 wilcox.test(d$OSPAN[d$Sample == "Gambler"], d$OSPAN[d$Sample != "Gambler"])
 
-summary(lm(zw ~ zOSPAN + zdCorti + zOSPANxdCorti, data = d))
 summary(lm(zw ~ zOSPAN + zdCortiM + zOSPANxdCortiM, data = d))
 
-cor.test(d$w, d$dCorti)
 cor.test(d$w, d$dCortiM)
 
-summary(lm(w ~ OSPAN*dCorti*SampleC, data = d))
 summary(lm(zw ~ zOSPAN*zdCortiM*SampleC, data = d))
 
 summary(lm(w ~ Raven*dCortiM, data = d))
