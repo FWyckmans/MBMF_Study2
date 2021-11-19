@@ -34,6 +34,7 @@ interact_plot(mO, pred = zdCortiM, modx = zOSPAN, plot.points = T,
               x.label = "dCort (centered)",
               y.label = "w-parameter (centered)",
               legend.main = "WM score")
+ggsave(paste0(Graphic_path, "InteractPlot.tiff"), dpi = 300)
 
 # Inclusion of Raven score
 mR <- lm(zw ~ zdCortiM + SampleC + zRaven + zGrpxdCortiM + zRavenxdCortiM, data = d)
