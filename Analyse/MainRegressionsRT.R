@@ -31,7 +31,7 @@ interact_plot(mO, pred = zdCortiM, modx = zOSPAN, plot.points = T,
               x.label = "dCort (centered)",
               y.label = "w-parameter (centered)",
               legend.main = "WM score")
-ggsave(paste0(Graphic_path, "InteractPlot.tiff"), dpi = 300)
+ggsave(paste0(Graphic_path, "InteractPlotRT1.tiff"), dpi = 300)
 
 ########## dRT2
 cor.test(d$dRT2, d$zdCortiM)
@@ -39,18 +39,21 @@ cor.test(d$dRT2, d$zOSPAN)
 cor.test(d$dRT2, d$StressGrM)
 
 # Main analyses
-m1 <- lm(dRT2 ~ zdCortiM*zOSPAN, data = d)
+m1 <- lm(dRT2 ~ zdCortiM*SampleC, data = d)
 summary(m1)
 
 # Inclusion of OSPAN score
-mO <- lm(dRT2 ~ zdCortiM + SampleC + zOSPAN + zdCortiM:SampleC + zdCortiM:zOSPAN + zOSPAN:SampleC, data = d)
-summary(mO)
+mO1 <- lm(dRT2 ~ zdCortiM*zOSPAN, data = d)
+summary(mO1)
 
-anova(m1, mO)
+mO2 <- lm(dRT2 ~ zdCortiM + SampleC + zOSPAN + zdCortiM:SampleC + zdCortiM:zOSPAN + zOSPAN:SampleC, data = d)
+summary(mO2)
+
+anova(mO1, mO2)
 
 interact_plot(mO, pred = zdCortiM, modx = zOSPAN, plot.points = T,
               x.label = "dCort (centered)",
               y.label = "w-parameter (centered)",
               legend.main = "WM score")
-ggsave(paste0(Graphic_path, "InteractPlot.tiff"), dpi = 300)
+ggsave(paste0(Graphic_path, "InteractPlotRT2.tiff"), dpi = 300)
 
