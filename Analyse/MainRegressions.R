@@ -33,7 +33,8 @@ anova(m1, mO)
 interact_plot(mO, pred = zdCortiM, modx = zOSPAN, plot.points = T,
               x.label = "dCort (centered)",
               y.label = "w-parameter (centered)",
-              legend.main = "WM score")
+              legend.main = "WM score",
+              colors = "Qual1")
 ggsave(paste0(Graphic_path, "InteractPlot.tiff"), dpi = 300)
 
 # Inclusion of Raven score
