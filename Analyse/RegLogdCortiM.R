@@ -4,6 +4,7 @@ remove(list = ls())
 source("MBMFStudy2_Initialization.R")
 Datapath = "Raw_Data/"
 Output_path = "Output/"
+Redo = 0
 
 dRL <- read.csv(paste0(Datapath, "DataFromORScript/choice_regress.dat"), sep="")
 
@@ -12,14 +13,13 @@ d <- read.delim(paste0(Output_path,"dOKGamFE_Comp7P_OK_HCPG.txt"))
 dRL <- dRL%>%
   filter(subj %in% d$subjID)
 
-dRL <- AddDummyCol(dRL, c("dCorti", "SampleC", "Raven", "RavenXdCortM"))
+dRL <- AddDummyCol(dRL, c("zdCortiM", "SampleC", "zRaven", "zOSPAN"))
 
 dRLF <- data.frame()
 
 for (i in unique(dRL$subj)) {
-  print(i)
+  # print(i)
   dRLt <- filter(dRL, subj==i)
-  dRLt$zdCorti <- d$zdCorti[d$subjID == i]
   dRLt$zdCortiM <- d$zdCortiM[d$subjID == i]
   dRLt$SampleC <- d$SampleC[d$subjID == i]
   dRLt$zRaven <- d$zRaven[d$subjID == i]
@@ -33,10 +33,32 @@ dRLFR <- dRLF%>%
 dRLFUR <- dRLF%>%
   filter(mn == -1)
 
-
 ########################################## Modelisation ###########################################
+# MixLogReg <- function(SaveName, DF, Redo = 0, CogMeasure = NA){
+#   SN <- paste0(SaveName, ".Rdata")
+#   if(SN %in% dir(paste0(Output_path, "Models/")) & Redo == 0){
+#     RegLog <- readRDS(paste0(Output_path, "Models/", SN))
+#   } else {
+#     if (is.na(CogMeasure)){
+#       RegLog <- glmer(stay ~ (1+mn*common|subj) + zdCortiM*SampleC*mn*common,
+#                       family = binomial, data = dRLF, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
+#     }
+#     if (CogMeasure == "OSPAN"){
+#       RegLog <- glmer(stay ~ (1+mn*common|subj) + zdCortiM*SampleC*zOSPAN*mn*common,
+#                       family = binomial, data = dRLF, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
+#     }
+#     if (CogMeasure == "OSPAN"){
+#       RegLog <- glmer(stay ~ (1+mn*common|subj) + zdCortiM*SampleC*zRaven*mn*common,
+#                       family = binomial, data = dRLF, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
+#     }
+#     saveRDS(RegLog, file=paste0(Output_path, "Models/", SaveName, ".Rdata"))
+#   }
+#   return(RegLog)
+# }
+# summary(MixLogReg("LRMtCortiM_OK_HCPG"))
+
 ########## Total model
-if("LRMtCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
+if("LRMtCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/")) & Redo == 0){
   LRM <- readRDS(paste0(Output_path, "Models/LRMtCortiM_OK_HCPG.Rdata"))
 } else {
   LRM <- glmer(stay ~ (1+mn*common|subj) + zdCortiM*SampleC*zOSPAN*mn*common,
@@ -44,7 +66,7 @@ if("LRMtCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
   saveRDS(LRM, file=paste0(Output_path, "Models/LRMtCortiM_OK_HCPG.Rdata"))
 }
 
-if("LRMRtCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
+if("LRMRtCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/")) & Redo == 0){
   LRMR <- readRDS(paste0(Output_path, "Models/LRMRtCortiM_OK_HCPG.Rdata"))
 } else {
   LRMR <- glmer(stay ~ (1+common|subj) + zdCortiM*SampleC*zOSPAN*common,
@@ -52,7 +74,7 @@ if("LRMRtCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
   saveRDS(LRMR, file=paste0(Output_path, "Models/LRMRtCortiM_OK_HCPG.Rdata"))
 }
 
-if("LRMURtCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
+if("LRMURtCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/")) & Redo == 0){
   LRMUR <- readRDS(paste0(Output_path, "Models/LRMURtCortiM_OK_HCPG.Rdata"))
 } else {
   LRMUR <- glmer(stay ~ (1+common|subj) + zdCortiM*SampleC*zOSPAN*common,
@@ -60,97 +82,29 @@ if("LRMURtCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
   saveRDS(LRMUR, file=paste0(Output_path, "Models/LRMURtCortiM_OK_HCPG.Rdata"))
 }
 
-
-########## Partial model
-if("LRMpCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
-  LRMp <- readRDS(paste0(Output_path, "Models/LRMpCortiM_OK_HCPG.Rdata"))
+########## Without OSPAN
+if("LRM2PCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/")) & Redo == 0){
+  LRM2P <- readRDS(paste0(Output_path, "Models/LRM2PCortiM_OK_HCPG.Rdata"))
 } else {
-  LRMp <- glmer(stay ~ (1+mn*common|subj) +
-                  mn + mn:common +
-                  SampleC:mn + SampleC:mn:common +
-                  zOSPAN:mn + zOSPAN:mn:common +
-                  zdCortiM:mn + zdCortiM:mn:common +
-                  
-                  SampleC:zOSPAN:mn + SampleC:zOSPAN:mn:common +
-                  SampleC:zdCortiM:mn + SampleC:zdCortiM:mn:common +
-                  zdCortiM:zOSPAN:mn + zdCortiM:zOSPAN:mn:common +
-                  
-                  SampleC:zOSPAN:zdCortiM:mn + SampleC:zOSPAN:zdCortiM:mn:common,
-                family = binomial, data = dRLF, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
-  saveRDS(LRMp, file=paste0(Output_path, "Models/LRMpCortiM_OK_HCPG.Rdata"))
+  LRM2P <- glmer(stay ~ (1+mn*common|subj) + zdCortiM*SampleC*mn*common,
+               family = binomial, data = dRLF, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
+  saveRDS(LRM2P, file=paste0(Output_path, "Models/LRM2PCortiM_OK_HCPG.Rdata"))
 }
 
-if("LRMRpCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
-  LRMRp <- readRDS(paste0(Output_path, "Models/LRMRpCortiM_OK_HCPG.Rdata"))
+if("LRMR2PCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/")) & Redo == 0){
+  LRMR2P <- readRDS(paste0(Output_path, "Models/LRMR2PCortiM_OK_HCPG.Rdata"))
 } else {
-  LRMRp <- glmer(stay ~ (1+common|subj) +
-                   common +
-                   SampleC:common +
-                   zOSPAN:common +
-                   zdCortiM:common +
-                   
-                   SampleC:zOSPAN:common +
-                   SampleC:zdCortiM:common +
-                   zdCortiM:zOSPAN:common +
-                   
-                   SampleC:zOSPAN:zdCortiM:common,
-                 family = binomial, data = dRLFR, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
-  saveRDS(LRMRp, file=paste0(Output_path, "Models/LRMRpCortiM_OK_HCPG.Rdata"))
+  LRMR2P <- glmer(stay ~ (1+common|subj) + zdCortiM*SampleC*common,
+                family = binomial, data = dRLFR, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
+  saveRDS(LRMR2P, file=paste0(Output_path, "Models/LRMR2PCortiM_OK_HCPG.Rdata"))
 }
 
-
-if("LRMURpCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
-  LRMURp <- readRDS(paste0(Output_path, "Models/LRMURpCortiM_OK_HCPG.Rdata"))
+if("LRMUR2PCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/")) & Redo == 0){
+  LRMUR2P <- readRDS(paste0(Output_path, "Models/LRMUR2PCortiM_OK_HCPG.Rdata"))
 } else {
-  LRMURp <- glmer(stay ~ (1+common|subj) +
-                    common +
-                    SampleC:common +
-                    zOSPAN:common +
-                    zdCortiM:common +
-                    
-                    SampleC:zOSPAN:common +
-                    SampleC:zdCortiM:common +
-                    zdCortiM:zOSPAN:common +
-                    
-                    SampleC:zOSPAN:zdCortiM:common,
-                  family = binomial, data = dRLFR, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
-  saveRDS(LRMURp, file=paste0(Output_path, "Models/LRMURpCortiM_OK_HCPG.Rdata"))
-}
-
-##### Reproduce w results
-if("LRMrCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
-  LRMr <- readRDS(paste0(Output_path, "Models/LRMrCortiM_OK_HCPG.Rdata"))
-} else {
-  LRMr <- glmer(stay ~ (1+mn*common|subj) +
-                  mn + mn:common +
-                  zdCortiM:zOSPAN:mn + zdCortiM:zOSPAN:mn:common +
-                  
-                  SampleC:zOSPAN:zdCortiM:mn + SampleC:zOSPAN:zdCortiM:mn:common,
-                family = binomial, data = dRLF, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
-  saveRDS(LRMr, file=paste0(Output_path, "Models/LRMrCortiM_OK_HCPG.Rdata"))
-}
-
-if("LRMRrCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
-  LRMRr <- readRDS(paste0(Output_path, "Models/LRMRrCortiM_OK_HCPG.Rdata"))
-} else {
-  LRMRr <- glmer(stay ~ (1+common|subj) +
-                   common +
-                   zdCortiM:zOSPAN:common +
-                   SampleC:zOSPAN:zdCortiM:common,
-                 family = binomial, data = dRLFR, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
-  saveRDS(LRMRr, file=paste0(Output_path, "Models/LRMRrCortiM_OK_HCPG.Rdata"))
-}
-
-
-if("LRMURrCortiM_OK_HCPG.Rdata" %in% dir(paste0(Output_path, "Models/"))){
-  LRMURr <- readRDS(paste0(Output_path, "Models/LRMURrCortiM_OK_HCPG.Rdata"))
-} else {
-  LRMURr <- glmer(stay ~ (1+common|subj) +
-                    common +
-                    zdCortiM:zOSPAN:common +
-                    SampleC:zOSPAN:zdCortiM:common,
-                  family = binomial, data = dRLFUR, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
-  saveRDS(LRMURr, file=paste0(Output_path, "Models/LRMURrCortiM_OK_HCPG.Rdata"))
+  LRMUR2P <- glmer(stay ~ (1+common|subj) + zdCortiM*SampleC*common,
+                 family = binomial, data = dRLFUR, control = glmerControl(optimizer = "bobyqa"), nAGQ = 1)
+  saveRDS(LRMUR2P, file=paste0(Output_path, "Models/LRMUR2PCortiM_OK_HCPG.Rdata"))
 }
 
 ########## Output
@@ -158,10 +112,14 @@ summary(LRM)
 summary(LRMR)
 summary(LRMUR)
 
-summary(LRMp)
-summary(LRMRp)
-summary(LRMURp)
+summary(LRM2P)
+summary(LRMR2P)
+summary(LRMUR2P)
 
-summary(LRMr)
-summary(LRMRr)
-summary(LRMURr)
+# summary(LRMp)
+# summary(LRMRp)
+# summary(LRMURp)
+# 
+# summary(LRMr)
+# summary(LRMRr)
+# summary(LRMURr)
