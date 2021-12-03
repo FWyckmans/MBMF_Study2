@@ -23,6 +23,12 @@ dClin$Analyse_2[dClin$Analyse_2 == 9999] <- NA
 dClin$Analyse_3[dClin$Analyse_3 == 9999] <- NA
 dClin$Analyse_4[dClin$Analyse_4 == 9999] <- NA
 
+# Convert from µg/dl to nmol/l
+dClin$Analyse_1 <- 27.586 * dClin$Analyse_1
+dClin$Analyse_2 <- 27.586 * dClin$Analyse_2
+dClin$Analyse_3 <- 27.586 * dClin$Analyse_3
+dClin$Analyse_4 <- 27.586 * dClin$Analyse_4
+
 ##### Add Group columns to specify gamblers, alcoholics and healthy controls
 dClin <- AddDummyCol(dClin, "Sample")
 dClin$Sample[dClin$Condition=="A_CPT"|dClin$Condition=="A_WPT"] <- "Alc"
@@ -140,7 +146,9 @@ dClin$PGAlc[dClin$Alc3 == -1 & dClin$SampleC == -1] <- -1
 ########## Indicate if the participant was stressed (1) or not (-1)
 ##### With Cortisol
 Threshold = 0.01999999999
+Threshold = 1.5
 # Threshold = 0.02
+
 dClin$StressGr[dClin$dCorti >= Threshold] <- 1
 dClin$StressGr[is.na(dClin$dCorti)] <- NA
 
