@@ -20,11 +20,11 @@ dGCB <- d%>%
             CrtB2M = mean(CrtB2), CrtB2sd = sd(CrtB2),
             CrtB3M = mean(CrtB3), CrtB3sd = sd(CrtB3),
             CrtB4M = mean(CrtB4), CrtB4sd = sd(CrtB4))%>%
-  unite("T1", CrtB1M:CrtB1sd, sep = "_")%>%
-  unite("T2", CrtB2M:CrtB2sd, sep = "_")%>%
-  unite("T3", CrtB3M:CrtB3sd, sep = "_")%>%
-  unite("T4", CrtB4M:CrtB4sd, sep = "_")%>%
-  gather(key = "Time", value = "Mean_SD", T1:T4)%>%
+  unite("Baseline", CrtB1M:CrtB1sd, sep = "_")%>%
+  unite("Before\nprocedure", CrtB2M:CrtB2sd, sep = "_")%>%
+  unite("After\nprocedure", CrtB3M:CrtB3sd, sep = "_")%>%
+  unite("After\nRL task", CrtB4M:CrtB4sd, sep = "_")%>%
+  gather(key = "Time", value = "Mean_SD", Baseline:"After\nRL task")%>%
   separate("Mean_SD", c("LogCortisol", "sd"), sep = "_")
 
 dGCB$LogCortisol <- as.numeric(dGCB$LogCortisol)
@@ -37,272 +37,30 @@ dGCB$n[dGCB$Water == 1] <- length(d$subjID[d$Water == 1])
 dGCB$n[dGCB$Water == -1] <- length(d$subjID[d$Water == -1])
 
 dGCB <- mutate(dGCB, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
-dGCB$SE[dGCB$Time == "T1"] <- NA
-dGCB$EBmin[dGCB$Time == "T1"] <- NA
-dGCB$EBmax[dGCB$Time == "T1"] <- NA
+dGCB$SE[dGCB$Time == "Baseline"] <- NA
+dGCB$EBmin[dGCB$Time == "Baseline"] <- NA
+dGCB$EBmax[dGCB$Time == "Baseline"] <- NA
 
 # Rename for convenience
 dGCB$Water[dGCB$Water == 1] <- "WPT"
 dGCB$Water[dGCB$Water == -1] <- "CPT"
 
+# Factor time
+dGCB$Time <- factor(dGCB$Time, levels = c("Baseline", "Before\nprocedure", "After\nprocedure", "After\nRL task"))
+
 # Graphic
-CortGraph <- ggplot(dGCB, aes(x = Time, y = LogCortisol, group = Water)) +
+MainCortGraph <- ggplot(dGCB, aes(x = Time, y = LogCortisol, group = Water)) +
   geom_line(aes(colour = Water), size = 1) +
   geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
   theme_classic() +
-  ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank()) +
+  ylab("Log Cortisol (nmol/l)") +
+  theme(axis.title.x=element_blank(),
+        axis.text.x = element_text(size = 8),
+        legend.position = "none") +
   scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure"))
-CortGraph
+MainCortGraph
 ggsave(paste0(Graphic_path, "CrtB1234.tiff"), dpi = 300)
-
-##### Cortisol mean(T1B_T2B) and mean(T3B_T4B)
-# Prepare Frame
-dGCBMd <- d%>%
-  select(NS, Water, SampleC, CrtBM12, CrtBM34)%>%
-  group_by(Water)%>%
-  summarise(CrtBBeforePTM = mean(CrtBM12), CrtBBeforePTsd = sd(CrtBM12),
-            CrtBAfterPTM = mean(CrtBM34), CrtBAfterPTsd = sd(CrtBM34))%>%
-  unite("Before", CrtBBeforePTM:CrtBBeforePTsd, sep = "_")%>%
-  unite("After", CrtBAfterPTM:CrtBAfterPTsd, sep = "_")%>%
-  gather(key = "Time", value = "Mean_SD", Before:After)%>%
-  separate("Mean_SD", c("LogCortisol", "sd"), sep = "_")
-
-dGCBMd$LogCortisol <- as.numeric(dGCBMd$LogCortisol)
-dGCBMd$sd <- as.numeric(dGCBMd$sd)
-
-# Compute SE
-dGCBMd <- AddDummyCol(dGCBMd, "n")
-
-dGCBMd$n[dGCBMd$Water == 1] <- length(d$subjID[d$Water == 1])
-dGCBMd$n[dGCBMd$Water == -1] <- length(d$subjID[d$Water == -1])
-
-dGCBMd <- mutate(dGCBMd, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
-dGCBMd$SE[dGCBMd$Time == "Before"] <- NA
-dGCBMd$EBmin[dGCBMd$Time == "Before"] <- NA
-dGCBMd$EBmax[dGCBMd$Time == "Before"] <- NA
-
-# Rename for convenience
-dGCBMd$Water[dGCBMd$Water == 1] <- "WPT"
-dGCBMd$Water[dGCBMd$Water == -1] <- "CPT"
-
-#Re-order Time
-dGCBMd$Time <- factor(dGCBMd$Time, levels = c("Before", "After"))
-
-# Graphic
-CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
-  geom_line(aes(colour = Water),size = 1) +
-  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
-  theme_classic() +
-  ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank()) +
-  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
-  guides(col=guide_legend("Procedure"))
-CortGraph
-ggsave(paste0(Graphic_path, "CrtBM1234.tiff"), dpi = 300)
-
-##### Cortisol only T2 and T3
-# Prepare Frame
-dGCBM <- d%>%
-  select(NS, Water, SampleC, CrtB32_2, dCrtB32)%>%
-  group_by(Water)%>%
-  summarise(CrtBBeforePTM = mean(CrtB32_2), CrtBBeforePTsd = sd(CrtB32_2),
-            CrtBAfterPTM = mean(dCrtB32), CrtBAfterPTsd = sd(dCrtB32))%>%
-  unite("Before", CrtBBeforePTM:CrtBBeforePTsd, sep = "_")%>%
-  unite("After", CrtBAfterPTM:CrtBAfterPTsd, sep = "_")%>%
-  gather(key = "Time", value = "Mean_SD", Before:After)%>%
-  separate("Mean_SD", c("LogCortisol", "sd"), sep = "_")
-
-dGCBM$LogCortisol <- as.numeric(dGCBM$LogCortisol)
-dGCBM$sd <- as.numeric(dGCBM$sd)
-
-# Compute SE
-dGCBM <- AddDummyCol(dGCBM, "n")
-
-dGCBM$n[dGCBM$Water == 1] <- length(d$subjID[d$Water == 1])
-dGCBM$n[dGCBM$Water == -1] <- length(d$subjID[d$Water == -1])
-
-dGCBM <- mutate(dGCBM, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
-dGCBM$SE[dGCBM$Time == "Before"] <- NA
-dGCBM$EBmin[dGCBM$Time == "Before"] <- NA
-dGCBM$EBmax[dGCBM$Time == "Before"] <- NA
-
-# Rename for convenience
-dGCBM$Water[dGCBM$Water == 1] <- "WPT"
-dGCBM$Water[dGCBM$Water == -1] <- "CPT"
-
-#Re-order Time
-dGCBM$Time <- factor(dGCBM$Time, levels = c("Before", "After"))
-
-# Graphic
-CortGraph <- ggplot(dGCBM, aes(x = Time, y = LogCortisol, group = Water)) +
-  geom_line(aes(colour = Water),size = 1) +
-  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
-  theme_classic() +
-  ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank()) +
-  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
-  guides(col=guide_legend("Procedure"))
-CortGraph
-ggsave(paste0(Graphic_path, "CrtB23.tiff"), dpi = 300)
-
-##### Cortisol only T2, T3 and T4
-# Prepare Frame
-dGCBM234 <- d%>%
-  mutate(dCrtB42 = Corti3-Corti2)%>%
-  select(NS, Water, SampleC, CrtB32_2, dCrtB32, dCrtB42)%>%
-  group_by(Water)%>%
-  summarise(CrtBBeforePTM = mean(CrtB32_2), CrtBBeforePTsd = sd(CrtB32_2),
-            CrtBAfterPTM = mean(dCrtB32), CrtBAfterPTsd = sd(dCrtB32),
-            CrtBAfterDTM = mean(dCrtB42), CrtBAfterDTsd = sd(dCrtB42))%>%
-  unite("BeforePT", CrtBBeforePTM:CrtBBeforePTsd, sep = "_")%>%
-  unite("AfterPT", CrtBAfterPTM:CrtBAfterPTsd, sep = "_")%>%
-  unite("AfterRL", CrtBAfterDTM:CrtBAfterDTsd, sep = "_")%>%
-  gather(key = "Time", value = "Mean_SD", BeforePT:AfterRL)%>%
-  separate("Mean_SD", c("LogCortisol", "sd"), sep = "_")
-
-dGCBM234$LogCortisol <- as.numeric(dGCBM234$LogCortisol)
-dGCBM234$sd <- as.numeric(dGCBM234$sd)
-
-# Compute SE
-dGCBM234 <- AddDummyCol(dGCBM234, "n")
-
-dGCBM234$n[dGCBM234$Water == 1] <- length(d$subjID[d$Water == 1])
-dGCBM234$n[dGCBM234$Water == -1] <- length(d$subjID[d$Water == -1])
-
-dGCBM234 <- mutate(dGCBM234, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
-dGCBM234$SE[dGCBM234$Time == "BeforePT"] <- NA
-dGCBM234$EBmin[dGCBM234$Time == "BeforePT"] <- NA
-dGCBM234$EBmax[dGCBM234$Time == "BeforePT"] <- NA
-
-# Rename for convenience
-dGCBM234$Water[dGCBM234$Water == 1] <- "WPT"
-dGCBM234$Water[dGCBM234$Water == -1] <- "CPT"
-
-#Re-order Time
-dGCBM234$Time <- factor(dGCBM234$Time, levels = c("BeforePT", "AfterPT", "AfterRL"))
-
-# Graphic
-CortGraph <- ggplot(dGCBM234, aes(x = Time, y = LogCortisol, group = Water)) +
-  geom_line(aes(colour = Water),size = 1) +
-  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
-  theme_classic() +
-  ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank()) +
-  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
-  guides(col=guide_legend("Procedure"))
-CortGraph
-ggsave(paste0(Graphic_path, "CrtB234.tiff"), dpi = 300)
-
-# Plot <- ggplot(d, aes(x = VI, y = VD)) +
-#   geom_point() +
-#   geom_smooth(method=lm, se=F) +
-#   theme_classic() +
-#   xlab(VIname) +
-#   ylab(VDname) +
-#   xlim(VImin, VImax) +
-#   ylim(VDmin, VDmax) +
-#   
-#   geom_text(x = EqX, y = EqY, label = Eq)
-# ggsave(NameSave, dpi=300)
-# Plot
-
-##### Cortisol mean(T1B_T2B) and mean(T3B_T4B) only HC
-dHC <- filter(d, SampleC == 1)
-
-# Prepare Frame
-dGCBMd <- dHC%>%
-  select(NS, Water, SampleC, CrtBM12, CrtBM34)%>%
-  group_by(Water)%>%
-  summarise(CrtBBeforePTM = mean(CrtBM12), CrtBBeforePTsd = sd(CrtBM12),
-            CrtBAfterPTM = mean(CrtBM34), CrtBAfterPTsd = sd(CrtBM34))%>%
-  unite("Before", CrtBBeforePTM:CrtBBeforePTsd, sep = "_")%>%
-  unite("After", CrtBAfterPTM:CrtBAfterPTsd, sep = "_")%>%
-  gather(key = "Time", value = "Mean_SD", Before:After)%>%
-  separate("Mean_SD", c("LogCortisol", "sd"), sep = "_")
-
-dGCBMd$LogCortisol <- as.numeric(dGCBMd$LogCortisol)
-dGCBMd$sd <- as.numeric(dGCBMd$sd)
-
-# Compute SE
-dGCBMd <- AddDummyCol(dGCBMd, "n")
-
-dGCBMd$n[dGCBMd$Water == 1] <- length(d$subjID[d$Water == 1])
-dGCBMd$n[dGCBMd$Water == -1] <- length(d$subjID[d$Water == -1])
-
-dGCBMd <- mutate(dGCBMd, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
-dGCBMd$SE[dGCBMd$Time == "Before"] <- NA
-dGCBMd$EBmin[dGCBMd$Time == "Before"] <- NA
-dGCBMd$EBmax[dGCBMd$Time == "Before"] <- NA
-
-# Rename for convenience
-dGCBMd$Water[dGCBMd$Water == 1] <- "WPT"
-dGCBMd$Water[dGCBMd$Water == -1] <- "CPT"
-
-#Re-order Time
-dGCBMd$Time <- factor(dGCBMd$Time, levels = c("Before", "After"))
-
-# Graphic
-CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
-  geom_line(aes(colour = Water),size = 1) +
-  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
-  theme_classic() +
-  ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank()) +
-  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
-  guides(col=guide_legend("Procedure")) +
-  labs(title = "HC")
-CortGraph
-ggsave(paste0(Graphic_path, "CrtBM1234HC.tiff"), dpi = 300)
-
-##### Cortisol mean(T1B_T2B) and mean(T3B_T4B) only HC
-dPG <- filter(d, SampleC == -1)
-
-# Prepare Frame
-dGCBMd <- dPG%>%
-  select(NS, Water, SampleC, CrtBM12, CrtBM34)%>%
-  group_by(Water)%>%
-  summarise(CrtBBeforePTM = mean(CrtBM12), CrtBBeforePTsd = sd(CrtBM12),
-            CrtBAfterPTM = mean(CrtBM34), CrtBAfterPTsd = sd(CrtBM34))%>%
-  unite("Before", CrtBBeforePTM:CrtBBeforePTsd, sep = "_")%>%
-  unite("After", CrtBAfterPTM:CrtBAfterPTsd, sep = "_")%>%
-  gather(key = "Time", value = "Mean_SD", Before:After)%>%
-  separate("Mean_SD", c("LogCortisol", "sd"), sep = "_")
-
-dGCBMd$LogCortisol <- as.numeric(dGCBMd$LogCortisol)
-dGCBMd$sd <- as.numeric(dGCBMd$sd)
-
-# Compute SE
-dGCBMd <- AddDummyCol(dGCBMd, "n")
-
-dGCBMd$n[dGCBMd$Water == 1] <- length(d$subjID[d$Water == 1])
-dGCBMd$n[dGCBMd$Water == -1] <- length(d$subjID[d$Water == -1])
-
-dGCBMd <- mutate(dGCBMd, SE = (sd/(sqrt(n))), EBmin = LogCortisol - multEB*SE, EBmax = LogCortisol + multEB*SE)
-dGCBMd$SE[dGCBMd$Time == "Before"] <- NA
-dGCBMd$EBmin[dGCBMd$Time == "Before"] <- NA
-dGCBMd$EBmax[dGCBMd$Time == "Before"] <- NA
-
-# Rename for convenience
-dGCBMd$Water[dGCBMd$Water == 1] <- "WPT"
-dGCBMd$Water[dGCBMd$Water == -1] <- "CPT"
-
-#Re-order Time
-dGCBMd$Time <- factor(dGCBMd$Time, levels = c("Before", "After"))
-
-# Graphic
-CortGraph <- ggplot(dGCBMd, aes(x = Time, y = LogCortisol, group = Water)) +
-  geom_line(aes(colour = Water),size = 1) +
-  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
-  theme_classic() +
-  ylab("Log Cortisol (nmol/ml)") +
-  theme(axis.title.x=element_blank()) +
-  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
-  guides(col=guide_legend("Procedure")) +
-  labs(title = "PG")
-CortGraph
-ggsave(paste0(Graphic_path, "CrtBM1234PG.tiff"), dpi = 300)
 
 ################### Self-reported
 ##### Stress
@@ -311,9 +69,9 @@ dSSR <- d%>%
   group_by(Water)%>%
   summarise(BeforeM = mean(Stress2), Beforesd = sd(Stress2),
             AfterM = mean(Stress3), Aftersd = sd(Stress3))%>%
-  unite("Before", BeforeM:Beforesd, sep = "_")%>%
-  unite("After", AfterM:Aftersd, sep = "_")%>%
-  gather(key = "Time", value = "Mean_SD", Before:After)%>%
+  unite("Before\nprocedure", BeforeM:Beforesd, sep = "_")%>%
+  unite("After\nprocedure", AfterM:Aftersd, sep = "_")%>%
+  gather(key = "Time", value = "Mean_SD", "Before\nprocedure":"After\nprocedure")%>%
   separate("Mean_SD", c("SRStress", "sd"), sep = "_")
 
 dSSR$SRStress <- as.numeric(dSSR$SRStress)
@@ -328,24 +86,25 @@ dSSR$n[dSSR$Water == -1] <- length(d$subjID[d$Water == -1])
 dSSR <- mutate(dSSR, SE = (sd/(sqrt(n))), EBmin = SRStress - multEB*SE, EBmax = SRStress + multEB*SE)
 
 #Re-order Time
-dSSR$Time <- factor(dSSR$Time, levels = c("Before", "After"))
+dSSR$Time <- factor(dSSR$Time, levels = c("Before\nprocedure", "After\nprocedure"))
 
 # Rename for convenience
 dSSR$Water[dSSR$Water == 1] <- "WPT"
 dSSR$Water[dSSR$Water == -1] <- "CPT"
 
 # Graphic
-CortGraph <- ggplot(dSSR, aes(x = Time, y = SRStress, group = Water)) +
+SRSGraph <- ggplot(dSSR, aes(x = Time, y = SRStress, group = Water)) +
   geom_line(aes(colour = Water),size = 1) +
   geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
   theme_classic() +
   ylab("Self-reported Stress (/10)") +
-  theme(axis.title.x=element_blank()) +
+  theme(axis.title.x=element_blank(),
+        axis.text.x = element_text(size = 8),
+        legend.position = "none") +
   scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure"))
-CortGraph
+SRSGraph
 ggsave(paste0(Graphic_path, "SRStress.tiff"), dpi = 300)
-
 
 ################### Self-reported
 ##### Pain
@@ -354,9 +113,9 @@ dSSR <- d%>%
   group_by(Water)%>%
   summarise(BeforeM = mean(Pain2), Beforesd = sd(Pain2),
             AfterM = mean(Pain3), Aftersd = sd(Pain3))%>%
-  unite("Before", BeforeM:Beforesd, sep = "_")%>%
-  unite("After", AfterM:Aftersd, sep = "_")%>%
-  gather(key = "Time", value = "Mean_SD", Before:After)%>%
+  unite("Before\nprocedure", BeforeM:Beforesd, sep = "_")%>%
+  unite("After\nprocedure", AfterM:Aftersd, sep = "_")%>%
+  gather(key = "Time", value = "Mean_SD", "Before\nprocedure":"After\nprocedure")%>%
   separate("Mean_SD", c("SRPain", "sd"), sep = "_")
 
 dSSR$SRPain <- as.numeric(dSSR$SRPain)
@@ -371,20 +130,76 @@ dSSR$n[dSSR$Water == -1] <- length(d$subjID[d$Water == -1])
 dSSR <- mutate(dSSR, SE = (sd/(sqrt(n))), EBmin = SRPain - multEB*SE, EBmax = SRPain + multEB*SE)
 
 #Re-order Time
-dSSR$Time <- factor(dSSR$Time, levels = c("Before", "After"))
+dSSR$Time <- factor(dSSR$Time, levels = c("Before\nprocedure", "After\nprocedure"))
 
 # Rename for convenience
 dSSR$Water[dSSR$Water == 1] <- "WPT"
 dSSR$Water[dSSR$Water == -1] <- "CPT"
 
 # Graphic
-CortGraph <- ggplot(dSSR, aes(x = Time, y = SRPain, group = Water)) +
+SRPGraph <- ggplot(dSSR, aes(x = Time, y = SRPain, group = Water)) +
   geom_line(aes(colour = Water),size = 1) +
   geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
   theme_classic() +
   ylab("Self-reported Pain (/10)") +
-  theme(axis.title.x=element_blank()) +
+  theme(axis.title.x=element_blank(),
+        axis.text.x = element_text(size = 8),
+        legend.position = "none") +
   scale_color_manual(values=c("dodgerblue3","firebrick2"))+
   guides(col=guide_legend("Procedure"))
-CortGraph
+SRPGraph
 ggsave(paste0(Graphic_path, "SRPain.tiff"), dpi = 300)
+
+##### Craving
+dSSR <- d%>%
+  filter(SampleC == -1)%>%
+  select(NS, Water, SampleC, Craving2, Craving3)%>%
+  group_by(Water)%>%
+  summarise(BeforeM = mean(Craving2), Beforesd = sd(Craving2),
+            AfterM = mean(Craving3), Aftersd = sd(Craving3))%>%
+  unite("Before\nprocedure", BeforeM:Beforesd, sep = "_")%>%
+  unite("After\nprocedure", AfterM:Aftersd, sep = "_")%>%
+  gather(key = "Time", value = "Mean_SD", "Before\nprocedure":"After\nprocedure")%>%
+  separate("Mean_SD", c("SRCraving", "sd"), sep = "_")
+
+dSSR$SRCraving <- as.numeric(dSSR$SRCraving)
+dSSR$sd <- as.numeric(dSSR$sd)
+
+# Compute SE
+dSSR <- AddDummyCol(dSSR, "n")
+
+dSSR$n[dSSR$Water == 1] <- length(d$subjID[d$Water == 1])
+dSSR$n[dSSR$Water == -1] <- length(d$subjID[d$Water == -1])
+
+dSSR <- mutate(dSSR, SE = (sd/(sqrt(n))), EBmin = SRCraving - multEB*SE, EBmax = SRCraving + multEB*SE)
+
+#Re-order Time
+dSSR$Time <- factor(dSSR$Time, levels = c("Before\nprocedure", "After\nprocedure"))
+
+# Rename for convenience
+dSSR$Water[dSSR$Water == 1] <- "WPT"
+dSSR$Water[dSSR$Water == -1] <- "CPT"
+
+# Graphic
+SRCGraph <- ggplot(dSSR, aes(x = Time, y = SRCraving, group = Water)) +
+  geom_line(aes(colour = Water),size = 1) +
+  geom_errorbar(aes(ymin = EBmin, ymax = EBmax, colour = Water), width = 0.2) +
+  theme_classic() +
+  ylab("Self-reported Craving (/10)") +
+  theme(axis.title.x=element_blank(),
+        axis.text.x = element_text(size = 8),
+        legend.position = "none") +
+  scale_color_manual(values=c("dodgerblue3","firebrick2"))+
+  guides(col=guide_legend("Procedure"))
+SRCGraph
+ggsave(paste0(Graphic_path, "SRCraving.tiff"), dpi = 300)
+
+###### MultipleGrid
+# Mg <- plot_grid(MainCortGraph, SRSGraph, SRPGraph, SRCGraph, ncol = 2,
+#                 labels = c("A", "B", "C", "D"))
+# Mg
+Mg <- ggarrange(MainCortGraph, SRSGraph, SRPGraph, SRCGraph, ncol = 2, nrow = 2,
+                labels = c("A", "B", "C", "D"),
+                common.legend = TRUE, legend="bottom")
+Mg
+ggsave(paste0(Graphic_path, "StressResponse.tiff"), dpi = 300)
