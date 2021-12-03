@@ -4,7 +4,7 @@
 # Groups = "Sample"
 # Format = "Long"
 # 
-NormalitySkewKurtosis <- function(d, VoI, Groups, Format = "Large") {
+NormalitySkewKurtosis <- function(d, VoI, Groups, Format = "Large", CriticVal = 1.96) {
   # Give the dataframe, the index of the Variable of Interest and the index of the group column
   # Indicate if you want a between-subject comparison
   if (!(Format %in% c("Large", "Long"))){
@@ -63,7 +63,7 @@ NormalitySkewKurtosis <- function(d, VoI, Groups, Format = "Large") {
         dTemp[n,9] = round(spssSkewKurtosis(vect)[1],digits=5)
         dTemp[n,10] <- 'OK'
         dTemp[n,11] <- length(vect)
-        if ((dTemp[n,6] < -1.96 | dTemp[n,6] > 1.96) | (dTemp[n,7] < -1.96 | dTemp[n,7] > 1.96)){
+        if ((dTemp[n,6] < -CriticVal | dTemp[n,6] > CriticVal) | (dTemp[n,7] < -CriticVal | dTemp[n,7] > CriticVal)){
           dTemp[n,10] <- "Not_OK"
         }
         n = n+1
