@@ -33,7 +33,7 @@ dDescr <- NormalitySkewKurtosis(d,
                                 VoI = FromColNameToIndex(d, c(AllCol$Demo, AllCol$Gamb, AllCol$Alc,
                                                               AllCol$Cog, AllCol$FR, AllCol$Perso,
                                                               AllCol$Computation, AllCol$ProbaM)),
-                                Groups = "Sample", Format = "Long")
+                                Groups = "Sample", Format = "Long", CriticVal = 3.29)
 write_xlsx(dDescr, paste0(Output_path, "dDescrGrp.xlsx"))
 
 dDescrW <- NormalitySkewKurtosis(d,
