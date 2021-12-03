@@ -6,8 +6,8 @@ Output_path = "Output/"
 ##### Cran packages
 ## Install
 packages <- c("dplyr", "tidyr",
-              "ggplot2", "gridExtra", "cowplot", "corrplot", "scales",
-              "nlme", "lmerTest", "BayesFactor", "stats", "glmnet", "interactions", "emmeans",
+              "ggplot2", "gridExtra", "cowplot", "corrplot", "scales", "ggpubr",
+              "nlme", "lmerTest", "BayesFactor", "stats", "glmnet", "interactions", "emmeans", "psy",
               "car", "readxl", "readr", "Hmisc", "rms", "ISLR", "e1071", "stringr", "writexl",
               "hBayesDM", "FactoMineR", "factoextra")
 
@@ -24,6 +24,7 @@ library(gridExtra)
 library(cowplot)
 library(corrplot)
 library(scales)
+library(ggpubr)
 
 ## Stat and ML
 library(nlme)
@@ -35,6 +36,7 @@ library(factoextra)
 library(glmnet) # Lasso selection
 library(interactions)
 library(emmeans)
+library(psy)
 
 ## Misc (or don't remember and imported anyway)
 library(car)
