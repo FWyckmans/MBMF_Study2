@@ -6,23 +6,16 @@ Datapath = "Raw_Data/"
 Output_path = "Output/"
 
 ############################################# Frame ###############################################
-d <- read.delim(paste0(Output_path,"dTot.txt"))%>%
-  filter(OKd == 1)%>%
-  filter(!is.na(StressGr))%>%
-  filter(subjID != 334)
-
-d <- read.delim(paste0(Output_path,"dOKGamFE.txt"))
-
-# d$WAIS = 1
+d <- read.delim(paste0(Output_path,"dOKGamFE_Comp7P_OK_HCPG.txt"))
 
 # Outlierremoval
 # d <- OutliersModif(d, c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso), Groups = "Sample")
 
 ############################################ Graphics ##############################################
-HeatMap <- function(VD = "Computation", Pop = "All"){
+HeatMap <- function(d, VD = "Computation", Pop = "All"){
   
   # Independent variables
-  X = c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso, AllCol$RT, AllCol$Interaction)
+  X = c(AllCol$Demo, AllCol$Gamb, AllCol$Alc, AllCol$Cog, AllCol$FR, AllCol$Perso, AllCol$RT)#, AllCol$Interaction)
   
   # Dependent variables
   if (VD == "Computation"){
@@ -120,7 +113,7 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   Tile6 <- TilePlot(dCorr[dCorr$X %in% AllCol$FR,], paste0("Correlation Facteur Risque - ", Pop))
   Tile7 <- TilePlot(dCorr[dCorr$X %in% AllCol$Perso,], paste0("Correlation Facteur Personnalite - ", Pop))
   Tile8 <- TilePlot(dCorr[dCorr$X %in% AllCol$RT,], paste0("Correlation Reaction Time - ", Pop))
-  Tile9 <- TilePlot(dCorr[dCorr$X %in% AllCol$Interaction,], paste0("Correlation interaction - ", Pop))
+  # Tile9 <- TilePlot(dCorr[dCorr$X %in% AllCol$Interaction,], paste0("Correlation interaction - ", Pop))
   
   print(Tile1)
   print(Tile2)
@@ -130,33 +123,38 @@ HeatMap <- function(VD = "Computation", Pop = "All"){
   print(Tile6)
   print(Tile7)
   print(Tile8)
-  print(Tile9)
+  # print(Tile9)
   
   dCorr <<- dCorr
 }
 
-d <- filter(d, Sample != "Alc")
+# d <- filter(d, Sample != "Alc")
+dS <- filter(d, StressGrM == -1)
+dNS <- filter(d, StressGrM == 1)
 
-HeatMap("Computation", "All")Y
-# HeatMap("Computation", "Alc")
-# HeatMap("Computation", "PG")
+HeatMap(d, "Computation", "PG")
+HeatMap(dS, "Computation", "PG")
+HeatMap(dS, "Seboldw", "PG")
+HeatMap(dNS, "Computation", "PG")
+HeatMap(dNS, "Seboldw", "PG")
+
+HeatMap(d, "Computation", "HC")
+HeatMap(dS, "Computation", "HC")
+HeatMap(dS, "Seboldw", "HC")
+HeatMap(dNS, "Computation", "HC")
+HeatMap(dNS, "Seboldw", "HC")
+
 # HeatMap("Computation", "HC")
-# summary(lm(zw ~ OSPAN*SampleC*dCorti, data = d))
-summary(lm(zw ~ OSPAN * dCorti, data = d))
-
-summary(lm(zw ~ Raven*SampleC*dCorti, data = d))
-summary(lm(zw ~ Raven*dCorti, data = d))
 
 # HeatMap("RegLogInd", "All")
 # HeatMap("RegLogInd", "Alc")
 # HeatMap("RegLogInd", "PG")
 # HeatMap("RegLogInd", "HC")
 
-HeatMap("Seboldw", "All")
+
 HeatMap("Seboldw", "Alc")
 HeatMap("Seboldw", "PG")
 HeatMap("Seboldw", "HC")
-
 
 d <- filter(d, Sample != "Alc")
 dl <- filter(d, dCorti < median(d$dCorti, na.rm = T))
