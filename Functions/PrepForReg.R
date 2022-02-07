@@ -4,15 +4,14 @@ PrepForReg <- function(OutliersReplacement = NA){
   
   # Frame without Outliers in dCortiM or w
   if (is.na(OutliersReplacement)){
-    dNoO <- OutliersModif(d, c("w", "dCortiM"), Proxy = "MAD", mult = 3, as = NA)
+    dNoO <- OutliersModif(d, c("dCortiM", "w"), Proxy = "MAD", mult = 3, as = NA)
     dNoO <- dNoO%>%
-      filter(!is.na(w))%>%
-      filter(!is.na(dCortiM))
+      filter(!is.na(dCortiM))%>%
+      filter(!is.na(w))
   } else {
     if (OutliersReplacement == "MinMax"){
       dNoO <- OutliersModif(d, c("w", "dCortiM"), Proxy = "MAD", mult = 3, as = "MinMax")
       dNoO <- dNoO%>%
-        filter(!is.na(w))%>%
         filter(!is.na(dCortiM))
     }
   }
@@ -29,9 +28,6 @@ PrepForReg <- function(OutliersReplacement = NA){
                                "zRewRT1", "zUnRewRT1", "zCommonRT2", "zRareRT2", "zdRT1", "zdRT2",
                                "zOSPAN", "zRaven", "zdCortiM", "zdCorti",
                                "zSRRS", "zSTAIA", "zBeck", "zSCL90R", "zRewardSens", "zDSM", "zSOGS"))
-  
-  # d <<- ScaleCol(d, ScaleToDo, "center")
-  # dNoO <<- ScaleCol(dNoO, ScaleToDo, "center")
   d <<- ScaleCol(d, ScaleToDo)
   dNoO <<- ScaleCol(dNoO, ScaleToDo)
 }
