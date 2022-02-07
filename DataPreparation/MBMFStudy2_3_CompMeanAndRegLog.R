@@ -6,7 +6,8 @@ Datapath = "Raw_Data/"
 Output_path = "Output/"
 
 ############################################ Frame ################################################
-d <- read.csv(paste0(Output_path, "/ComputationsReady.txt"), sep = " ")
+d <- read.csv(paste0(Output_path, "/ComputationsReady.txt"), sep = " ")%>%
+  filter(Trial > 10)
 
 ###################################### Features engineering #######################################
 ########## Mean Probabilities - This part computes the same probabilities as those used by Sebold et al. (2014)

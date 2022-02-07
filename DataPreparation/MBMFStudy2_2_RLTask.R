@@ -6,7 +6,6 @@ Datapath = "Raw_Data/RLTaskData/"
 Output_path = "Output/"
 Test = 0
 Way = 'Wyck'
-Playlist = "This is: Elton John by Spotify, Benny and the Jets, random"
 
 ############################################ Frame ################################################
 if (Test != 0){
@@ -34,6 +33,7 @@ d$Step <- str_sub(d$Step, start = 6, end = -9)
 ## Remove transition probabilities
 d$RT1[d$Step == 2] <- NA  # The RT < than 0 corresponds to transition probabilities
 d$Resp1[d$Step == 2] <- NA # The Resp1 < than 0 corresponds to transition probabilities
+
 
 ###################################### Features engineering #######################################
 ##### New columns
@@ -102,11 +102,17 @@ for (i in c(1:length(d$NS))){
           d$Stay[i] <- 0
           d$Stay[i+1] <- 0}}
       if (d$Step[i] == "1" & d$Step[i-1] == "1"){ # Select trials for which the participant missed the SECOND step !
-        d$Stay[i] <- -1  
-    }}}
+        d$Stay[i] <- -1
+      }}
+  if (d$Trial[i] == 1){
+    d$Stay[i] <- 5
+  }}
 
 ##### Compute PrReward & PrTransition
 for (i in c(1:length(d$NS))){
+  if (d$Trial[i] == min(d$Trial) & d$Step[i] == "1"){
+    d$Reward[i] = d$Reward[i+1]
+  }
   if (d$Trial[i] != min(d$Trial) & d$Step[i] == "1"){
     d$Reward[i] = d$Reward[i+1]
     
@@ -114,16 +120,26 @@ for (i in c(1:length(d$NS))){
     d$PrReward[i+1] = d$Reward[i-1]
     
     d$PrTransition[i] = d$Transition[i-1]
-    d$PrTransition[i+1] = d$Transition[i-1]}}
+    d$PrTransition[i+1] = d$Transition[i-1]}
+  if (d$Trial[i] == 1){
+    d$PrReward[i] <- 5
+    d$PrTransition[i] <- 5
+  }
+}
 
 ##### Remove trials after unanswered trial (My way)
 if (Way == "Wyck"){
   d <- filter(d, PrReward != -1)
 }
 
+# First Step Stay, PrReward and PrTransition as NA
+d$Stay[d$Stay == 5] <- NA
+d$PrReward[d$PrReward == 5] <- NA
+d$PrTransition[d$PrTransition == 5] <- NA
+
 ##### Remove Trial 10 and above 175
-d <- d%>%
-  filter(Trial > 10)#%>%filter(Trial <= 175) Keep trial until max!
+# d <- d%>%
+#   filter(Trial > 10)#%>%filter(Trial <= 175) Keep trial until max!
 
 # dComp <- filter(d, Step == 1)
 

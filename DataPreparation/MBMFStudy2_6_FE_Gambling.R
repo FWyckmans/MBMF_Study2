@@ -22,6 +22,9 @@ if (TypeComp == "PGHC"){
   OutputName = "dOKGamFE_Comp7P_OK_HCPG.txt"
 }
 
+dCompParameter1 <- read.delim(paste0(Output_path, "ComputationParameter7P_OK_HCPG_1stHalf.txt"))
+dCompParameter2 <- read.delim(paste0(Output_path, "ComputationParameter7P_OK_HCPG_2ndHalf.txt"))
+
 # ModelFit <- readRDS(paste0(Output_path, "Models/output7P_OKHCPG.Rdata"))
 
 ###################################### Features engineering #######################################
@@ -133,6 +136,7 @@ d <- d%>%
          GrpxOSPANxdCrtB32 = SampleC*OSPAN*dCrtB32)
 
 ########## Add computations
+##### Main
 AdditionnalDF <- list(dCompParameter)
 ToFillbyDF <- list(dCP = colnames(dCompParameter)[-1])
 
@@ -142,14 +146,40 @@ for (i in 1:length(AdditionnalDF)) {
   d <- FillCol(d, dt, ToFill)
 }
 
+##### Halves
+dCompParameter1 <- dCompParameter1%>%
+  rename(a1_12 = a1, beta1_12 = beta1, a2_12 = a2, beta2_12 = beta2, pi_12 = pi, w_12 = w, lambda_12 = lambda)
+dCompParameter2 <- dCompParameter2%>%
+  rename(a1_22 = a1, beta1_22 = beta1, a2_22 = a2, beta2_22 = beta2, pi_22 = pi, w_22 = w, lambda_22 = lambda)
+
+AdditionnalDF <- list(dCompParameter1)
+ToFillbyDF <- list(dCP = colnames(dCompParameter1)[-1])
+
+for (i in 1:length(AdditionnalDF)) {
+  dt <- as.data.frame(AdditionnalDF[i])
+  ToFill <- ToFillbyDF[[i]]
+  d <- FillCol(d, dt, ToFill)
+}
+
+AdditionnalDF <- list(dCompParameter2)
+ToFillbyDF <- list(dCP = colnames(dCompParameter2)[-1])
+
+for (i in 1:length(AdditionnalDF)) {
+  dt <- as.data.frame(AdditionnalDF[i])
+  ToFill <- ToFillbyDF[[i]]
+  d <- FillCol(d, dt, ToFill)
+}
+
 ########## MB/MF scores
 d <- d%>%
-  mutate(MBv = beta1*w, MFv = beta1*(1-w))
+  mutate(MBv = beta1*w, MFv = beta1*(1-w),
+         MBv_12 = beta1_12*w_12, MFv_12 = beta1_12*(1-w_12),
+         MBv_22 = beta1_22*w_22, MFv_22 = beta1_22*(1-w_22))
 
 ## LogTransform cortisol values to remove skew
 # Single Measures
 # d$dCorti <- log10(d$dCorti + 1)
-# d$dCortiM <- log10(d$dCortiM + 1)
+# d$dCortiM <- log10(d$dCortiM + 11) # Done later
 #
 #
 # Baselines

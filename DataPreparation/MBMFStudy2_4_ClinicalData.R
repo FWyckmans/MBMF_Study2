@@ -60,7 +60,8 @@ dClin <- dClin%>%
          dCorti = Analyse_3-Analyse_2, dCortiM = ((Analyse_3+Analyse_4)/2)-((Analyse_2+Analyse_1)/2))%>%
   select(subjID = NumDaw, NS, Initiales, Age, StudyLevel = Annee_Reussie,
          
-         FinalCondition, Condition, Sample, SampleC, Water, BaselineGr, OKCort, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
+         FinalCondition, Condition, Sample, SampleC, Water,
+         BaselineGr, OKCort, StressGr, StressGrM, StressGrSR, StressGrSRM, Patho,
          AUDIT, DSMal, SOGS, DSM, Craving,
          
          dCraving, dResist, dStress, dPain, dCorti,
@@ -232,4 +233,11 @@ write.table(dOKTot, paste0(Output_path, "dOKTot.txt"), col.names = T, row.names 
 # Make a dCompReady specific for gamblers
 dCompReadyGamblers <- read.csv(paste0(Output_path, "ComputationsReady.txt"), sep="")%>%
   filter(subjID %in% dOKGam$subjID)
-write.table(dCompReadyGamblers, paste0(Output_path, "dCompReadyGamb.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
+write.table(dCompReadyGamblers, paste0(Output_path, "dCompReadyGamb.txt"),
+            col.names = T, row.names = F, sep = "\t", dec = ".")
+
+# Premilinary results for interns
+# dGN <- dClin%>%
+#   filter(OKd == 1)%>%
+#   filter(Sample != "Gambler")
+# write.table(dGN, paste0(Output_path, "dGN.txt"), col.names = T, row.names = F, sep = "\t", dec = ".")
