@@ -7,7 +7,7 @@ Output_path = "Output/"
 ## Install
 packages <- c("dplyr", "tidyr",
               "ggplot2", "gridExtra", "cowplot", "corrplot", "scales", "ggpubr",
-              "nlme", "lmerTest", "BayesFactor", "stats", "glmnet", "interactions", "emmeans", "psy",
+              "nlme", "lmerTest", "BayesFactor", "stats", "glmnet", "interactions", "emmeans", "psy", "correlation",
               "car", "readxl", "readr", "Hmisc", "rms", "ISLR", "e1071", "stringr", "writexl",
               "hBayesDM", "FactoMineR", "factoextra")
 
@@ -30,6 +30,7 @@ library(ggpubr)
 library(nlme)
 library(lmerTest)
 library(BayesFactor)
+library(correlation)
 library(stats)
 library(FactoMineR)
 library(factoextra)
@@ -82,7 +83,7 @@ AllCol <- list(
             "PunitionSens", "RewardSens",
             "Routine", "Auto",
             "UPPS_Total", "NegUr", "PosUr", "LackOfPrem", "LackOfPers", "Sensation"),
-  Computation = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda"),
+  Computation = c("a1", "beta1", "a2", "beta2", "pi", "w", "lambda", "MBv", "MFv"),
   RegLogInd = c("MB", "MF", "RewMB", "UnrewMB", "MBp", "MFp", "RewMBp", "UnrewMBp"),
   ProbaM = c("PRCw", "PRRw", "PUCw", "PURw", "PRCd", "PRRd", "PUCd", "PURd",
              "MBsw", "MFsw", "MBURsw", "MBRsw",
