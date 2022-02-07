@@ -42,12 +42,12 @@ interact_plot(mO, pred = zdCortiM, modx = zOSPAN, plot.points = T,
 # ggsave(paste0(Graphic_path, "InteractPlot_w_OSPAN.tiff"), dpi = 300)
 
 ##### Moderation-Mediation
-# mTModOSPAN <- lm(zw ~ zdCortiM*SampleC*zOSPAN, data = DF)
+mTModOSPAN <- lm(zw ~ zdCortiM*SampleC*zOSPAN, data = DF)
 mTMedOSPAN <- lm(zw ~ zdCortiM + SampleC + zOSPAN + zdCortiM:SampleC + zdCortiM:zOSPAN,
                  data = DF)
-# mTMedOSPAN <- lm(zw ~ zdCortiM + SampleC + zOSPAN + zdCortiM:SampleC + zdCortiM:zOSPAN + zOSPAN:SampleC,
-#                  data = DF)
-# summary(mTModOSPAN)
+mTMedOSPAN <- lm(zw ~ zdCortiM + SampleC + zOSPAN + zdCortiM:SampleC + zdCortiM:zOSPAN + zOSPAN:SampleC,
+                 data = DF)
+summary(mTModOSPAN)
 summary(mTMedOSPAN)
 
 # interact_plot(mTModOSPAN, pred = zdCortiM, modx = zOSPAN, mod2 = SampleC, plot.points = T,

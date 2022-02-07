@@ -65,8 +65,7 @@ summary(LRM)
 summary(LRMRew)
 summary(LRMURew)
 
-
-interact_plot(LRMRew, pred = StressGrM, modx = SampleC, plot.points = T,
+interact_plot(LRMURew, pred = StressGrM, modx = SampleC, plot.points = T,
               interval = T,
               # modx.values = "plus-minus",
               # x.label = "Cortisol increase (z-score)",
