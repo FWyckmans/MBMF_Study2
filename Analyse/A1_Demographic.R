@@ -43,15 +43,6 @@ dDescrW <- NormalitySkewKurtosis(d,
                                 Groups = "StressGrM", Format = "Long", CriticVal = 3.29)
 write_xlsx(dDescrW, paste0(Output_path, "dDescrW.xlsx"))
 
-
-# dDescrT <- NormalitySkewKurtosis(d,
-#                                  VoI = FromColNameToIndex(d, c(AllCol$Demo, AllCol$Gamb, AllCol$Alc,
-#                                                                AllCol$Cog, AllCol$FR, AllCol$Perso,
-#                                                                AllCol$Computation, AllCol$ProbaM)),
-#                                  Groups = c("FinalCondition"), Format = "Long")
-# 
-# write_xlsx(dDescr, paste0(Output_path, "dDescrTot.xlsx"))
-
 dNS <- filter(d, StressGrM == "NotStressed")
 
 dDescrNS <- NormalitySkewKurtosis(dNS,
