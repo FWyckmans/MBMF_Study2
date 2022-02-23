@@ -22,9 +22,13 @@ if (Test != 0){
 }
 
 ########################################## Computations ###########################################
-niter = 2000
-nwarmup = niter/2
-output <- ts_par7(data = d, niter = 2000, nwarmup = 1000, nchain = 4, ncore = 4)
+if ("output7P_OK_HCPG_AllTrials.Rdata" %in% dir(paste0(Output_path, "Models/"))){
+  output = readRDS(file=paste0(Output_path, "Models/output7P_OK_HCPG_AllTrials.Rdata"))
+} else {
+  niter = 2000
+  nwarmup = niter/2
+  output <- ts_par7(data = d, niter = 2000, nwarmup = 1000, nchain = 4, ncore = 4)
+}
 
 ########################################## Save Output ###########################################
 dOutput <- output$allIndPars
