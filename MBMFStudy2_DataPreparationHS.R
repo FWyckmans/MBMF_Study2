@@ -8,6 +8,6 @@ source("MBMFStudy2_Initialization.R")
 
 source("DataPreparation/MBMFStudy2_2_RLTask.R")
 # source("DataPreparation/MBMFStudy2_3_ComputationWithPackage.R")
-source("DataPreparation/MBMFStudy2_4_CompMeanAndRegLog.R")
-source("DataPreparation/MBMFStudy2_5_ClinicalData.R")
+source("DataPreparation/MBMFStudy2_3_CompMeanAndRegLog.R")
+source("DataPreparation/MBMFStudy2_4_ClinicalData.R")
 source("DataPreparation/MBMFStudy2_6_FE_Gambling.R")

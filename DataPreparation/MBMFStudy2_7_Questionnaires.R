@@ -127,3 +127,9 @@ cronbach(dUPPS[c(8, 16, 21, 26)]) # PosUr
 cronbach(dUPPS[c(7, 12, 19, 25)]) # Lack of Prem
 cronbach(dUPPS[c(11, 14, 17, 22)]) # Lack of Pers
 cronbach(dUPPS[c(9, 15, 20, 24)]) # Sensation seeking
+
+
+##### DSM and SOGS together with computation
+# Clinical frame
+dDS <- cbind(d, dDSM[2:length(dDSM)], dSOGS[2:length(dSOGS)])
+write.table(dDS, paste0(Output_path, "DSMSOGSindiv.txt"), col.names = T, row.names = F, sep = "\t")
