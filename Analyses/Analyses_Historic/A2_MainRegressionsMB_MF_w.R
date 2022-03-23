@@ -9,6 +9,7 @@ Graphic_path = "Graphics/Graph/"
 ############################################# Frame ###############################################
 d <- read.delim(paste0(Output_path,"dOKGamFE_Comp7P_OK_HCPG.txt"))
 d$dCortiM <- log10(d$dCortiM + 11)
+d$dCorti <- log10(d$dCorti + 11)
 
 d$Sample <- as.factor(d$Sample)
 
@@ -19,7 +20,7 @@ d$SRRSGrp[d$SRRS > median(d$SRRS, na.rm = T)] <- "HCS"
 ########################################### Regressions ###########################################
 ##### w analyses
 # Data cleaning
-Dw <- OutliersScale(d, c("dCortiM", "w"))
+Dw <- OutliersScale(d, c("dCortiM", "w"), OutRem = T)
 
 # Regression
 mw <- lm(zw ~ zdCortiM*Sample, data = Dw)
