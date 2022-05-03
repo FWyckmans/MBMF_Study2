@@ -47,14 +47,14 @@ dHCS <- filter(dLong, Group == "HC_Stressed")
 
 # Plots 
 gPGU <- ClassicGraph(dPGU, dPGU$RewTrans, dPGU$Proba, dPGU$ymin, dPGU$ymax,
-                     Title = paste0("Unstressed PG (n = ", dLong$n[dLong$Group=="Gambler_NotStressed"], ")"))
+                     Title = paste0("Non-responder PG (n = ", dLong$n[dLong$Group=="Gambler_NotStressed"], ")"))
 gPGS <- ClassicGraph(dPGS, dPGS$RewTrans, dPGS$Proba, dPGS$ymin, dPGS$ymax,
-                     Title = paste0("Stressed PG (n = ", dLong$n[dLong$Group=="Gambler_Stressed"], ")"))
+                     Title = paste0("Responder PG (n = ", dLong$n[dLong$Group=="Gambler_Stressed"], ")"))
 
 gHCU <- ClassicGraph(dHCU, dHCU$RewTrans, dHCU$Proba, dHCU$ymin, dHCU$ymax,
-                     Title = paste0("Unstressed HC (n = ", dLong$n[dLong$Group=="HC_NotStressed"], ")"))
+                     Title = paste0("Non-responder HC (n = ", dLong$n[dLong$Group=="HC_NotStressed"], ")"))
 gHCS <- ClassicGraph(dHCS, dHCS$RewTrans, dHCS$Proba, dHCS$ymin, dHCS$ymax,
-                     Title = paste0("Stressed HC (n = ", dLong$n[dLong$Group=="HC_Stressed"], ")"))
+                     Title = paste0("Responder HC (n = ", dLong$n[dLong$Group=="HC_Stressed"], ")"))
 
 # Multiple plots in one
 g <- plot_grid(gPGU, gPGS, gHCU, gHCS, ncol = 2, labels = c("A", "B", "C", "D"))

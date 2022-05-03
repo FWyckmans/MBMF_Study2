@@ -28,14 +28,14 @@ dg$n[dg$Group=="HC Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1]
 
 dg <- mutate(dg, SE = wSD/sqrt(n), ymin = wM - multEB*SE, ymax = wM + multEB*SE)
 
-dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NS"
-dg$Group[dg$Group == "Gambler Stressed"] <- "PG S"
+dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NR"
+dg$Group[dg$Group == "Gambler Stressed"] <- "PG R"
 
-dg$Group[dg$Group == "HC Not Stressed"] <- "HC NS"
-dg$Group[dg$Group == "HC Stressed"] <- "HC S"
+dg$Group[dg$Group == "HC Not Stressed"] <- "HC NR"
+dg$Group[dg$Group == "HC Stressed"] <- "HC R"
 
 dg$Group <- factor(dg$Group,
-                   levels = c("PG S", "PG NS", "HC S", "HC NS"))
+                   levels = c("PG R", "PG NR", "HC R", "HC NR"))
 
 g <- ggplot(dg, aes(x = Group, y = wM, fill = Group)) +
   geom_bar(stat = "identity", color="black") +
@@ -74,14 +74,14 @@ dg$n[dg$Group=="HC Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1]
 
 dg <- mutate(dg, SE = a1SD/sqrt(n), ymin = a1M - multEB*SE, ymax = a1M + multEB*SE)
 
-dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NS"
-dg$Group[dg$Group == "Gambler Stressed"] <- "PG S"
+dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NR"
+dg$Group[dg$Group == "Gambler Stressed"] <- "PG R"
 
-dg$Group[dg$Group == "HC Not Stressed"] <- "HC NS"
-dg$Group[dg$Group == "HC Stressed"] <- "HC S"
+dg$Group[dg$Group == "HC Not Stressed"] <- "HC NR"
+dg$Group[dg$Group == "HC Stressed"] <- "HC R"
 
 dg$Group <- factor(dg$Group,
-                   levels = c("PG S", "PG NS", "HC S", "HC NS"))
+                   levels = c("PG R", "PG NR", "HC R", "HC NR"))
 
 ga1 <- ggplot(dg, aes(x = Group, y = a1M, fill = Group)) +
   geom_bar(stat = "identity", color="black") +
@@ -120,14 +120,14 @@ dg$n[dg$Group=="HC Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1]
 
 dg <- mutate(dg, SE = a2SD/sqrt(n), ymin = a2M - multEB*SE, ymax = a2M + multEB*SE)
 
-dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NS"
-dg$Group[dg$Group == "Gambler Stressed"] <- "PG S"
+dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NR"
+dg$Group[dg$Group == "Gambler Stressed"] <- "PG R"
 
-dg$Group[dg$Group == "HC Not Stressed"] <- "HC NS"
-dg$Group[dg$Group == "HC Stressed"] <- "HC S"
+dg$Group[dg$Group == "HC Not Stressed"] <- "HC NR"
+dg$Group[dg$Group == "HC Stressed"] <- "HC R"
 
 dg$Group <- factor(dg$Group,
-                   levels = c("PG S", "PG NS", "HC S", "HC NS"))
+                   levels = c("PG R", "PG NR", "HC R", "HC NR"))
 
 ga2 <- ggplot(dg, aes(x = Group, y = a2M, fill = Group)) +
   geom_bar(stat = "identity", color="black") +
@@ -166,14 +166,14 @@ dg$n[dg$Group=="HC Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1]
 
 dg <- mutate(dg, SE = beta1SD/sqrt(n), ymin = beta1M - multEB*SE, ymax = beta1M + multEB*SE)
 
-dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NS"
-dg$Group[dg$Group == "Gambler Stressed"] <- "PG S"
+dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NR"
+dg$Group[dg$Group == "Gambler Stressed"] <- "PG R"
 
-dg$Group[dg$Group == "HC Not Stressed"] <- "HC NS"
-dg$Group[dg$Group == "HC Stressed"] <- "HC S"
+dg$Group[dg$Group == "HC Not Stressed"] <- "HC NR"
+dg$Group[dg$Group == "HC Stressed"] <- "HC R"
 
 dg$Group <- factor(dg$Group,
-                   levels = c("PG S", "PG NS", "HC S", "HC NS"))
+                   levels = c("PG R", "PG NR", "HC R", "HC NR"))
 
 gbeta1 <- ggplot(dg, aes(x = Group, y = beta1M, fill = Group)) +
   geom_bar(stat = "identity", color="black") +
@@ -212,14 +212,14 @@ dg$n[dg$Group=="HC Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1]
 
 dg <- mutate(dg, SE = beta2SD/sqrt(n), ymin = beta2M - multEB*SE, ymax = beta2M + multEB*SE)
 
-dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NS"
-dg$Group[dg$Group == "Gambler Stressed"] <- "PG S"
+dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NR"
+dg$Group[dg$Group == "Gambler Stressed"] <- "PG R"
 
-dg$Group[dg$Group == "HC Not Stressed"] <- "HC NS"
-dg$Group[dg$Group == "HC Stressed"] <- "HC S"
+dg$Group[dg$Group == "HC Not Stressed"] <- "HC NR"
+dg$Group[dg$Group == "HC Stressed"] <- "HC R"
 
 dg$Group <- factor(dg$Group,
-                   levels = c("PG S", "PG NS", "HC S", "HC NS"))
+                   levels = c("PG R", "PG NR", "HC R", "HC NR"))
 
 gbeta2 <- ggplot(dg, aes(x = Group, y = beta2M, fill = Group)) +
   geom_bar(stat = "identity", color="black") +
@@ -258,14 +258,14 @@ dg$n[dg$Group=="HC Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1]
 
 dg <- mutate(dg, SE = piSD/sqrt(n), ymin = piM - multEB*SE, ymax = piM + multEB*SE)
 
-dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NS"
-dg$Group[dg$Group == "Gambler Stressed"] <- "PG S"
+dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NR"
+dg$Group[dg$Group == "Gambler Stressed"] <- "PG R"
 
-dg$Group[dg$Group == "HC Not Stressed"] <- "HC NS"
-dg$Group[dg$Group == "HC Stressed"] <- "HC S"
+dg$Group[dg$Group == "HC Not Stressed"] <- "HC NR"
+dg$Group[dg$Group == "HC Stressed"] <- "HC R"
 
 dg$Group <- factor(dg$Group,
-                   levels = c("PG S", "PG NS", "HC S", "HC NS"))
+                   levels = c("PG R", "PG NR", "HC R", "HC NR"))
 
 gpi <- ggplot(dg, aes(x = Group, y = piM, fill = Group)) +
   geom_bar(stat = "identity", color="black") +
@@ -304,14 +304,14 @@ dg$n[dg$Group=="HC Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1]
 
 dg <- mutate(dg, SE = lambdaSD/sqrt(n), ymin = lambdaM - multEB*SE, ymax = lambdaM + multEB*SE)
 
-dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NS"
-dg$Group[dg$Group == "Gambler Stressed"] <- "PG S"
+dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NR"
+dg$Group[dg$Group == "Gambler Stressed"] <- "PG R"
 
-dg$Group[dg$Group == "HC Not Stressed"] <- "HC NS"
-dg$Group[dg$Group == "HC Stressed"] <- "HC S"
+dg$Group[dg$Group == "HC Not Stressed"] <- "HC NR"
+dg$Group[dg$Group == "HC Stressed"] <- "HC R"
 
 dg$Group <- factor(dg$Group,
-                   levels = c("PG S", "PG NS", "HC S", "HC NS"))
+                   levels = c("PG R", "PG NR", "HC R", "HC NR"))
 
 glambda <- ggplot(dg, aes(x = Group, y = lambdaM, fill = Group)) +
   geom_bar(stat = "identity", color="black") +
@@ -350,14 +350,14 @@ dg$n[dg$Group=="HC Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1]
 
 dg <- mutate(dg, SE = MBvSD/sqrt(n), ymin = MBvM - multEB*SE, ymax = MBvM + multEB*SE)
 
-dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NS"
-dg$Group[dg$Group == "Gambler Stressed"] <- "PG S"
+dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NR"
+dg$Group[dg$Group == "Gambler Stressed"] <- "PG R"
 
-dg$Group[dg$Group == "HC Not Stressed"] <- "HC NS"
-dg$Group[dg$Group == "HC Stressed"] <- "HC S"
+dg$Group[dg$Group == "HC Not Stressed"] <- "HC NR"
+dg$Group[dg$Group == "HC Stressed"] <- "HC R"
 
 dg$Group <- factor(dg$Group,
-                   levels = c("PG S", "PG NS", "HC S", "HC NS"))
+                   levels = c("PG R", "PG NR", "HC R", "HC NR"))
 
 gMBv <- ggplot(dg, aes(x = Group, y = MBvM, fill = Group)) +
   geom_bar(stat = "identity", color="black") +
@@ -396,14 +396,14 @@ dg$n[dg$Group=="HC Stressed"] <- length(d$NS[d$SampleC == 1 & d$StressGrM == -1]
 
 dg <- mutate(dg, SE = MFvSD/sqrt(n), ymin = MFvM - multEB*SE, ymax = MFvM + multEB*SE)
 
-dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NS"
-dg$Group[dg$Group == "Gambler Stressed"] <- "PG S"
+dg$Group[dg$Group == "Gambler Not Stressed"] <- "PG NR"
+dg$Group[dg$Group == "Gambler Stressed"] <- "PG R"
 
-dg$Group[dg$Group == "HC Not Stressed"] <- "HC NS"
-dg$Group[dg$Group == "HC Stressed"] <- "HC S"
+dg$Group[dg$Group == "HC Not Stressed"] <- "HC NR"
+dg$Group[dg$Group == "HC Stressed"] <- "HC R"
 
 dg$Group <- factor(dg$Group,
-                   levels = c("PG S", "PG NS", "HC S", "HC NS"))
+                   levels = c("PG R", "PG NR", "HC R", "HC NR"))
 
 gMFv <- ggplot(dg, aes(x = Group, y = MFvM, fill = Group)) +
   geom_bar(stat = "identity", color="black") +

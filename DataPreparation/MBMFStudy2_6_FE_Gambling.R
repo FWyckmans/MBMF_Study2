@@ -217,3 +217,4 @@ sum(d$Sample == "HC")
 
 ############################################# Export ##############################################
 write.table(d, paste0(Output_path, OutputName), col.names = T, row.names = F, sep = "\t", dec = ".")
+write.table(d, paste0(Output_path, "dOKGamFE_Comp7P_OK_HCPG_commaDec.txt"), col.names = T, row.names = F, sep = "\t", dec = ",")

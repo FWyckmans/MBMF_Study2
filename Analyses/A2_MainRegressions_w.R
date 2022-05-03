@@ -14,10 +14,6 @@ d$Sample[d$Sample == "Gambler"] <- 'PG'
 d$Sample <- as.factor(d$Sample)
 d$Sample <- relevel(d$Sample, "PG")
 
-d <- AddDummyCol(d, "SRRSGrp", "LCS")
-boxplot(SRRS~Sample, data = d)
-d$SRRSGrp[d$SRRS > median(d$SRRS, na.rm = T)] <- "HCS"
-
 ########################################### Regressions ###########################################
 ##### w analyses
 # Data cleaning
@@ -59,6 +55,9 @@ dcorPG <- dPG[c("dCortiM", "w")]
 correlation(dcorHC, bayesian = T, method = "kendall")
 correlation(dcorPG, bayesian = T, method = "kendall")
 
+correlation(dcorHC, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
+correlation(dcorPG, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
+
 ##### OSPAN mediation
 # Data cleaning
 Dw <- OutliersScale(d, c("OSPAN", "dCortiM", "w"), OutRem = T)
@@ -82,11 +81,23 @@ Inter_w_MedOspan <- interact_plot(mw, pred = zdCortiM, modx = Sample, mod2 = zOS
 Inter_w_MedOspan
 # ggsave(paste0(Graphic_path, "Final_w_OSPAN.tiff"), dpi = 300)
 
+# Bayesian Kendall Correlation
+dStr <- filter(d, StressGrM == -1)
+dNStr <- filter(d, StressGrM == 1)
+
+dcorStr <- dStr[c("OSPAN", "w")]
+dcorNStr <- dNStr[c("OSPAN", "w")]
+
+correlation(dcorStr, bayesian = T, method = "kendall")
+correlation(dcorNStr, bayesian = T, method = "kendall")
+
+correlation(dcorStr, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
+correlation(dcorNStr, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
+            
 ##### RAVEN mediation
 # Data cleaning
 Dw <- OutliersScale(d, c("Raven", "dCortiM", "w"), OutRem = T)
 
-# Regression
 # Regression
 mw <- lm(zw ~ zdCortiM + Sample + zRaven +
            zdCortiM*Sample + zdCortiM*zRaven + Sample*zRaven,
@@ -105,6 +116,19 @@ Inter_w_MedRaven <- interact_plot(mw, pred = zdCortiM, modx = Sample, mod2 = zRa
                          colors = "Qual1")
 Inter_w_MedRaven
 # ggsave(paste0(Graphic_path, "Final_w_Raven.tiff"), dpi = 300)
+
+# Bayesian Kendall Correlation
+dStr <- filter(d, StressGrM == -1)
+dNStr <- filter(d, StressGrM == 1)
+
+dcorStr <- dStr[c("Raven", "w")]
+dcorNStr <- dNStr[c("Raven", "w")]
+
+correlation(dcorStr, bayesian = T, method = "kendall")
+correlation(dcorNStr, bayesian = T, method = "kendall")
+
+correlation(dcorStr, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
+correlation(dcorNStr, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
 
 ##### w analyses - SCL 90R
 # Data cleaning
@@ -154,9 +178,6 @@ mw <- lm(zw ~ zdCortiM + Sample + zSTAIA +
 mw <- lm(zw ~ zdCortiM*Sample*zSTAIA, data = Dw)
 
 summary(mw)
-
-
-
 
 
 Mg <- ggarrange(Inter_w, Inter_w_MedOspan, Inter_w_MedRaven, ncol = 2, nrow = 2,
