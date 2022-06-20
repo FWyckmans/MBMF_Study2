@@ -10,9 +10,11 @@ Graphic_path = "Graphics/Graph/"
 d <- read.delim(paste0(Output_path,"dOKGamFE_Comp7P_OK_HCPG.txt"))
 d$dCortiM <- log10(d$dCortiM + 11)
 
+
 d$Sample[d$Sample == "Gambler"] <- 'PG'
 d$Sample <- as.factor(d$Sample)
 d$Sample <- relevel(d$Sample, "PG")
+dt <- d[c("NS", "Sample", "w", "dCortiM")]
 
 ########################################### Regressions ###########################################
 ##### w analyses
@@ -24,13 +26,18 @@ mw <- lm(zw ~ zdCortiM*SampleC, data = Dw)
 summary(mw)
 
 # Graphic
+col = c("Qual1")
+col = c("aquamarine2", "cadetblue2")
+col = c("lightgreen", "lightskyblue")
+
+
 Inter_w <- interact_plot(mw, pred = zdCortiM, modx = SampleC, plot.points = T,
                          interval = T,
                          x.label = "Cortisol increase (z-score)",
                          y.label = "ω (z-score)",
                          modx.labels = c("PG", "HC"),
                          legend.main = "DG",
-                         colors = "Qual1")
+                         colors = col)
 
 Inter_w
 ggsave(paste0(Graphic_path, "Final_w.tiff"), dpi = 300)
