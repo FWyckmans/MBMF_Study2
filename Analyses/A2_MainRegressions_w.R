@@ -15,6 +15,11 @@ d$Sample[d$Sample == "Gambler"] <- 'PG'
 d$Sample <- as.factor(d$Sample)
 d$Sample <- relevel(d$Sample, "PG")
 dt <- d[c("NS", "Sample", "w", "dCortiM")]
+d$PG3[d$PG3 == 1] <- "NG"
+d$PG3[d$PG3 == 0] <- "G"
+d$PG3[d$PG3 == -1] <- "PG"
+d$PG3 <- as.factor(d$PG3)
+d$PG3 <- relevel(d$PG3, "NG")
 
 ########################################### Regressions ###########################################
 ##### w analyses
@@ -27,8 +32,8 @@ summary(mw)
 
 # Graphic
 col = c("Qual1")
-col = c("aquamarine2", "cadetblue2")
-col = c("lightgreen", "lightskyblue")
+# col = c("aquamarine2", "cadetblue2")
+# col = c("lightgreen", "lightskyblue")
 
 
 Inter_w <- interact_plot(mw, pred = zdCortiM, modx = SampleC, plot.points = T,
@@ -65,6 +70,29 @@ correlation(dcorPG, bayesian = T, method = "kendall")
 correlation(dcorHC, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
 correlation(dcorPG, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
 
+##### w analyses - 3Grp
+# Data cleaning
+Dw <- OutliersScale(d, c("dCortiM", "w"), OutRem = T)
+
+# Regression
+mw <- lm(zw ~ zdCortiM*PG3, data = Dw)
+summary(mw)
+
+# Graphic
+col = c("Qual1")
+# col = c("aquamarine2", "cadetblue2")
+# col = c("lightgreen", "lightskyblue")
+
+Inter_w3 <- interact_plot(mw, pred = zdCortiM, modx = PG3, plot.points = T,
+                         interval = T,
+                         x.label = "Cortisol increase (z-score)",
+                         y.label = "ω (z-score)",
+                         # modx.labels = c("PG", "HC"),
+                         legend.main = "DG",
+                         colors = col)
+
+Inter_w3
+
 ##### OSPAN mediation
 # Data cleaning
 Dw <- OutliersScale(d, c("OSPAN", "dCortiM", "w"), OutRem = T)
@@ -100,7 +128,26 @@ correlation(dcorNStr, bayesian = T, method = "kendall")
 
 correlation(dcorStr, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
 correlation(dcorNStr, bayesian = T, method = "kendall", bayesian_prior = "ultrawide")
-            
+
+##### SOGS instead of sample
+# Data cleaning
+Dw <- OutliersScale(d, c("SOGS", "dCortiM", "w"), OutRem = T)
+
+# Regression
+mw <- lm(zw ~ zdCortiM*zSOGS, data = Dw)
+
+summary(mw)
+
+Inter_w_SOGS <- interact_plot(mw, pred = zdCortiM, modx = zSOGS, plot.points = T,
+                                  interval = T,
+                                  x.label = "Cortisol increase (z-score)",
+                                  y.label = "ω (z-score)",
+                                  modx.values = 'plus-minus',
+                                  modx.labels = c('Low SOGS score', 'High SOGS score'),
+                                  legend.main = "DG",
+                                  colors = "Qual1")
+Inter_w_SOGS
+hist(Dw$SOGS)
 ##### RAVEN mediation
 # Data cleaning
 Dw <- OutliersScale(d, c("Raven", "dCortiM", "w"), OutRem = T)

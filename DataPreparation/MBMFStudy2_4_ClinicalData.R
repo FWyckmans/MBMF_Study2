@@ -128,8 +128,8 @@ dClin$OKd[is.na(dClin$PRCd)] <- 0
 ############################ Add Group columns
 # PG 3 groups
 dClin$PG3 <- 0
-dClin$PG3[dClin$SOGS < 6] <- 1
-dClin$PG3[dClin$SOGS >= 12] <- -1
+dClin$PG3[dClin$SOGS < 6] <- 0
+dClin$PG3[dClin$SOGS >= 6] <- -1
 dClin$PG3[is.na(dClin$SOGS)] <- 1
 dClin$PG3[dClin$Sample == "Alc"] <- NA
 
