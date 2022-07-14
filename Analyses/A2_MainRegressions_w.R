@@ -93,6 +93,11 @@ Inter_w3 <- interact_plot(mw, pred = zdCortiM, modx = PG3, plot.points = T,
 
 Inter_w3
 
+# Multiple plots in one
+g <- plot_grid(Inter_w, Inter_w3, ncol = 2, labels = c("A", "B"))
+g
+ggsave(paste0(Graphic_path, "Final_w.tiff"), dpi = 300)
+
 ##### OSPAN mediation
 # Data cleaning
 Dw <- OutliersScale(d, c("OSPAN", "dCortiM", "w"), OutRem = T)
