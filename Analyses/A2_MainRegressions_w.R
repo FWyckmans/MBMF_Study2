@@ -96,7 +96,7 @@ Inter_w3
 # Multiple plots in one
 g <- plot_grid(Inter_w, Inter_w3, ncol = 2, labels = c("A", "B"))
 g
-ggsave(paste0(Graphic_path, "Final_w.tiff"), dpi = 300)
+ggsave(paste0(Graphic_path, "Final_wbothGrp.tiff"), dpi = 300)
 
 ##### OSPAN mediation
 # Data cleaning
